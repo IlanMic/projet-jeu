@@ -2,9 +2,10 @@
 
 .login-form-container{
     margin: 5% 5%;
+    padding: 5%;
     background-color: #ffffff;
-    border: solid 0.25ex;
     display: flex;
+    box-shadow: 5px 10px 18px #888888;
 }
 
 .connexion-form, .inscription-form, .reinitialisation-form{
@@ -75,16 +76,6 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* informations utilisateur */
-
-.container-informations{
-    border-style: solid;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-}
-
 .slider.round {
     border-radius: 34px;
 }
@@ -102,6 +93,82 @@ input:checked + .slider:before {
 {
     display: inline-block;
 }
+
+/* informations utilisateur */
+
+.container-informations{
+    margin: 1em;
+    background-color: #ffffff;
+    display: flex;
+    box-shadow: 5px 10px 18px #888888;
+    position: relative;
+}
+
+.picture-container{
+    padding: 1em 0em 0em 3em;
+    margin-right: 5em;
+}
+
+.informations-utilisateur{
+    width: 100%;
+}
+
+.informations-header{
+    width: 99%;
+    padding: 2em 0em;
+    border-width: thin;
+    border-color: #000;
+}
+
+.liste-personnage-container{
+    width: 99%;
+    padding: 10px;
+}
+
+#card-1{
+    margin-left: 25%;
+    width: 30em;
+    margin-bottom: 10em;
+}
+
+
+.personnage-title{
+    display: inline;
+    text-align:left
+}
+
+/* informations club */
+
+.liste-personnage-container, .personnages-title{
+    margin-left: 1em;
+}
+
+
+
+.informations-club{
+    padding-left: 1em;
+    width: 100%;
+}
+
+/* Modifier club */
+
+.edit-club-form{
+    width: 99%;
+    padding: 2em 2em;
+}
+
+.horizontal-card{
+    width: 99%;
+    max-height: 20em;
+}
+
+.picture-placeholder{
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    width: 6em;
+}
+
 
 /* navbar */
 
@@ -195,4 +262,50 @@ body{
 .form-control {
 	padding-top: .8rem !important;
 	padding-bottom: .8rem !important;
+}
+
+
+/* Autres outils */
+
+.center-text{
+    text-align: center;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.padding-right-short{
+    padding-right: 2em;
+}
+
+#circle {
+    display: inline;
+    width: 2em;
+    height: 2em;
+    background: rgba(45, 172, 45, 0.452);
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    float: right;
+    text-align: center;
+}
+
+.verticalLine {
+  border-left: thick solid #ff0000;
+  display: inline-block;
+}
+
+.bloc-card{
+    border: 1px solid;
+}
+
+
+
+.card-body{
+    margin-top: 1em;
 }

@@ -10,6 +10,7 @@
         <a class="nav-link" href="#">Classement des meilleurs clubs</a>
         <a class="nav-link" href="#">Classement des meilleurs personnages</a>
         <a class="nav-link" href="profil-utilisateur.php">Profil utilisateur</a>
+        <a class="nav-link" href="profil-club.php">Profil club</a>
       </div>
       <div class="nav-right">
         <a class="nav-link" href="#">
