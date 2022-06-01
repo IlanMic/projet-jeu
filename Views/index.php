@@ -1,3 +1,4 @@
+<!-- Header/Navbar -->
 <?php
     $titre_page = "Accueil";
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
@@ -32,10 +33,10 @@
         <hr>
         <div class="outer">
             <div class="inner">
-                <button class="btn-inscription mt-2 sub-btn" class="form-btn"  type="button">S'inscrire</button>
+                <button class="btn-inscription mt-2 sub-btn" type="button">S'inscrire</button>
             </div>
             <div class="inner">
-                <button class="btn-recuperation mt-2 sub-btn" class="form-btn" type="button">Mot de passe oublié</button>
+                <button class="btn-recuperation mt-2 sub-btn" type="button">Mot de passe oublié</button>
             </div>
         </div> 
     </form> 
@@ -116,6 +117,8 @@
     </form> 
 
 </div>
+
+<!-- Footer -->
 <?php
   include dirname(dirname(__FILE__)) .'/Views/layout/footer.php';
 ?>
