@@ -46,7 +46,7 @@
         <div class="label-inscription-head">
             <h1>Inscription</h1>
             <hr>
-            <h3>Veuillez saisir les informations obligatoires (*) afin de vous connecter: <h2>
+            <h3>Veuillez saisir les informations obligatoires (*) afin de vous inscrire: <h2>
             <br>
         </div>
         <div class="inscription-content">
@@ -91,7 +91,7 @@
         <div class="label-reinitialisation-head">
             <h1>Réinitialisation du mot de passe</h1>
             <hr>
-            <h3>Veuillez saisir les informations obligatoires (*) afin de vous connecter: <h2>
+            <h3>Veuillez saisir les informations obligatoires (*) afin de faire une demande de réinitialisation de mot de passe: <h2>
             <br>
         </div>
         <div class="reinitialisation-content">
