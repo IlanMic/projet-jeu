@@ -1,25 +1,34 @@
 <!-- Header/Navbar -->
 <?php
-    $titre_page = "Création de personnage";
+    $titre_page = "Modification de personnage";
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
 ?>
 
 <body>
 <div class="personnage-creation-form-container">
-    <!-- Formulaire de création de personnage -->
-    <form class="creation-form" action="Controllers/creer-personnage.php">
+    <!-- Formulaire de modification de personnage -->
+    <form class="creation-form" action="Controllers/modifier-personnage.php">
         <div class="label-connexion-head">
-            <h1>Création de personnage</h1>
+            <h1>Modification de personnage</h1>
             <hr>
             <h3>Veuillez saisir les informations obligatoires (*) afin de créer votre personnage: <h2>
             <br>
         </div>
         <div class="connexion-content">
             <div class="row">
+            <div class="picture-container-2">
+                <img src="assets/images/illustration-placeholder.png" alt="illustration du personnage">
+                <br>
+                <label for="illustration">Illustration du personnage:</label>
+                <br>
+                <br>
+                <input type="file" id="illustration" name="illustration" value="" accept="image/*"/>
+            </div>
+            <div class="edit-character-header">
                 <div class="mb-4">
                     <label for="nom-perso" class="form-label">Pseudo *:</label><br>
-                    <input type="text" id="psnom-perso" class="form-control" name="nom-perso" placeholder="Entrez le nom du personnage..." required>
+                    <input type="text" id="psnom-persoeudo" class="form-control" name="nom-perso" placeholder="Pseudo actuel du personnage..." required>
                 </div>
                 <div class="mb-4">
                     <label for="race">Race *:</label>
@@ -31,12 +40,9 @@
                         <option value="orc">Orc</option>
                     </select>
                 </div>
+            </div>
                 <div class="mb-4">
                     <br>
-                    <label for="illustration">Illustration du personnage:</label>
-                    <input class="right" type="file" id="illustration" name="illustration" value="" accept="image/*"/>
-                </div>
-                <div class="mb-4">
                     <label for="bibilographie">Bibilographie du personnage:</label>
                     <br>
                     <textarea maxlength="300" name="bibilographie" placeholder="Saisissez la biographie de votre personnage..." class="textarea-bibliographie" cols="100%" rows="5%"></textarea>
@@ -130,7 +136,7 @@
                     </div>
                 </div>
                 <div class="text-center mt-4 mb-3">
-                    <button type="submit" name="submit" class="form-btn">Créer le personnage</button>
+                    <button type="submit" name="submit" class="form-btn">Modifier le personnage</button>
                 </div>
             </div>
         </div>
