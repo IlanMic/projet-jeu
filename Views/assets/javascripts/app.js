@@ -1,8 +1,9 @@
 $(document).ready(function () {
     showConnectionForm();
+    showSelectedPersonnage();
     
 
-/**
+    /**
     Permet d'afficher le formulaire de connexion ou d'inscription
     */
     function showConnectionForm() {
@@ -28,5 +29,34 @@ $(document).ready(function () {
             $(inscription_form).addClass("d-none")
         });
     }
+
+    /**
+    Permet d'afficher le personnage séléctionnée
+    */
+    function showSelectedPersonnage() {
+        var svg_1= document.getElementsByClassName("svg-1")
+        var svg_2 = document.getElementsByClassName("svg-2")
+        var svg_3 = document.getElementsByClassName("svg-3")
+        
+        $(".tick-1").click(function() {
+            $(svg_1).removeClass("invisible")
+            $(svg_2).addClass("invisible")
+            $(svg_3).addClass("invisible")
+        });
+        
+        $(".tick-2").click(function() {
+            $(svg_2).removeClass("invisible")
+            $(svg_1).addClass("invisible")
+            $(svg_3).addClass("invisible")
+        });
+        
+        $(".tick-3").click(function() {
+            $(svg_3).removeClass("invisible")
+            $(svg_2).addClass("invisible")
+            $(svg_1).addClass("invisible")
+        });
+    }
+
+
 
 });

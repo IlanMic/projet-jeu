@@ -8,9 +8,14 @@
     box-shadow: 5px 10px 18px #888888;
 }
 
-.connexion-form, .inscription-form, .reinitialisation-form{
+.connexion-form, .inscription-form, .reinitialisation-form, .contact-form{
     width: 100%;
     padding: 2em 2em;
+}
+
+.informations-mentions-legales, .informations-regles-jeu{
+    width: 100%;
+    padding: 1em 2em;
 }
 
 .connexion-content label{
@@ -134,12 +139,33 @@ input:checked + .slider:before {
     text-align:left
 }
 
-.perso-card{
-    display: initial;
+.personnage-container:hover{
+    box-shadow: 5px 10px 18px #888888;
+    transform: scale(1.10); 
 }
 
-.perso-card:hover{
-    box-shadow: #000;
+.link-container{
+    width: 100%;
+    background-color: rgba(45, 172, 45, 0.452);
+    text-align: center;
+}
+
+.link-container a{
+    color: white;
+}
+
+
+
+.link-container a:hover{
+    color: rgba(0, 0, 0, 0.452);
+    
+}
+
+.link-container a:hover:after{
+    
+    text-align: center;
+    color: rgba(45, 172, 45, 0.452);
+    width: 100%;
 }
 
 /* informations club */
@@ -147,8 +173,6 @@ input:checked + .slider:before {
 .liste-personnage-container, .personnages-title{
     margin-left: 1em;
 }
-
-
 
 .informations-club{
     padding-left: 1em;
@@ -215,7 +239,7 @@ input:checked + .slider:before {
 
 /* Creation de personnage */
 
-.personnage-creation-form-container{
+.personnage-creation, .queue-form-container, .personnage-creation-form-container{
     margin: 4em;
     background-color: #ffffff;
     display: flex;
@@ -241,16 +265,89 @@ input:checked + .slider:before {
     text-align: center;
 }
 
-.icon-carac{
+.icon-carac, .icon-carac-2{
     width: 40%;
     height: 40%;
+    margin: 5%;
 }
 
-.icon-carac-2{
-    width: 40%;
-    height: 40%;
+/* Modification de personnage */
+.picture-container-2 {
+    padding: 1em 0em 0em 3em;
+    margin-right: 5em;
+    width: 15%;
+    text-align: center;
+    display: inline-block;
 }
 
+.edit-character-header{
+    display: inline-block;
+    top: 50%;
+    width: 80%;
+}
+
+/* Sélection de personnage */
+
+.ticking-box-container{
+    position: relative;
+    width: 100%;
+}
+
+.ticking-box{
+    float: right;
+    background-color: #fff;
+    margin-top: 5%;
+    margin-left: 80%;
+    border: 1px solid;
+    width: 15%;
+    height: 15%;
+    position: absolute;
+    text-align: center;
+    padding-top: 5%;
+    color:rgba(45, 172, 45, 0.452)
+}
+
+.invisible{
+    visibility: hidden;
+}
+
+.card-button-footer{
+    background-color: rgba(45, 172, 45, 0.452);
+    border: none;
+    color: white;
+    width: 100%;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.card-button-footer:hover{
+    background-color: white;
+    border: 1px solid rgba(45, 172, 45, 0.452);
+    color: rgba(45, 172, 45, 0.452);
+    width: 100%;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+}
+
+.box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+}
 /* navbar */
 
 nav{
@@ -380,6 +477,18 @@ body{
     float: right;
 }
 
+.float-right{
+    float: right;
+}
+.float-left{
+    float: left;
+}
+.float-middle{
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+}
+
 
 .middle-text{
     text-align: center;
@@ -395,4 +504,8 @@ body{
 
 .right{
     float: right;
+}
+
+.margin-title{
+    margin: 1em;
 }
