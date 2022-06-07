@@ -1,6 +1,10 @@
 $(document).ready(function () {
     showConnectionForm();
     showSelectedPersonnage();
+    matchTimer();
+    activateCapacite();
+    activateCapaciteByKey();
+    chageIcon();
     
 
     /**
@@ -57,6 +61,79 @@ $(document).ready(function () {
         });
     }
 
+
+    /**
+     * Timer pour le match
+     */
+    function matchTimer(){
+        let temps = 5400
+        const timerElement = document.getElementById("timer")
+  
+        function diminuerTemps() {
+            let minutes = parseInt(temps / 60, 10)
+            let secondes = parseInt(temps % 60, 10)
+
+            minutes = minutes < 10 ? "0" + minutes : minutes
+            secondes = secondes < 10 ? "0" + secondes : secondes
+          
+            timerElement.innerText = minutes + ":" + secondes
+            temps--
+        }
+        setInterval(diminuerTemps, 1000)
+    }
+
+    /**
+     * Capacité a activer avec cooldown de rechargement
+     */
+    function activateCapacite(){
+        var enableCapacite1 = function(ele) {
+            $(ele).removeAttr("disabled");
+            document.getElementById("image-capacite-1").style.visibility='visible';
+        }
+
+        var enableCapacite2 = function(ele) {
+            $(ele).removeAttr("disabled");
+            document.getElementById("image-capacite-2").style.visibility='visible';
+        }
+        
+        $("#capacite-1").click(function() {
+            var that = this;
+            $(this).attr("disabled", true);
+            document.getElementById("image-capacite-1").style.visibility='hidden';
+            setTimeout(function() { enableCapacite1(that) }, 10000);
+        });
+
+        $("#capacite-2").click(function() {
+            var that = this;
+            $(this).attr("disabled", true);
+            document.getElementById("image-capacite-2").style.visibility='hidden';
+            setTimeout(function() { enableCapacite2(that) }, 1000);
+        });
+    }
+
+    function activateCapaciteByKey(){
+        var enableCapacite1 = function(ele) {
+            $(ele).removeAttr("disabled");
+            document.getElementById("image-capacite-1").style.visibility='visible';
+        }
+
+        var enableCapacite2 = function(ele) {
+            $(ele).removeAttr("disabled");
+            document.getElementById("image-capacite-2").style.visibility='visible';
+        }
+
+        $(document).keypress(function(e){
+            if (e.which == 65){
+                $('#capacite-a').attr("disabled", true);
+                document.getElementById("image-capacite-1").style.visibility='hidden';
+                setTimeout(function() { enableCapacite1('#capacite-a') }, 1000);
+            }else if(e.which == 69){
+                $('#capacite-e').attr("disabled", true);
+                document.getElementById("image-capacite-2").style.visibility='hidden';
+                setTimeout(function() { enableCapacite2('#capacite-e') }, 10000);
+            }
+        });
+    }
 
 
 });
