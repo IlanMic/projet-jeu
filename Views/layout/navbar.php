@@ -16,6 +16,7 @@
         <a class="nav-link" href="creation-personnage.php">Création de personnage</a>
         <a class="nav-link" href="selection-personnage.php">Sélection de personnage</a>
         <a class="nav-link" href="queue-match.php">Fil d'attente de match</a>
+        <a class="nav-link" href="jeu.php">Page de jeu</a>
       </div>
       <div class="nav-right">
         <a class="nav-link" href="regles-jeu.php">
