@@ -64,11 +64,15 @@
                     <input type="password" class="form-control" id="pass" name="pass" placeholder="Entrez votre mot de passe..." required>
                 </div>
                 <div class="switch">
-                    Voulez-vous profiter des avantages premium tels que la création ou gestion de club ou le déblocage d'un troisième personnage pour 5€ ?
-                    <label class="switch-premium">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
+                    <div class="row">
+                        <div class="col-9">Voulez-vous profiter des avantages premium tels que la création ou gestion de club ou le déblocage d'un troisième personnage pour 5€ ?</div>
+                        <div class="col-3">
+                            <label class="switch-premium">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="text-center mt-4 mb-3">
                     <button type="submit" name="submit" class="form-btn">S'inscrire</button>

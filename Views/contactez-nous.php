@@ -6,7 +6,7 @@
 ?>
 
 <body>
-<div class="personnage-creation-form-container">
+<div class="contact-form-container">
     <!-- Formulaire de contact -->
     <form class="contact-form" action="Controllers/contact.php">
         <div class="label-connexion-head">
