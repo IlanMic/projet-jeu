@@ -1,11 +1,12 @@
 /* formulaires de connexion, inscription et réinitialisation de mot de passe */
 
 .login-form-container{
-    margin: 5% 5%;
-    padding: 5%;
+    margin: 2% 2%;
+    padding: 0.5%;
     background-color: #ffffff;
     display: flex;
     box-shadow: 5px 10px 18px #888888;
+    margin-bottom: 5em;
 }
 
 .connexion-form, .inscription-form, .reinitialisation-form, .contact-form{
@@ -88,27 +89,34 @@ input:checked + .slider:before {
 
 .outer
 {
-    width:100%;
     text-align: center;
 }
 .inner
 {
     display: inline-block;
+    width:100%;
 }
 
 /* informations utilisateur */
 
 .container-informations{
-    margin: 1em;
+    padding: 0.75em;
     background-color: #ffffff;
-    display: flex;
     box-shadow: 5px 10px 18px #888888;
-    position: relative;
+}
+
+.picture-container img{
+    min-width: 25%;
+    min-height: 25%;
+    max-height: 75%;
+    max-width: 75%;
 }
 
 .picture-container{
-    padding: 1em 0em 0em 3em;
-    margin-right: 5em;
+    padding: 1em 0em 0em 0em;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
 }
 
 .informations-utilisateur{
@@ -117,7 +125,7 @@ input:checked + .slider:before {
 
 .informations-header{
     width: 99%;
-    padding: 2em 0em;
+    padding: 2em 1em;
     border-width: thin;
     border-color: #000;
 }
@@ -128,8 +136,8 @@ input:checked + .slider:before {
 }
 
 #card-1{
-    margin-left: 25%;
-    width: 30em;
+    margin: 1em;
+    max-width: 95%;
     margin-bottom: 10em;
 }
 
@@ -141,7 +149,7 @@ input:checked + .slider:before {
 
 .personnage-container:hover{
     box-shadow: 5px 10px 18px #888888;
-    transform: scale(1.10); 
+    transform: scale(1.05); 
 }
 
 .link-container{
@@ -240,11 +248,12 @@ input:checked + .slider:before {
 /* Creation de personnage */
 
 .personnage-creation, .queue-form-container, .personnage-creation-form-container{
-    margin: 4em;
+    margin: 1.5em;
     background-color: #ffffff;
     display: flex;
     box-shadow: 5px 10px 18px #888888;
     position: relative;
+    margin-bottom: 5em;
 }
 
 .textarea-bibliographie{
@@ -253,23 +262,27 @@ input:checked + .slider:before {
     width: 100%;
 }
 
-.grid-caracteristique {
-    display: grid;
-    gap: 1px;
-    grid-template-columns: repeat(3, 1fr);
- }
 
 .div-caracteristiques {
-    margin: 10px;
-    padding: 10px 10px;
     text-align: center;
 }
 
-.icon-carac, .icon-carac-2{
-    width: 40%;
-    height: 40%;
+.icon-carac{
+    max-width: 35%;
+    max-height: 35%;
     margin: 5%;
 }
+.icon-carac-2{
+    max-width: 30%;
+    max-height: 30%;
+    margin: 5%;
+}
+.icon-carac-3{
+    max-width: 45%;
+    max-height: 45%;
+    margin: 5%;
+}
+
 
 /* Modification de personnage */
 .picture-container-2 {
@@ -281,9 +294,22 @@ input:checked + .slider:before {
 }
 
 .edit-character-header{
+    top: 10%;
+    position: relative;
+}
+
+#file-upload {
+    display: none;
+}
+
+#label-upload {
+    margin-top: 1em;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
     display: inline-block;
-    top: 50%;
-    width: 80%;
+    padding: 6px 12px;
+    cursor: pointer;
 }
 
 /* Sélection de personnage */
@@ -349,6 +375,17 @@ input:checked + .slider:before {
   font-size: 150%;
 }
 
+/* Page de contact */
+
+.contact-form-container{
+    margin: 1em;
+    background-color: #ffffff;
+    display: flex;
+    box-shadow: 5px 10px 18px #888888;
+    position: relative;
+    margin-bottom: 5em;
+}
+
 /* Page de jeu */
 
 .game-container{
@@ -407,6 +444,7 @@ a.fill-div {
 
 nav{
     background-color: #ADDCC9;
+    position: fixed;
 }
 
 .navbar{
@@ -415,21 +453,13 @@ nav{
 
 .navbar a {
     margin: 0px 15px;
-    text-align: center;
+    margin-left: 2em;
 }
 
 .navbar a:hover{
     color: rgb(255, 255, 255);
     text-decoration: underline;
     z-index: 2;
-}
-
-.nav-left a{
-    float: left;
-}
-
-.nav-right a{
-    float: right;
 }
 
 body{
@@ -474,12 +504,17 @@ body{
 	font-weight: 500;
 	background: #f6f6f9;
 	padding: .8rem 1rem;
-	width: 33%;
+	width: 66%;
 
 }
 
-.form-btn:hover, .form-btn.focus, .sub-btn:hover, .sub-btn:focus{
-    box-shadow: inset 0 0 0 15em rgba(45, 172, 45, 0.452);
+.form-btn:hover, .form-btn.focus{
+    background:  rgba(45, 172, 45, 0.452);
+    color: #fff;
+}
+
+.sub-btn:hover, .sub-btn:focus{
+    background-color: #ADDCC9;
     color: #fff;
 }
 
@@ -487,8 +522,7 @@ body{
 	border: 1px solid #000;
 	padding: .7rem 1rem;
 	color: #000;
-    width: 25em;
-    margin-inline: 15em;
+    width: 66%;
 	background: #f6f6f9;
 }
 
@@ -561,6 +595,14 @@ body{
     float: right;
 }
 
+.flex-container{
+    display: flex;
+}
+
 .margin-title{
     margin: 1em;
+}
+
+.title{
+    font-size: large;
 }
