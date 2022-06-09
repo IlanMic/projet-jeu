@@ -33,27 +33,21 @@
 <!-- Liste des personnages appartenant au club avec quelques caractéristiques (possibilité de les supprimer du club) -->
 <h1 class="club-title"> Clubs correspondant à la recherche (?): </h1>
 <br>
-<div class="liste-personnage-container">
-  <div class=row>
-        <div class="card mb-3 horizontal-card">
-            <div class="row no-gutters">
-                <div class="col-md-11">
-                    <div class="card-body">
-                        <div class="col-md-5 card-bloc">
-                            <h5 class="card-title">Nom du club</h5>
-                        </div>
-                        <div class="col-md-5 card-bloc">
-                            <p class="card-text">Nom du propriétaire</p>
-                        </div>
-                        <div class="col-md-5 card-bloc">
-                            <p class="card-text">Nombre de joueurs</p>
-                        </div>
-                        <div class="col-md-5 card-bloc">
-                            <p class="card-text">Division actuelle</p>
-                        </div>
-                    </div>
+<div class="card" id="card-2">
+    <div class="row no-gutters">
+        <div class="card-body thin-margin">
+                <h5 class="card-title">Nom du club</h5>
+                <hr>
+                <div class="col-sm-7">
+                    <br>
+                    <p class="card-text">Nom du propriétaire</p>
+                    <br>
+                    <br>
+                    <p class="card-text">Nombre de joueurs </p>
+                    <br>
+                    <br>
+                    <p class="card-text">Division actuelle:</p>
                 </div>
-            </div>
         </div>
     </div>
 </div>

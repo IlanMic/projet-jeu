@@ -37,10 +37,9 @@
 <!-- Liste des personnages appartenant au club avec quelques caractéristiques -->
 <h1> Personnages appartenant au club (9): </h1>
 <br>
-<div class="liste-personnage-container">
   <div class=row>
     <!-- Personnage 1 -->
-    <div class="col-4 ">
+    <div class="col-lg-4 ">
       <div class="card personnage-container-1" id="card-1">
         <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
         <div class="card-body">
@@ -49,15 +48,18 @@
           <div class="text-left">
             <br>
             <p class="card-text">Race: </p>
+            <br>
             <p class="card-text">Club: </p>
+            <br>
             <p class="card-text">Capacité 1: </p>
+            <br>
             <p class="card-text">Capacité 2: </p>
           </div>
         </div>
       </div>
     </div>
     <!-- Personnage 2... -->
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="card personnage-container-2" id="card-1">
         <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
         <div class="card-body">
@@ -66,14 +68,17 @@
           <div class="text-left">
             <br>
             <p class="card-text">Race: </p>
+            <br>
             <p class="card-text">Club: </p>
+            <br>
             <p class="card-text">Capacité 1: </p>
+            <br>
             <p class="card-text">Capacité 2: </p>
           </div>
         </div>
       </div>  
     </div>  
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="card personnage-container-1" id="card-1"5>
         <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
         <div class="card-body">
@@ -82,18 +87,19 @@
           <div class="text-left">
             <br>
             <p class="card-text">Race: </p>
+            <br>
             <p class="card-text">Club: </p>
+            <br>
             <p class="card-text">Capacité 1: </p>
+            <br>
             <p class="card-text">Capacité 2: </p>
           </div>
         </div>
       </div>
     </div>
-  </div>    
-</div>
-<div class="liste-personnage-container">
+  </div>   
   <div class=row>
-    <div class="col-4 ">
+    <div class="col-lg-4 ">
       <div class="card personnage-container-1" id="card-1">
         <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
         <div class="card-body">
@@ -102,14 +108,17 @@
           <div class="text-left">
             <br>
             <p class="card-text">Race: </p>
+            <br>
             <p class="card-text">Club: </p>
+            <br>
             <p class="card-text">Capacité 1: </p>
+            <br>
             <p class="card-text">Capacité 2: </p>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="card personnage-container-2" id="card-1">
         <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
         <div class="card-body">
@@ -118,14 +127,17 @@
           <div class="text-left">
             <br>
             <p class="card-text">Race: </p>
+            <br>
             <p class="card-text">Club: </p>
+            <br>
             <p class="card-text">Capacité 1: </p>
+            <br>
             <p class="card-text">Capacité 2: </p>
           </div>
         </div>
       </div>  
     </div>  
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="card personnage-container-1" id="card-1">
         <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
         <div class="card-body">
@@ -134,18 +146,19 @@
           <div class="text-left">
             <br>
             <p class="card-text">Race: </p>
+            <br>
             <p class="card-text">Club: </p>
+            <br>
             <p class="card-text">Capacité 1: </p>
+            <br>
             <p class="card-text">Capacité 2: </p>
           </div>
         </div>
       </div>
     </div>
   </div>    
-</div>
-<div class="liste-personnage-container">
   <div class=row>
-    <div class="col-4 ">
+    <div class="col-lg-4 ">
       <div class="card personnage-container-1" id="card-1">
         <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
         <div class="card-body">
@@ -154,14 +167,17 @@
           <div class="text-left">
             <br>
             <p class="card-text">Race: </p>
+            <br>
             <p class="card-text">Club: </p>
+            <br>
             <p class="card-text">Capacité 1: </p>
+            <br>
             <p class="card-text">Capacité 2: </p>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="card personnage-container-2" id="card-1">
         <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
         <div class="card-body">
@@ -170,14 +186,17 @@
           <div class="text-left">
             <br>
             <p class="card-text">Race: </p>
+            <br>
             <p class="card-text">Club: </p>
+            <br>
             <p class="card-text">Capacité 1: </p>
+            <br>
             <p class="card-text">Capacité 2: </p>
           </div>
         </div>
       </div>  
     </div>  
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="card personnage-container-1" id="card-1"5>
         <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
         <div class="card-body">
@@ -186,8 +205,11 @@
           <div class="text-left">
             <br>
             <p class="card-text">Race: </p>
+            <br>
             <p class="card-text">Club: </p>
+            <br>
             <p class="card-text">Capacité 1: </p>
+            <br>
             <p class="card-text">Capacité 2: </p>
           </div>
         </div>

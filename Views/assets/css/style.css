@@ -103,6 +103,8 @@ input:checked + .slider:before {
     padding: 0.75em;
     background-color: #ffffff;
     box-shadow: 5px 10px 18px #888888;
+    margin-bottom: 1em;
+    margin: 0.5em;
 }
 
 .picture-container img{
@@ -138,9 +140,13 @@ input:checked + .slider:before {
 #card-1{
     margin: 1em;
     max-width: 95%;
-    margin-bottom: 10em;
+    margin-bottom: 5em;
 }
 
+#card-2{
+    margin: 1em;
+    margin-bottom: 5em;
+}
 
 .personnage-title{
     display: inline;
@@ -223,8 +229,14 @@ input:checked + .slider:before {
 }
 
 .icon-btn{
-    height: 4em;
-    width: 4em;
+    min-height: 5em;
+    min-width: 5em;
+    height: 75%;
+    width: 75%;
+}
+
+.card-illustration img{
+    max-height: 35em;
 }
 
 /* Création et recherche de club */
@@ -333,6 +345,10 @@ input:checked + .slider:before {
     color:rgba(45, 172, 45, 0.452)
 }
 
+.card-footer{
+ background: none;
+}
+
 .invisible{
     visibility: hidden;
 }
@@ -386,21 +402,41 @@ input:checked + .slider:before {
     margin-bottom: 5em;
 }
 
+/* File d'attente */
+
+.queue-content{
+    text-align: center;
+}
+
 /* Page de jeu */
 
 .game-container{
     margin: 1%;
+    margin-bottom: 4em;
     padding: 0.5%;
     box-shadow: 5px 10px 18px #888888;
-    height: 90vh;
     max-width: 100%;
     position: relative;
+    min-height: 70vh;
+    background: #ebf0f0
 }
 
 .timer-container{
     text-align: center;
-    margin: 1em 40%;
-    background: #ADDCC9;
+    margin: 2em 0em;
+    padding: 5%;
+    background: #ffffff;
+    border-radius: 50%;
+    width: 100%;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 150%;
+}
+
+.gaming-screen{
+    margin: 1em;
+    border: solid 1px #000;
+    min-height:50vh;
+    background: #ffffff;
 }
 
 .capacites-container{
@@ -418,10 +454,12 @@ input:checked + .slider:before {
 }
 
 #capacite-1 img, #capacite-2 img{
-    border-radius: 75%;
+    border-radius: 25% 10%;
     border: rgba(45, 172, 45, 0.452) solid 0.5px;
     width: 5em;
     height: 5em;
+    background: #fff;
+    margin-bottom: 1vh;
 }
 
 #capacite-1 img:hover, #capacite-2 img:hover{
@@ -437,7 +475,44 @@ a.fill-div {
 
 .button-capacites{
     border: none;
-    background: #f6f6f9;
+}
+
+.team-img{
+    max-width: 3em;
+}
+
+
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+@media (min-width: 768px) {
+.col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
 }
 
 /* navbar */
@@ -464,6 +539,10 @@ nav{
 
 body{
     background-color: #f6f6f9;
+    width: 100%;
+    overflow-x:hidden;
+    margin: 0;
+    padding: 0;
 }
 
 /* footer */
@@ -605,4 +684,12 @@ body{
 
 .title{
     font-size: large;
+}
+
+.thin-margin{
+    margin: 0.5em;
+}
+
+.thin-margin-2{
+    margin: 1em;
 }
