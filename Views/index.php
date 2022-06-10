@@ -56,7 +56,7 @@
                     <input type="text" id="pseudo" class="form-control" name="pseudo" placeholder="Entrez votre pseudonyme..." required>
                 </div>
                 <div class="mb-4">
-                    <label for="mail" class="form-label">Pseudo *:</label><br>
+                    <label for="mail" class="form-label">Adresse mail *:</label><br>
                     <input type="email" id="mail" class="form-control" name="mail" placeholder="Entrez votre adresse mail..." required>
                 </div>
                 <div class="mb-4">
