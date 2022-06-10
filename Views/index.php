@@ -8,7 +8,7 @@
 <body>
 <div class="login-form-container">
     <!-- Formulaire de connexion -->
-    <form class="connexion-form" action="Controllers/connexion.php">
+    <form class="connexion-form" action="../Controllers/connexion.php" method="POST">
         <div class="label-connexion-head">
             <h1>Connexion</h1>
             <hr>
@@ -42,7 +42,7 @@
     </form> 
 
     <!-- Formulaire d'inscription -->
-    <form class="inscription-form d-none" action="Controllers/inscription.php">
+    <form class="inscription-form d-none" action="../Controllers/inscription.php" method="POST">
         <div class="label-inscription-head">
             <h1>Inscription</h1>
             <hr>
@@ -68,7 +68,8 @@
                         <div class="col-9">Voulez-vous profiter des avantages premium tels que la création ou gestion de club ou le déblocage d'un troisième personnage pour 5€ ?</div>
                         <div class="col-3">
                             <label class="switch-premium">
-                                <input type="checkbox">
+                                <input type="hidden" name="premium" id="premium" value="2">
+                                <input type="checkbox" name="premium" id="premium" value="1">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -91,7 +92,7 @@
     </form> 
 
     <!-- Formulaire de réinitialisation de mot de passe  -->
-    <form class="reinitialisation-form d-none" action="Controllers/recuperation.php">
+    <form class="reinitialisation-form d-none" action="Controllers/recuperation.php" method="POST">
         <div class="label-reinitialisation-head">
             <h1>Réinitialisation du mot de passe</h1>
             <hr>
