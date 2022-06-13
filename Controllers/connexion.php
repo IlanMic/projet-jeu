@@ -25,8 +25,12 @@
         $mdp_check = password_verify($mdp, $data['mot_de_passe']);
         //var_dump($mdp_check);
         if($mdp_check == true) {
+            $_SESSION['statut_connexion'] = true;
+            $_SESSION['utilisateur_pseudo'] = $data['pseudo'];
+            $_SESSION['etat'] = "Succès";
             header('Location: ../Views/profil-utilisateur.php');
         } else{
+            $_SESSION['statut_connexion'] = false;
             $_SESSION['etat'] = "Echec";
             header('Location: ../Views/index.php');
             $_SESSION['message'] = "Erreur: Mot de passe et/ou adresse email incorrect(s)";
