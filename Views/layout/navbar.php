@@ -15,41 +15,61 @@
                 <i class="bi bi-house-fill"></i> Page d'accueil 
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Classement des meilleurs clubs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Classement des meilleurs personnages</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="profil-utilisateur.php">Profil utilisateur</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="creation-club.php">Création du club</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="profil-club.php">Profil club</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="rechercher-club.php">Recherche club</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="creation-personnage.php">Création de personnage</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="selection-personnage.php">Sélection de personnage</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="queue-match.php">Fil d'attente de match</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="jeu.php">Page de jeu</a>
-            </li>
+            <?php if($_SESSION['statut_connexion'] == true) { ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="profil-utilisateur.php">
+                    <p>
+                    <svg class="svg-profile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                      <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                      <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/>
+                    </svg>
+                      Bienvenue, 
+                      <?php
+                      echo $_SESSION['utilisateur_pseudo'];
+                      ?>
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="creation-club.php">Création du club</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="profil-club.php">Profil club</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="rechercher-club.php">Recherche club</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="creation-personnage.php">Création de personnage</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="selection-personnage.php">Sélection de personnage</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="queue-match.php">Fil d'attente de match</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="jeu.php">Page de jeu</a>
+                </li>
+            <?php }else{ 
+              $_SESSION['statut_connexion'] = false;
+              ?>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Classement des meilleurs clubs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Classement des meilleurs personnages</a>
+              </li>
+            <?php } ?>    
           </ul>
-
         </div>
         <div>
-          <a class="nav-link right" href="regles-jeu.php">
+          <?php if($_SESSION['statut_connexion'] == true) { ?>
+            <form action="../Controllers/deconnexion.php" method="post">
+              <button type="submit">Déconnexion</button>
+            </form>
+          <?php } ?>
+            <a class="nav-link right" href="regles-jeu.php">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
               <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
