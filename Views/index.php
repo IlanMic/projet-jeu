@@ -5,7 +5,6 @@
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
 ?>
 
-<body>
 <div class="login-form-container">
     <!-- Formulaire de connexion -->
     <form class="connexion-form" action="../Controllers/connexion.php" method="POST">
