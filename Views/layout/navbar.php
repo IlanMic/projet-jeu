@@ -17,15 +17,16 @@
             </li>
             <?php if($_SESSION['statut_connexion'] == true) { ?>
                 <li class="nav-item">
-                  <a class="nav-link" href="profil-utilisateur.php">
+                  <a class="nav-link" href="mon-profil.php">
                     <p>
                     <svg class="svg-profile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                       <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                       <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/>
                     </svg>
-                      Bienvenue, 
                       <?php
-                      echo $_SESSION['utilisateur_pseudo'];
+                      if(isset($_SESSION['utilisateur_pseudo'])) {
+                        echo $_SESSION['utilisateur_pseudo'];
+                      }
                       ?>
                     </p>
                   </a>
@@ -66,7 +67,7 @@
         <div>
           <?php if($_SESSION['statut_connexion'] == true) { ?>
             <form action="../Controllers/deconnexion.php" method="post">
-              <button type="submit">Déconnexion</button>
+              <button class="logout-btn" type="submit">Déconnexion</button>
             </form>
           <?php } ?>
             <a class="nav-link right" href="regles-jeu.php">

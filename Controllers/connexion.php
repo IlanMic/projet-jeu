@@ -26,9 +26,17 @@
         //var_dump($mdp_check);
         if($mdp_check == true) {
             $_SESSION['statut_connexion'] = true;
+            $_SESSION['utilisateur_id'] = $data['id_utilisateur'];
             $_SESSION['utilisateur_pseudo'] = $data['pseudo'];
+            $_SESSION['mail'] = $data['adresse_mail'];
+            $_SESSION['utilisateur_club'] = $data['club_id'];
+            $_SESSION['compte_premium'] = $data['compte_premium'];
+            $_SESSION['utilisateur_personnage_1'] = $data['personnage_1_id'];
+            $_SESSION['utilisateur_personnage_2'] = $data['personnage_2_id'];
+            $_SESSION['utilisateur_personnage_3'] = $data['personnage_3_id'];
+
             $_SESSION['etat'] = "Succès";
-            header('Location: ../Views/profil-utilisateur.php');
+            header('Location: ../Views/jeu.php');
         } else{
             $_SESSION['statut_connexion'] = false;
             $_SESSION['etat'] = "Echec";
