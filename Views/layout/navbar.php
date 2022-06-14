@@ -15,7 +15,7 @@
                 <i class="bi bi-house-fill"></i> Page d'accueil 
               </a>
             </li>
-            <?php if($_SESSION['statut_connexion'] == true) { ?>
+            <?php if(isset($_SESSION['statut_connexion']) && $_SESSION['statut_connexion'] == true) { ?>
                 <li class="nav-item">
                   <a class="nav-link" href="mon-profil.php">
                     <p>
