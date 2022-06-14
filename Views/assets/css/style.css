@@ -342,11 +342,11 @@ input:checked + .slider:before {
     position: absolute;
     text-align: center;
     padding-top: 5%;
-    color:rgba(45, 172, 45, 0.452)
+    color:rgba(45, 172, 45, 0.452);
 }
 
 .card-footer{
- background: none;
+    background-color: rgba(45, 172, 45, 0.452);
 }
 
 .invisible{
@@ -699,4 +699,26 @@ body{
 
 .thin-margin-2{
     margin: 1em;
+}
+
+.logout-btn{
+    background-color: rgba(117, 190, 218, 0.0) ;
+    color: #ffffff;
+    border: 1px #fff solid;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-right: 2em;
+}
+
+.logout-btn:hover{
+    background-color: rgb(255, 255, 255) ;
+    color: rgba(45, 172, 45, 0.452);
+    border: rgba(45, 172, 45, 0.452) solid 1px;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-right: 2em;
 }
