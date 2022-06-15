@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="mb-4">
                     <label for="nom-perso" class="form-label">Pseudo *:</label><br>
-                    <input type="text" id="psnom-perso" class="form-control" name="nom-perso" placeholder="Entrez le nom du personnage..." required>
+                    <input type="text" id="nom-perso" class="form-control" name="nom-perso" placeholder="Entrez le nom du personnage..." required>
                 </div>
                 <div class="mb-4">
                     <label for="race">Race *:</label>
