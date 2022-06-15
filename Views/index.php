@@ -5,8 +5,16 @@
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
 ?>
 
+<div class="alert-container">
+    <?php
+        require_once("../Views/layout/message.php");
+    ?>
+</div>
 
 <?php
+    require_once("../Views/layout/message.php");
+
+
     //Affichage des menus de connexions, inscriptions et demande de mot de passe si l'utilisateur est connecté
     if($_SESSION['statut_connexion'] == false) {
         ?>

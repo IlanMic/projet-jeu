@@ -779,3 +779,15 @@ body{
     cursor: pointer;
     margin-right: 2em;
 }
+
+.alert-container{
+    margin: 3em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+}
+
+.alert-container div{
+    width: 90%;
+}

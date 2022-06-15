@@ -33,7 +33,7 @@
         $stmt->bindParam("premium", $premium, PDO::PARAM_INT);
         if($stmt->execute()) {
             $_SESSION['etat'] = "Succès";
-            $_SESSION['message'] = "Inscription réussie";
+            $_SESSION['message'] = "Inscription réussie. Vous pouvez désormais vous connecter";
             header('Location: ../Views/index.php');
 
         } else {
@@ -42,6 +42,9 @@
             header('Location: ../Views/index.php');
         }
 
+
+        //Fermeture connexion base de données
+        $pdo = null;
     }
 
     
