@@ -42,11 +42,16 @@
             $_SESSION['statut_connexion'] = false;
             $_SESSION['etat'] = "Echec";
             header('Location: ../Views/index.php');
-            $_SESSION['message'] = "Erreur: Mot de passe et/ou adresse email incorrect(s)";
+            $_SESSION['message'] = "Erreur: Mot de passe et/ou adresse email incorrect(s)µ.";
         }
 
         //Fermeture connexion base de données
         $pdo = null;
 
+    } else {
+        $_SESSION['statut_connexion'] = false;
+        $_SESSION['etat'] = "Echec";
+        header('Location: ../Views/index.php');
+        $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été saisi.";
     }
 ?>
