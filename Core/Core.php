@@ -46,4 +46,14 @@
         }
     }
 
+    //Vérifie que le mot de passe correspond bien aux conditions
+    function mot_de_passe_valide($mdp)
+    {
+        if(preg_match("/^(?=.{6,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/", $mdp)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 ?>
