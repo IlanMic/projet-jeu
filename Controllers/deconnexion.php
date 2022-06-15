@@ -13,6 +13,8 @@
     unset($_SESSION['utilisateur_personnage_2']);
     unset($_SESSION['utilisateur_personnage_3']);
 
-    //Redirection vers la page d'accueil
+    //Redirection vers la page d'accueil + message
+    $_SESSION['etat'] = "Succès";
     header('Location: ../Views/index.php');
+    $_SESSION['message'] = "Vous avez été déconnecté avec succès";
 ?>

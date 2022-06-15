@@ -37,12 +37,16 @@
 
             $_SESSION['etat'] = "Succès";
             header('Location: ../Views/jeu.php');
+            $_SESSION['message'] = "Connexion réussie.";
         } else{
             $_SESSION['statut_connexion'] = false;
             $_SESSION['etat'] = "Echec";
             header('Location: ../Views/index.php');
             $_SESSION['message'] = "Erreur: Mot de passe et/ou adresse email incorrect(s)";
         }
+
+        //Fermeture connexion base de données
+        $pdo = null;
 
     }
 ?>
