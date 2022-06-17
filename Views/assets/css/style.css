@@ -599,6 +599,12 @@ nav{
     height: 1vh;
 }
 
+.btn-dropdown{
+    border: none;
+    margin: 0px 15px;
+    margin-left: 2em;
+}
+
 /* body */
 
 body{
@@ -785,7 +791,6 @@ body{
     text-align: center;
     display: flex;
     justify-content: center;
-
 }
 
 .alert-container div{
