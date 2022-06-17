@@ -10,7 +10,7 @@
 <body>
 <div class="personnage-creation-form-container">
     <!-- Formulaire de création de personnage -->
-    <form class="creation-form" action="Controllers/creer-personnage.php">
+    <form class="creation-form" action="../Controllers/creer-personnage.php" method="POST">
         <div class="label-connexion-head">
             <h1>Création de personnage</h1>
             <hr>
@@ -20,17 +20,17 @@
         <div class="connexion-content">
             <div class="row">
                 <div class="mb-4">
-                    <label for="nom-perso" class="form-label">Pseudo *:</label><br>
-                    <input type="text" id="nom-perso" class="form-control" name="nom-perso" placeholder="Entrez le nom du personnage..." required>
+                    <label for="nom_perso" class="form-label">Pseudo *:</label><br>
+                    <input type="text" id="nom_perso" class="form-control" name="nom_perso" placeholder="Entrez le nom du personnage..." required>
                 </div>
                 <div class="mb-4">
                     <label for="race">Race *:</label>
                     <select class= "form-select" name="race" id="race" required>
                         <option selected disabled>Sélectionnez votre race...</option>
-                        <option value="humain">Humain</option>
-                        <option value="elfe">Elfe</option>
-                        <option value="nain">Nain</option>
-                        <option value="orc">Orc</option>
+                        <option value="1">Humain</option>
+                        <option value="2">Elfe</option>
+                        <option value="3">Nain</option>
+                        <option value="4">Orc</option>
                     </select>
                 </div>
                 <div class="mb-4">
@@ -41,9 +41,9 @@
                     <input id="file-upload" type="file"/>
                 </div>
                 <div class="mb-4">
-                    <label for="bibilographie">Bibilographie du personnage:</label>
+                    <label for="biographie">Biographie du personnage:</label>
                     <br>
-                    <textarea maxlength="300" name="bibilographie" placeholder="Saisissez la biographie de votre personnage..." class="textarea-bibliographie" cols="100%" rows="5%"></textarea>
+                    <textarea maxlength="300" id="biographie" name="biographie" placeholder="Saisissez la biographie de votre personnage..." class="textarea-bibliographie" cols="100%" rows="5%"></textarea>
                 </div>
                 <hr>
                 <h5>Vous avez (?) points de compétences à dépenser: </h5>
