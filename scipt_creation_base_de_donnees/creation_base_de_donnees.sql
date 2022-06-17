@@ -36,7 +36,7 @@ ALTER TABLE `projet_jeu`.`orientation` ADD INDEX(`poste_id`);
 
 -- Ajout de la cle etrangere entre les tables "orientations" et "poste"
 
-ALTER TABLE `projet_jeu`.`orientation` ADD CONSTRAINT `FK_orientation_poste` FOREIGN KEY (`poste_id`) REFERENCES `poste`(`id_poste`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`orientation` ADD CONSTRAINT `FK_orientation_poste` FOREIGN KEY (`poste_id`) REFERENCES `projet_jeu`.`poste`(`id_poste`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- Insertion des orientations predefinies --
 
@@ -111,9 +111,9 @@ CREATE TABLE IF NOT EXISTS `projet_jeu`.`utilisateur` (
 
 -- ajout des cles etrangeres sur "personnage_1_id", "personnage_2_id" et "personnage_3_id" pour lier les tables "utilisateur" et "personnage" --
 
-ALTER TABLE `projet_jeu`.`utilisateur` ADD CONSTRAINT `FK_utilisateur_personnage_1` FOREIGN KEY (`personnage_1_id`) REFERENCES `personnage`(`id_personnage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`utilisateur` ADD CONSTRAINT `FK_utilisateur_personnage_2` FOREIGN KEY (`personnage_2_id`) REFERENCES `personnage`(`id_personnage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`utilisateur` ADD CONSTRAINT `FK_utilisateur_personnage_3` FOREIGN KEY (`personnage_3_id`) REFERENCES `personnage`(`id_personnage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`utilisateur` ADD CONSTRAINT `FK_utilisateur_personnage_1` FOREIGN KEY (`personnage_1_id`) REFERENCES `projet_jeu`.`personnage`(`id_personnage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`utilisateur` ADD CONSTRAINT `FK_utilisateur_personnage_2` FOREIGN KEY (`personnage_2_id`) REFERENCES `projet_jeu`.`personnage`(`id_personnage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`utilisateur` ADD CONSTRAINT `FK_utilisateur_personnage_3` FOREIGN KEY (`personnage_3_id`) REFERENCES `projet_jeu`.`personnage`(`id_personnage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
 -- Creation de la table "club" --
@@ -133,7 +133,7 @@ ALTER TABLE `projet_jeu`.`club` ADD INDEX(`proprietaire_id`);
 
 -- ajout de cle etrangere sur "proprietaire_id" pour lier les tables "utilisateur" et "club" --
 
-ALTER TABLE `projet_jeu`.`club` ADD CONSTRAINT `FK_club_utilisateur` FOREIGN KEY (`proprietaire_id`) REFERENCES `utilisateur`(`id_utilisateur`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`club` ADD CONSTRAINT `FK_club_utilisateur` FOREIGN KEY (`proprietaire_id`) REFERENCES `projet_jeu`.`utilisateur`(`id_utilisateur`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- Creation de la table "poule" --
 
@@ -175,16 +175,16 @@ CREATE TABLE IF NOT EXISTS `projet_jeu`.`poule` (
 
 -- Ajout de cles etrangeres pour lier la table "club" et la table "poule" -- 
 
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_1` FOREIGN KEY (`club_id_1`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_2` FOREIGN KEY (`club_id_2`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_3` FOREIGN KEY (`club_id_3`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_4` FOREIGN KEY (`club_id_4`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_5` FOREIGN KEY (`club_id_5`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_6` FOREIGN KEY (`club_id_6`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_7` FOREIGN KEY (`club_id_7`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_8` FOREIGN KEY (`club_id_8`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_9` FOREIGN KEY (`club_id_9`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_10` FOREIGN KEY (`club_id_10`) REFERENCES `club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_1` FOREIGN KEY (`club_id_1`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_2` FOREIGN KEY (`club_id_2`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_3` FOREIGN KEY (`club_id_3`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_4` FOREIGN KEY (`club_id_4`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_5` FOREIGN KEY (`club_id_5`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_6` FOREIGN KEY (`club_id_6`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_7` FOREIGN KEY (`club_id_7`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_8` FOREIGN KEY (`club_id_8`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_9` FOREIGN KEY (`club_id_9`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`poule` ADD CONSTRAINT `FK_poule_club_10` FOREIGN KEY (`club_id_10`) REFERENCES `projet_jeu`.`club`(`id_club`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- Creation de la table "match" --
 
@@ -218,7 +218,7 @@ ALTER TABLE `projet_jeu`.`match` ADD INDEX(`type_match_id`);
 
 -- Ajout cle etrangere sur "" pour lier les tables "matchs" et "type_match" --
 
-ALTER TABLE `projet_jeu`.`match` ADD CONSTRAINT `FK_match_type_match` FOREIGN KEY (`type_match_id`) REFERENCES `type_match`(`id_type_match`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `projet_jeu`.`match` ADD CONSTRAINT `FK_match_type_match` FOREIGN KEY (`type_match_id`) REFERENCES `projet_jeu`.`type_match`(`id_type_match`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- Insertion des deux types de match predefinis dans la table type_match -- 
 
@@ -240,7 +240,8 @@ INSERT INTO `projet_jeu`.`personnage` (`id_personnage`, `nom_personnage`, `race_
  (NULL, 'test_personnage_2_attaquant', '2', '6', '5', '4', '2', '7', '8', '7', '10', '9', '0', '4', NULL, NULL, NULL, '2', NULL, '4');
 
 INSERT INTO `projet_jeu`.`personnage` (`id_personnage`, `nom_personnage`, `race_id`, `endurance`, `force`, `tacle`, `defense`, `technique`, `vitesse`, `intelligence`, `tir`, `passe`, `experience`, `niveau`, `club_id`, `illustration`, `biographie`, `capacite_1_id`, `capacite_2_id`, `poste_id`) VALUES (NULL, 'test_personnage_3_milieu', '4', '9', '7', '7', '5', '6', '7', '8', '6', '9', '0', '0', NULL, NULL, NULL, NULL, NULL, '3');
-
+ALTER TABLE `projet_jeu`.`personnage` CHANGE `force` `strength` TINYINT(4) NOT NULL;
+ALTER TABLE `projet_jeu`.`personnage` CHANGE `poste_id` `poste_id` INT(11) NULL;
 UPDATE `projet_jeu`.`utilisateur` SET `personnage_1_id`=1,`personnage_2_id`=2 WHERE id_utilisateur = 1;
 UPDATE `projet_jeu`.`utilisateur` SET `personnage_1_id`=3 WHERE id_utilisateur = 2;
 
