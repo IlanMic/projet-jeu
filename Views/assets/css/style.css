@@ -791,3 +791,11 @@ body{
 .alert-container div{
     width: 90%;
 }
+
+.close-btn{
+    background: none;
+    border: none;
+    float: right;
+    position: relative;
+    top: 0%;
+}
