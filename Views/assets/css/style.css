@@ -352,6 +352,9 @@ input:checked + .slider:before {
     margin: 5%;
 }
 
+.img-illustration{
+    max-height: 40vh;
+}
 
 /* Modification de personnage */
 .picture-container-2 {
