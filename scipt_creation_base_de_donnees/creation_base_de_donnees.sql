@@ -244,6 +244,7 @@ ALTER TABLE `projet_jeu`.`personnage` CHANGE `force` `strength` TINYINT(4) NOT N
 ALTER TABLE `projet_jeu`.`personnage` CHANGE `poste_id` `poste_id` INT(11) NULL;
 UPDATE `projet_jeu`.`utilisateur` SET `personnage_1_id`=1,`personnage_2_id`=2 WHERE id_utilisateur = 1;
 UPDATE `projet_jeu`.`utilisateur` SET `personnage_1_id`=3 WHERE id_utilisateur = 2;
+ALTER TABLE `projet_jeu`.`personnage` CHANGE `illustration` `illustration` LONGBLOB NULL DEFAULT NULL;
 
 INSERT INTO `projet_jeu`.`poule` (`nom_poule`, `club_id_1`, `club_id_2`, `point_club_1`, `point_club_2`) VALUES ('Argent', '1', '2', '0', '0');
 
