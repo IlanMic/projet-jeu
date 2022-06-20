@@ -59,9 +59,4 @@
         header('Location: ../Views/index.php');
         $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été rempli.";
     }
-
-    
-
-
-
 ?>
