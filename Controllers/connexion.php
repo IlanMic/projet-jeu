@@ -35,14 +35,14 @@
             $_SESSION['utilisateur_personnage_2'] = $data['personnage_2_id'];
             $_SESSION['utilisateur_personnage_3'] = $data['personnage_3_id'];
 
-            if(is_null($data['personnage_1_id'])) {
-                $_SESSION['dernier_personnage_cree'] = "personnage_1_id";
+            if(is_null($data['personnage_2_id'])) {
+                $id_personnage = $_SESSION['dernier_personnage_cree'] = "personnage_1_id";
             }
-            else if(is_null($data['personnage_2_id'])) {
+            else if(is_null($data['personnage_3_id'])) {
                 $_SESSION['dernier_personnage_cree'] = "personnage_2_id";
             }
-            else if(is_null ($data['personnage_3_id'])) {
-                $_SESSION['dernier_personnage_cree'] = "personnage_3_id";
+            else if(!is_null ($data['personnage_3_id'])) {
+                $_SESSION['dernier_personnage_cree'] = "personnage_2_id";
             }
             else{
                 $_SESSION['dernier_personnage_cree'] = "";
