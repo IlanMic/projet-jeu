@@ -10,7 +10,7 @@
 <body>
 <div class="personnage-creation-form-container">
     <!-- Formulaire de création de personnage -->
-    <form class="creation-form" action="../Controllers/creer-personnage.php" method="POST">
+    <form class="creation-form" action="../Controllers/creer-personnage.php" method="POST" enctype="multipart/form-data">
         <div class="label-connexion-head">
             <h1>Création de personnage</h1>
             <hr>
@@ -38,7 +38,7 @@
                     <label id="label-upload" for="file-upload" class="custom-file-upload">
                         <i class="fa fa-cloud-upload"></i> Ajouter une illustration
                     </label>
-                    <input id="file-upload" type="file"/>
+                    <input id="file-upload" name="illustration" type="file"/>
                 </div>
                 <div class="mb-4">
                     <label for="biographie">Biographie du personnage:</label>

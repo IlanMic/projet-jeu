@@ -29,7 +29,7 @@ session_start();
         $id_personnage_disponible = $pdo->prepare("SELECT personnage_1_id, personnage_2_id, personnage_3_id FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
         $id_personnage_disponible->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
         $id_personnage_disponible->execute();
-        $data=$id_personnage_disponible->fetch();
+        $data=$id_personnage_disponible->fetch(PDO::FETCH_ASSOC);
         if(is_null($data['personnage_1_id'])) {
             $personnage_id="personnage_1_id";
         }
@@ -43,10 +43,12 @@ session_start();
             $personnage_id="";
         }
 
+        
+
         //On vérifie que l'utilisateur n'a pas encore atteint son nombre maximal de personnage
         if(($_SESSION['compte_premium'] == 1 && is_null($data['personnage_3_id'])) || ($_SESSION['compte_premium'] == 0 && is_null($data['personnage_2_id']))){
             //insertion du personnage dans la base de données sans biographie ni illustration
-            if(!isset($_POST['file-upload']) && !isset($_POST['biographie'])) {
+            if(!isset($_FILES["illustration"]["tmp_name"]) && !isset($_POST['biographie'])) {
                 $stmt = $pdo->prepare("INSERT INTO personnage (nom_personnage, race_id, endurance, strength, tacle, defense, technique, vitesse, intelligence, tir, passe, experience, niveau) VALUES (:nom_personnage, :race_id, :endurance, :strength, :tacle, :defense, :technique, :vitesse, :intelligence, :tir, :passe, :experience, :niveau)");
                 $stmt->bindParam("nom_personnage", $nom_perso, PDO::PARAM_STR);
                 $stmt->bindParam("race_id", $race, PDO::PARAM_INT);
@@ -63,8 +65,9 @@ session_start();
                 $stmt->bindParam("niveau", $zero, PDO::PARAM_INT);
             }
             //insertion du personnage dans la base de données sans biographie mais avec illustration
-            else if(isset($_POST['file-upload']) && !isset($_POST['biographie'])) {
-                $illustration =  $_POST['file-upload'];
+            else if(isset($_FILES["illustration"]["tmp_name"]) && !isset($_POST['biographie'])) {
+                $illu = $_FILES["illustration"]["tmp_name"];
+                $illustration = file_get_contents($illu);
                 $stmt = $pdo->prepare("INSERT INTO personnage (nom_personnage, race_id, endurance, strength, tacle, defense, technique, vitesse, intelligence, tir, passe, experience, niveau, illustration) VALUES (:nom_personnage, :race_id, :endurance, :strength, :tacle, :defense, :technique, :vitesse, :intelligence, :tir, :passe, :experience, :niveau, :illustration)");
                 $stmt->bindParam("nom_personnage", $nom_perso, PDO::PARAM_STR);
                 $stmt->bindParam("race_id", $race, PDO::PARAM_INT);
@@ -82,7 +85,7 @@ session_start();
                 $stmt->bindParam("illustration", $illustration, PDO::PARAM_LOB);
             }
             //insertion du personnage dans la base de données avec biographie mais sans illustration
-            else if(!isset($_POST['file-upload']) && isset($_POST['biographie'])) {
+            else if(!isset($_FILES["illustration"]["tmp_name"]) && isset($_POST['biographie'])) {
                 $biographie = $_POST['biographie'];
                 $stmt = $pdo->prepare("INSERT INTO personnage (nom_personnage, race_id, endurance, strength, tacle, defense, technique, vitesse, intelligence, tir, passe, experience, niveau, biographie) VALUES (:nom_personnage, :race_id, :endurance, :strength, :tacle, :defense, :technique, :vitesse, :intelligence, :tir, :passe, :experience, :niveau, :biographie)");
                 $stmt->bindParam("nom_personnage", $nom_perso, PDO::PARAM_STR);
@@ -98,11 +101,12 @@ session_start();
                 $stmt->bindParam("passe", $passe, PDO::PARAM_INT);
                 $stmt->bindParam("experience", $zero, PDO::PARAM_INT);
                 $stmt->bindParam("niveau", $zero, PDO::PARAM_INT);
-                $stmt->bindParam("biographie", $biographie, PDO::PARAM_LOB);
+                $stmt->bindParam("biographie", $biographie, PDO::PARAM_STR);
             } 
             //Insertion de l'utilisateur dans la base de données si tout champ a été rempli
-            else if(isset($_POST['file-upload']) && isset($_POST['biographie'])) {
-                $illustration =  $_POST['file-upload'];
+            else if(isset($_FILES["illustration"]["tmp_name"]) && isset($_POST['biographie'])) {
+                $illu = $_FILES["illustration"]["tmp_name"];
+                $illustration = file_get_contents($illu);
                 $biographie = $_POST['biographie'];
                 $stmt = $pdo->prepare("INSERT INTO personnage (nom_personnage, race_id, endurance, strength, tacle, defense, technique, vitesse, intelligence, tir, passe, experience, niveau, illustration, biographie) VALUES (:nom_personnage, :race_id, :endurance, :strength, :tacle, :defense, :technique, :vitesse, :intelligence, :tir, :passe, :experience, :niveau, :illustration, :biographie)");
                 $stmt->bindParam("nom_personnage", $nom_perso, PDO::PARAM_STR);

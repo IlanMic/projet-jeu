@@ -35,6 +35,7 @@
             $counter += 1;
         }
         return $counter;
+        $pdo = null;
     }
 
 
@@ -54,6 +55,31 @@
         } else {
             return false;
         }
+    }
+
+    //Récupère les informations d'un personnage via son identifiant
+    function get_personnage($id)
+    {
+        require_once("../Core/ConnexionBDD.php");
+        $pdo = connect_db();
+        $stmt = $pdo->prepare("SELECT * FROM personnage WHERE id_personnage = :id_personnage");
+        $stmt->bindParam("id_personnage", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetch();
+        $pdo = null;
+        return $data;
+    }
+
+    //Récupère les informations d'un personnage via son identifiant
+    function get_race($race_id){
+        require_once("../Core/ConnexionBDD.php");
+        $pdo = connect_db();
+        $stmt = $pdo->prepare("SELECT * FROM race WHERE id_race = :id_race");
+        $stmt->bindParam("id_race", $race_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetch();
+        $pdo = null;
+        return $data['nom_race'];
     }
 
 ?>
