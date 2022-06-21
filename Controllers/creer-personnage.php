@@ -48,7 +48,7 @@ session_start();
         //On vérifie que l'utilisateur n'a pas encore atteint son nombre maximal de personnage
         if(($_SESSION['compte_premium'] == 1 && is_null($data['personnage_3_id'])) || ($_SESSION['compte_premium'] == 0 && is_null($data['personnage_2_id']))){
             //insertion du personnage dans la base de données sans biographie ni illustration
-            if(!isset($_FILES["illustration"]["tmp_name"]) && !isset($_POST['biographie'])) {
+            if(!file_exists($_FILES["illustration"]["tmp_name"]) && !isset($_POST['biographie'])) {
                 $stmt = $pdo->prepare("INSERT INTO personnage (nom_personnage, race_id, endurance, strength, tacle, defense, technique, vitesse, intelligence, tir, passe, experience, niveau) VALUES (:nom_personnage, :race_id, :endurance, :strength, :tacle, :defense, :technique, :vitesse, :intelligence, :tir, :passe, :experience, :niveau)");
                 $stmt->bindParam("nom_personnage", $nom_perso, PDO::PARAM_STR);
                 $stmt->bindParam("race_id", $race, PDO::PARAM_INT);
@@ -65,7 +65,7 @@ session_start();
                 $stmt->bindParam("niveau", $zero, PDO::PARAM_INT);
             }
             //insertion du personnage dans la base de données sans biographie mais avec illustration
-            else if(isset($_FILES["illustration"]["tmp_name"]) && !isset($_POST['biographie'])) {
+            else if(file_exists($_FILES["illustration"]["tmp_name"]) && !isset($_POST['biographie'])) {
                 $illu = $_FILES["illustration"]["tmp_name"];
                 $illustration = file_get_contents($illu);
                 $stmt = $pdo->prepare("INSERT INTO personnage (nom_personnage, race_id, endurance, strength, tacle, defense, technique, vitesse, intelligence, tir, passe, experience, niveau, illustration) VALUES (:nom_personnage, :race_id, :endurance, :strength, :tacle, :defense, :technique, :vitesse, :intelligence, :tir, :passe, :experience, :niveau, :illustration)");
@@ -85,7 +85,7 @@ session_start();
                 $stmt->bindParam("illustration", $illustration, PDO::PARAM_LOB);
             }
             //insertion du personnage dans la base de données avec biographie mais sans illustration
-            else if(!isset($_FILES["illustration"]["tmp_name"]) && isset($_POST['biographie'])) {
+            else if(!file_exists($_FILES["illustration"]["tmp_name"]) && isset($_POST['biographie'])) {
                 $biographie = $_POST['biographie'];
                 $stmt = $pdo->prepare("INSERT INTO personnage (nom_personnage, race_id, endurance, strength, tacle, defense, technique, vitesse, intelligence, tir, passe, experience, niveau, biographie) VALUES (:nom_personnage, :race_id, :endurance, :strength, :tacle, :defense, :technique, :vitesse, :intelligence, :tir, :passe, :experience, :niveau, :biographie)");
                 $stmt->bindParam("nom_personnage", $nom_perso, PDO::PARAM_STR);
@@ -104,7 +104,7 @@ session_start();
                 $stmt->bindParam("biographie", $biographie, PDO::PARAM_STR);
             } 
             //Insertion de l'utilisateur dans la base de données si tout champ a été rempli
-            else if(isset($_FILES["illustration"]["tmp_name"]) && isset($_POST['biographie'])) {
+            else if(file_exists($_FILES["illustration"]["tmp_name"]) && isset($_POST['biographie'])) {
                 $illu = $_FILES["illustration"]["tmp_name"];
                 $illustration = file_get_contents($illu);
                 $biographie = $_POST['biographie'];
