@@ -1,38 +1,69 @@
 <?php
-    //classe orientation: orientation que peut occuper un personnage
-    class Orientation
+
+    //Getter pour l'identifiant du poste correspondant à cette orientation
+    function get_poste_id($id_orientation)
     {
-        //identifiant de l'orientation
-        private $id_capacite;
-
-        //identifiant du poste
-        private $poste_id;
-
-        //nom de l'orientation
-        private $nom_orientation;
-
-        //constructeur de la classe orientation
-        public function __construct($poste_id, $nom_orientation)
-        {
-            $this->poste_id = $poste_id;
-            $this->nom_orientation = $nom_orientation;
-        }
-
-        //Getter des propriétés de la classe
-        public function __get($property)
-        {
-            if (property_exists($this, $property)) {
-                return $this->$property;
-            }
-        }
-
-        //Setter des propriétés de la classe
-        public function __set($property, $value)
-        {
-            if (property_exists($this, $property)) {
-                $this->$property = $value;
-            }
-            return $this;
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT poste_id FROM orientation WHERE id_orientation = :id_orientation");
+            $stmt->bindParam("id_orientation", $id_orientation, PDO::PARAM_INT);
+            $stmt->execute();
+            $poste = $stmt->fetch();
+            return $poste['poste_id'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le type de ce match: ". $e->getMessage();
         }
     }
+
+    //Getter pour le nom de l'orientation
+    function get_orientation($id_orientation)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT nom_orientation FROM orientation WHERE id_orientation = :id_orientation");
+            $stmt->bindParam("id_orientation", $id_orientation, PDO::PARAM_INT);
+            $stmt->execute();
+            $orientation = $stmt->fetch();
+            return $orientation['nom_orientation'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le nom de l'orientation: ". $e->getMessage();
+        }
+    }
+
+    //Getter d'orientation par identifiant
+    function get_orientation_by_ID($id_orientation)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT * FROM orientation WHERE id_orientation = :id_orientation");
+            $stmt->bindParam("id_orientation", $id_orientation, PDO::PARAM_INT);
+            $stmt->execute();
+            $orientation = $stmt->fetch();
+            return $orientation;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir l'orientation: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour obtenir toutes les orientations
+    function get_all_orientations()
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT * FROM orientation");
+            $all_orientation = $stmt->fetchAll();
+            return $all_orientation;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des orientations: ". $e->getMessage();
+        }
+    }
+
 ?>

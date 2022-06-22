@@ -1,61 +1,138 @@
 <?php
-    //classe match
-    class Match
+    //Getter pour le type de match
+    function get_type_match_id($id_match)
     {
-        //identifiant du match
-        private $id_match;
-
-        //identifiant du type de match (amical ou compétitif,...)
-        private $type_match_id;
-
-        //identifiant du premier club
-        private $club_1_id;
-
-        //identifiant du second club
-        private $club_2_id;
-
-        //date et heure du début du match
-        private $date_match;
-
-        //score du premier club
-        private $score_club_1;
-
-        //score du second club
-        private $score_club_2;
-
-        //constructeur de la classe match
-        public function __construct($type_match_id, $club_1_id, $club_2_id)
-        {
-            $this->type_match_id = $type_match_id;
-            $this->club_1_id = $club_1_id;
-            $this->club_2_id = $club_2_id;
-
-            //Définit la zone temporaire comme étant l'UTC
-            date_default_timezone_set('UTC');
-
-            //La date et heure de création du match sont celle du début du match
-            $this->date_match = date('Y-m-d H:i:s');
-
-            //Les deux clubs commencent le match avec un score de 0
-            $this->score_club_1 = 0;
-            $this->score_club_2 = 0;
+        try{
+                require_once("../Core/ConnexionBDD.php");
+                $pdo = connect_db();
+                $stmt = $pdo->prepare("SELECT type_match_id FROM matchs WHERE id_match = :id_match");
+                $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
+                $stmt->execute();
+                $type_match = $stmt->fetch();
+                return $type_match['type_match_id'];
+                $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le type de ce match: ". $e->getMessage();
         }
 
-        //Getter des propriétés de la classe
-        public function __get($property)
-        {
-            if (property_exists($this, $property)) {
-                return $this->$property;
-            }
-        }
+    }
 
-        //Setter des propriétés de la classe
-        public function __set($property, $value)
-        {
-            if (property_exists($this, $property)) {
-                $this->$property = $value;
-            }
-            return $this;
+    //Getter pour l'identifiant du premier club participant au match
+    function get_club_1($id_match)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT club_1_id FROM matchs WHERE id_match = :id_match");
+            $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
+            $stmt->execute();
+            $club_1 = $stmt->fetch();
+            return $club_1['club_1_id'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le premier club participant au match: ". $e->getMessage();
         }
     }
+
+    //Getter pour l'identifiant du second club participant au match
+    function get_club_2($id_match)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT club_2_id FROM matchs WHERE id_match = :id_match");
+            $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
+            $stmt->execute();
+            $club_2 = $stmt->fetch();
+            return $club_2['club_2_id'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le second club participant au match: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour la date du match
+    function get_date_match($id_match)
+    {
+        try{
+        require_once("../Core/ConnexionBDD.php");
+        $pdo = connect_db();
+        $stmt = $pdo->prepare("SELECT date_match FROM matchs WHERE id_match = :id_match");
+        $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
+        $stmt->execute();
+        $date_match = $stmt->fetch();
+        return $date_match['date_match'];
+        $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la date du match: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour le score du club 1
+    function get_score_club_1($id_match)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT score_club_1 FROM matchs WHERE id_match = :id_match");
+            $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
+            $stmt->execute();
+            $score_club_1 = $stmt->fetch();
+            return $score_club_1['score_club_1'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le score du club 1: ". $e->getMessage();
+        }
+    }
+
+    
+    //Getter pour le score du club 2
+    function get_score_club_2($id_match)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT score_club_2 FROM matchs WHERE id_match = :id_match");
+            $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
+            $stmt->execute();
+            $get_score_club_2 = $stmt->fetch();
+            return $get_score_club_2['score_club_2'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le score du club 2: ". $e->getMessage();
+        }
+    }
+
+    //Getter de match par identifiant
+    function get_match_by_ID($id_match)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT * FROM matchs WHERE id_match = :id_match");
+            $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
+            $stmt->execute();
+            $match = $stmt->fetch();
+            return $match;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir les informations du match: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour obtenir tous les matchs
+    function get_all_matchs()
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT * FROM matchs");
+            $all_match = $stmt->fetchAll();
+            return $all_match;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des matchs: ". $e->getMessage();
+        }
+    }
+
 ?>

@@ -1,38 +1,102 @@
 <?php
-    //classe club: groupe auquel peuvent appartenir plusieurs personnages
-    class Club
+
+    //Getter pour le nom du club
+    function get_club($id_club)
     {
-        //identifiant du club
-        private $id_club;
-
-        //nom du club
-        private $nom_club;
-
-        //identifiant du propriétaire du club
-        private $proprietaire_id;
-
-        //constructeur de la classe club
-        public function __construct($nom_club, $proprietaire_id)
-        {
-            $this->nom_club = $nom_club;
-            $this->proprietaire_id = $proprietaire_id;
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT nom_club FROM club WHERE id_club = :id_club");
+            $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
+            $stmt->execute();
+            $nom_club = $stmt->fetch();
+            return $nom_club['nom_club'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le nom du club: ". $e->getMessage();
         }
+    }
 
-        //Getter des propriétés de la classe
-        public function __get($property)
-        {
-            if (property_exists($this, $property)) {
-                return $this->$property;
-            }
+    //Getter pour l'identifiant du propriétaire du club
+    function get_proprietaire_id($id_club)
+    {
+        try {
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT proprietaire_id FROM club WHERE id_club = :id_club");
+            $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
+            $stmt->execute();
+            $proprietaire = $stmt->fetch();
+            return $proprietaire['proprietaire_id'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le propriétaire du club: ". $e->getMessage();
         }
+    }
 
-        //Setter des propriétés de la classe
-        public function __set($property, $value)
-        {
-            if (property_exists($this, $property)) {
-                $this->$property = $value;
-            }
-            return $this;
+    //Getter de club par identifiant
+    function get_club_by_ID($id_club)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT * FROM club WHERE id_club = :id_club");
+            $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
+            $stmt->execute();
+            $club = $stmt->fetch();
+            return $club;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le club: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour obtenir tous les clubs
+    function get_all_clubs()
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT * FROM club");
+            $all_club = $stmt->fetchAll();
+            return $all_club;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir les clubs: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour le propriétaire du club
+    function get_proprietaire($proprietaire_id)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :proprietaire_id");
+            $stmt->bindParam("proprietaire_id", $proprietaire_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $proprietaire = $stmt->fetch();
+            return $proprietaire;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le propriétaire du club: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour les membres du club
+    function get_all_personnages_club($club_id)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT * FROM personnage WHERE club_id = :club_id");
+            $stmt->bindParam("club_id", $club_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $all_personnages_club = $stmt->fetchAll();
+            return $all_personnages_club;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des membres du club: ". $e->getMessage();
         }
     }
 ?>
