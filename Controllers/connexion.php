@@ -20,10 +20,10 @@
         $stmt->bindParam("pseudo", $pseudo, PDO::PARAM_STR);
         $stmt->execute();
         $data = $stmt->fetch();
-        //var_dump($data[0]['mot_de_passe']);
+        
         //Vérification que le mot de passe saisi est correct
         $mdp_check = password_verify($mdp, $data['mot_de_passe']);
-        //var_dump($mdp_check);
+        
         if($mdp_check == true) {
             $_SESSION['statut_connexion'] = true;
             $_SESSION['utilisateur_id'] = $data['id_utilisateur'];
