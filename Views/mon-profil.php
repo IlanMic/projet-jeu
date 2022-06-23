@@ -4,10 +4,13 @@
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
     require_once("../Core/Core.php");
+    require_once("../Models/personnage.php");
+    require_once("../Models/race.php");
+    require_once("../Models/utilisateur.php");
     redirection_si_non_connecte($_SESSION['statut_connexion']);
-    $perso_1 = get_personnage($_SESSION['utilisateur_personnage_1']);
-    $perso_2 = get_personnage($_SESSION['utilisateur_personnage_2']);
-    $perso_3 = get_personnage($_SESSION['utilisateur_personnage_3']);
+    $perso_1 = get_personnage_by_ID($_SESSION['utilisateur_personnage_1']);
+    $perso_2 = get_personnage_by_ID($_SESSION['utilisateur_personnage_2']);
+    $perso_3 = get_personnage_by_ID($_SESSION['utilisateur_personnage_3']);
 ?>
 
 <body>
@@ -48,7 +51,7 @@
         <!-- Club dont l'utilisateur est propriétaire s'il possède un club premium -->
         <?php
           if($_SESSION['compte_premium'] == 1) {
-            $nom_club = trouver_club_proprietaire($_SESSION['utilisateur_id']);
+            $nom_club = get_club_nom($_SESSION['utilisateur_id']);
             if(isset($nom_club)){
               ?>
               <p class="informations-header-content">Propriétaire de :
@@ -95,13 +98,19 @@
         ?>
         <div class="col-lg-4">
             <div class="card personnage-container" id="card-1">
-            <?php echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode( $perso_1['illustration'] ).'" alt="Profil du personnage 1"/>';?>
+            <?php
+            if($perso_1['illustration']!=null) {
+            echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($perso_1['illustration']).'" alt="Profil du personnage 1"/>';
+            } else {
+            echo '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage n°1">';
+            }
+            ?>
                 <div class="card-body">
                 <h5 class="personnage-title"> <?php echo $perso_1['nom_personnage'] ?></h5>
                 <div id="circle"><?php echo $perso_1['niveau'] ?></div>
                 <hr>
                 <div class="text-left">
-                <p class="card-text">Race: <?php $race = get_race($perso_1['race_id']);
+                <p class="card-text">Race: <?php $race = get_nom_race($perso_1['race_id']);
                 echo $race; ?> </p>
                     <br>
                     <p class="card-text">Club: </p>
@@ -193,13 +202,19 @@
         ?>
         <div class="col-lg-4">
             <div class="card personnage-container" id="card-1">
-            <?php echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode( $perso_2['illustration'] ).'"/>';?>
+            <?php
+            if($perso_2['illustration']!=null) {
+            echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($perso_2['illustration']).'" alt="Profil du personnage 1"/>';
+            } else {
+            echo '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage n°1">';
+            }
+            ?>
             <div class="card-body">
                 <h5 class="personnage-title"><?php echo $perso_2['nom_personnage'] ?></h5>
                 <div id="circle"><?php echo $perso_2['niveau'] ?></div>
                 <hr>
                 <div class="text-left">
-                <p class="card-text">Race: <?php $race = get_race($perso_2['race_id']);
+                <p class="card-text">Race: <?php $race = get_nom_race($perso_2['race_id']);
                 echo $race; ?> </p>
                 <br>
                 <p class="card-text">Club: </p>
@@ -292,30 +307,36 @@
         ?>
             <div class="col-lg-4">
                 <div class="card personnage-container" id="card-1">
-                <?php echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode( $perso_3['illustration'] ).'"/>';?>
-                        <div class="card-body">
-                        <h5 class="personnage-title"><?php echo $perso_3['nom_personnage'] ?></h5>
-                        <div id="circle"><?php echo $perso_3['niveau'] ?></div>
-                        <hr>
-                        <div class="text-left">
-                        <p class="card-text">Race: <?php $race = get_race($perso_3['race_id']);
-                        echo $race; ?> </p>
-                            <br>
-                            <p class="card-text">Club: </p>
-                            <br>
-                            <p class="card-text">Capacité 1: </p>
-                            <br>
-                            <p class="card-text">Capacité 2: </p>
-                            <br>
-                            <p class="card-text">Nombre de matchs: </p>
-                            <br>
-                            <p class="card-text">Nombre de victoires: </p>
-                            <br>
-                        </div>
+                    <?php
+                    if($perso_3['illustration']!=null) {
+                    echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($perso_3['illustration']).'" alt="Profil du personnage 1"/>';
+                    } else {
+                    echo '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage n°1">';
+                    }
+                    ?>
+                    <div class="card-body">
+                    <h5 class="personnage-title"><?php echo $perso_3['nom_personnage'] ?></h5>
+                    <div id="circle"><?php echo $perso_3['niveau'] ?></div>
+                    <hr>
+                    <div class="text-left">
+                    <p class="card-text">Race: <?php $race = get_nom_race($perso_3['race_id']);
+                    echo $race; ?> </p>
+                        <br>
+                        <p class="card-text">Club: </p>
+                        <br>
+                        <p class="card-text">Capacité 1: </p>
+                        <br>
+                        <p class="card-text">Capacité 2: </p>
+                        <br>
+                        <p class="card-text">Nombre de matchs: </p>
+                        <br>
+                        <p class="card-text">Nombre de victoires: </p>
+                        <br>
                     </div>
-                    <div class="card-footer link-container">
-                        <a class="link" href="modification-personnage.php?p=<?php echo $perso_3['id_personnage']?>">Modifier le personnage</a>  
-                    </div>
+                </div>
+                <div class="card-footer link-container">
+                    <a class="link" href="modification-personnage.php?p=<?php echo $perso_3['id_personnage']?>">Modifier le personnage</a>  
+                </div>
                 </div>
             </div>
         <?php
