@@ -4,10 +4,12 @@
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
     require_once("../Core/Core.php");
+    require_once("../Models/personnage.php");
+    require_once("../Models/race.php");
     redirection_si_non_connecte($_SESSION['statut_connexion']);
     $uri = $_SERVER['REQUEST_URI']; 
     $identifiant_personnage = $_GET['p'];
-    $perso_a_modifier = get_personnage($identifiant_personnage);
+    $perso_a_modifier = get_personnage_by_ID($identifiant_personnage);
 ?>
 
 <body>
@@ -45,7 +47,7 @@
                             <input type="text" id="nom_perso" class="form-control" name="nom_perso" placeholder="Pseudo actuel du personnage: <?php echo $perso_a_modifier['nom_personnage']?>">
                             <label for="race">Race :</label>
                             <select class= "form-select" name="race" id="race">
-                                <option selected disabled>Sélectionnez votre race... (Race actuelle : <?php echo get_race($perso_a_modifier['race_id'])?>)</option>
+                                <option selected disabled>Sélectionnez votre race... (Race actuelle : <?php echo get_nom_race($perso_a_modifier['race_id'])?>)</option>
                                 <option value="1">Humain</option>
                                 <option value="2">Elfe</option>
                                 <option value="3">Nain</option>
