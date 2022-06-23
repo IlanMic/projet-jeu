@@ -128,6 +128,13 @@ session_start();
             if($stmt->execute()) {
                 //On ajoute l'identifiant correspondant au nouveau personnage à l'utilisateur auquel il appartient
                 $dernier_id = $pdo->lastInsertId();
+                if($personnage_id == "personnage_1_id"){
+                    $_SESSION['utilisateur_personnage_1'] = $dernier_id;
+                }else if($personnage_id == "personnage_2y_id"){
+                    $_SESSION['utilisateur_personnage_2'] = $dernier_id;
+                }else if($personnage_id == "personnage_3_id"){
+                    $_SESSION['utilisateur_personnage_3'] = $dernier_id;
+                }
                 if($personnage_id != "") {
                     $update_id = $pdo->prepare("UPDATE utilisateur SET ". $personnage_id ." =:personnage_id WHERE id_utilisateur =:id_utilisateur");
                     $update_id->bindParam("personnage_id", $dernier_id, PDO::PARAM_INT);
