@@ -1,41 +1,50 @@
 <?php
-
-    //Trouver l'identifiant d'un club en fonction de l'identifiant de son propriétaire
-    function trouver_club_proprietaire($id_utilisateur)
-    {
-        //Connexion à la base de données
-        require_once("../Core/ConnexionBDD.php");
-        $pdo = connect_db();
-        $stmt = $pdo->prepare("SELECT nom_club FROM club WHERE proprietaire_id = :id_proprietaire");
-        $stmt->bindParam("id_proprietaire", $id_utilisateur, PDO::PARAM_STR);
-        $stmt->execute();
-        $data = $stmt->fetch();
-        return $data;
+    //Vérifie qu'aucun autre club ne possède le même nom (vrai si unique, faux sinon)
+    function club_est_unique($nom_club){
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM club WHERE nom_club = :nom_club");
+            $stmt->bindParam("nom_club", $nom_club, PDO::PARAM_STR);
+            $stmt->execute();
+            $unique = $stmt->fetchColumn();
+            if($unique ==0) {
+                return true;
+            } else {
+                return false;
+            }
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo 'Impossible de vérifier si le nom de club saisi est unique: '. $e->getMessage();
+        }
     }
-
     
     //Compter le nombre de personnages appartenant à un utilisateur
     function compter_personnages_utilisateur($id_utilisateur)
     {
-        $counter = 0;
-        //Connexion à la base de données
-        require_once("../Core/ConnexionBDD.php");
-        $pdo = connect_db();
-        $stmt = $pdo->prepare("SELECT personnage_1_id, personnage_2_id, personnage_3_id FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
-        $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_STR);
-        $stmt->execute();
-        $data = $stmt->fetch();
-        if(isset($data['personnage_1_id'])) {
-            $counter += 1;
+        try{
+            $counter = 0;
+            //Connexion à la base de données
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT personnage_1_id, personnage_2_id, personnage_3_id FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
+            $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_STR);
+            $stmt->execute();
+            $data = $stmt->fetch();
+            if(isset($data['personnage_1_id'])) {
+                $counter += 1;
+            }
+            if(isset($data['personnage_2_id'])) {
+                $counter += 1;
+            }
+            if(isset($data['personnage_3_id'])) {
+                $counter += 1;
+            }
+            return $counter;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo 'Impossible de vérifier le nombre de personnages possédés par l\'utilisateur: '. $e->getMessage();
         }
-        if(isset($data['personnage_2_id'])) {
-            $counter += 1;
-        }
-        if(isset($data['personnage_3_id'])) {
-            $counter += 1;
-        }
-        return $counter;
-        $pdo = null;
     }
 
 
@@ -55,31 +64,6 @@
         } else {
             return false;
         }
-    }
-
-    //Récupère les informations d'un personnage via son identifiant
-    function get_personnage($id)
-    {
-        require_once("../Core/ConnexionBDD.php");
-        $pdo = connect_db();
-        $stmt = $pdo->prepare("SELECT * FROM personnage WHERE id_personnage = :id_personnage");
-        $stmt->bindParam("id_personnage", $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $data = $stmt->fetch();
-        $pdo = null;
-        return $data;
-    }
-
-    //Récupère les informations d'un personnage via son identifiant
-    function get_race($race_id){
-        require_once("../Core/ConnexionBDD.php");
-        $pdo = connect_db();
-        $stmt = $pdo->prepare("SELECT * FROM race WHERE id_race = :id_race");
-        $stmt->bindParam("id_race", $race_id, PDO::PARAM_INT);
-        $stmt->execute();
-        $data = $stmt->fetch();
-        $pdo = null;
-        return $data['nom_race'];
     }
 
 ?>
