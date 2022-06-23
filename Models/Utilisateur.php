@@ -118,6 +118,23 @@
         }
     }
 
+    //Getter pour le club dont l'utilisateur est propriétaire
+    function get_club_nom($id_utilisateur)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT nom_club FROM club WHERE proprietaire_id = :id_utilisateur");
+            $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+            $stmt->execute();
+            $club = $stmt->fetch();
+            return $club['nom_club'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le club de l'utilisateur: ". $e->getMessage();
+        }
+    }
+
     //Getter de race par identifiant
     function get_utilisateur_by_ID($id_utilisateur)
     {
