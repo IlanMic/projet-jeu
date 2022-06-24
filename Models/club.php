@@ -34,6 +34,23 @@
         }
     }
 
+    //Getter pour l'identifiant du club à partir de celui de son propriétaire
+    function get_club_id_from_proprietaire_id($id_proprietaire)
+    {
+        try {
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT id_club FROM club WHERE proprietaire_id = :id_proprietaire");
+            $stmt->bindParam("id_proprietaire", $id_proprietaire, PDO::PARAM_INT);
+            $stmt->execute();
+            $club = $stmt->fetch();
+            return $club['id_club'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le club: ". $e->getMessage();
+        }
+    }
+
     //Getter de club par identifiant
     function get_club_by_ID($id_club)
     {
@@ -63,6 +80,22 @@
             $pdo = null;
         } catch(PDOException $e) {
             echo "Impossible d'obtenir les clubs: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour obtenir tous les clubs
+    function get_all_clubs_from_name($nom_club)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT * FROM club WHERE nom_club LIKE CONCAT('%', :nom_club, '%')");
+            $stmt->bindParam("nom_club", $nom_club, PDO::PARAM_STR);
+            $all_club = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $all_club;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir les clubs à partir de leur nom: ". $e->getMessage();
         }
     }
 

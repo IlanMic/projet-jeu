@@ -28,7 +28,7 @@
             require_once("../Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT personnage_1_id, personnage_2_id, personnage_3_id FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
-            $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_STR);
+            $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
             $stmt->execute();
             $data = $stmt->fetch();
             if(isset($data['personnage_1_id'])) {
@@ -44,6 +44,24 @@
             $pdo = null;
         } catch(PDOException $e) {
             echo 'Impossible de vérifier le nombre de personnages possédés par l\'utilisateur: '. $e->getMessage();
+        }
+    }
+
+    //Compter le nombre de personnages appartenant à un club
+    function compter_personnages_club($id_club)
+    {
+        try{
+            //Connexion à la base de données
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM personnage WHERE club_id = :id_club");
+            $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
+            $stmt->execute();
+            $resultat = $stmt->fetchColumn();
+            return $resultat;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo 'Impossible de vérifier le nombre de personnages ayant rejoint le club:'. $e->getMessage();
         }
     }
 

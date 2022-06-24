@@ -239,7 +239,7 @@
     }
 
     //Getter pour le club du personnage
-    function get_club($id_club)
+    function get_club_infos($id_club)
     {
         try{
             require_once("../Core/ConnexionBDD.php");
@@ -337,6 +337,25 @@
             $pdo = null;
         } catch(PDOException $e) {
             echo "Impossible d'obtenir le poste du personnage: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour obtenir le joueur possédant le personnage
+    function get_joueur($id_personnage)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT id_utilisateur FROM utilisateur WHERE personnage_1_id = :id_personnage_1 OR personnage_2_id = :id_personnage_2 OR personnage_3_id = :id_personnage_3");
+            $stmt->bindParam("id_personnage_1", $id_personnage, PDO::PARAM_INT);
+            $stmt->bindParam("id_personnage_2", $id_personnage, PDO::PARAM_INT);
+            $stmt->bindParam("id_personnage_3", $id_personnage, PDO::PARAM_INT);
+            $stmt->execute();
+            $joueur = $stmt->fetch();
+            return $joueur['id_utilisateur'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir les informations du joueur possédant le personnage: ". $e->getMessage();
         }
     }
 
