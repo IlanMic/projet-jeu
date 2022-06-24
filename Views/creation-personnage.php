@@ -8,6 +8,11 @@
 ?>
 
 <body>
+<div class="alert-container">
+    <?php
+        require_once("../Views/layout/message.php");
+    ?>
+</div>
 <div class="personnage-creation-form-container">
     <!-- Formulaire de création de personnage -->
     <form class="creation-form" action="../Controllers/creer-personnage.php" method="POST" enctype="multipart/form-data">
