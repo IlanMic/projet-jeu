@@ -43,7 +43,10 @@
                           if(empty(get_club_nom($_SESSION['utilisateur_id']))){
                             echo '<a class="nav-link" href="creation-club.php">Créer un club</a>';
                           }else{
-                            echo'<a class="nav-link" href="profil-club.php">Modifier le club</a>';
+                            $club = $_SESSION['club_id'];
+                            ?>
+                              <a class="nav-link" href="modification-club.php?club=<?php echo $club; ?>">Modifier le club</a>
+                            <?php
                           }
                         }
                       ?>

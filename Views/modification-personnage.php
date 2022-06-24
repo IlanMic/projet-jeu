@@ -183,6 +183,7 @@
                             </div>
                         </div>
                     </div>
+                <input type="hidden" id="personnage_id" name="personnage_id" value="<?php echo $identifiant_personnage ?>">
                 <div class="text-center mt-4 mb-3">
                     <button type="submit" name="submit" class="form-btn">Modifier le personnage</button>
                 </div>
