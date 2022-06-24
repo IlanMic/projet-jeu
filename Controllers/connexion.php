@@ -1,6 +1,7 @@
 <?php
     session_start();
-
+    require_once("../Models/club.php");
+    require_once("../Models/utilisateur.php");
     //Vérification de la déclaration des variables
     if(isset($_POST['pseudo']) && isset($_POST['pass'])) {
 
@@ -34,6 +35,11 @@
             $_SESSION['utilisateur_personnage_1'] = $data['personnage_1_id'];
             $_SESSION['utilisateur_personnage_2'] = $data['personnage_2_id'];
             $_SESSION['utilisateur_personnage_3'] = $data['personnage_3_id'];
+            if($data['compte_premium'] == 1) {
+                if(!empty(get_club_nom($_SESSION['utilisateur_id']))){
+                    $_SESSION['club_id'] = get_club_id_from_proprietaire_id($_SESSION['utilisateur_id']);
+                }
+            }
 
             if(is_null($data['personnage_2_id'])) {
                 $id_personnage = $_SESSION['dernier_personnage_cree'] = "personnage_1_id";
@@ -55,7 +61,7 @@
             $_SESSION['statut_connexion'] = false;
             $_SESSION['etat'] = "Echec";
             header('Location: ../Views/index.php');
-            $_SESSION['message'] = "Erreur: Mot de passe et/ou adresse email incorrect(s)µ.";
+            $_SESSION['message'] = "Erreur: Mot de passe et/ou adresse email incorrect(s).";
         }
 
         //Fermeture connexion base de données
@@ -65,6 +71,6 @@
         $_SESSION['statut_connexion'] = false;
         $_SESSION['etat'] = "Echec";
         header('Location: ../Views/index.php');
-        $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été saisi.";
+        $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été saisi. La connexion ne peut aboutir.";
     }
 ?>

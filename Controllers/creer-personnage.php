@@ -167,7 +167,7 @@ session_start();
 
     } else {
         $_SESSION['etat'] = "Echec";
-        header('Location: ../Views/test.php');
-        $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été rempli.";
+        header('Location: ../Views/index.php');
+        $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été rempli. La création de personnage ne peut aboutir.";
     }
 ?>

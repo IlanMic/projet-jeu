@@ -17,6 +17,8 @@ if(isset($_POST['nom_club'])) {
             $stmt->bindParam("nom_club", $nom_club, PDO::PARAM_STR);
             $stmt->bindParam("proprietaire_id", $proprietaire_id, PDO::PARAM_INT);
             if($stmt->execute()) {
+                $dernier_id = $pdo->lastInsertId();
+                $_SESSION['club_id'] = $dernier_id;
                 $_SESSION['etat'] = "Succès";
                 $_SESSION['message'] = "Ajout de club réussi.";
                 header('Location: ../Views/index.php');
@@ -39,7 +41,7 @@ if(isset($_POST['nom_club'])) {
 } else {
     $_SESSION['etat'] = "Echec";
     header('Location: ../Views/creation-club.php');
-    $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été saisi.";
+    $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été saisi. La création de club ne peut aboutir.";
 }
 
 ?>
