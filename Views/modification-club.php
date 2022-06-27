@@ -56,7 +56,13 @@
             <div class="row no-gutters">
                 <div class="col-sm-5">
                     <div class="card-illustration">
-                        <img class="card-img" src="assets/images/illustration-placeholder.png" alt="Illustration du personnage">
+                        <?php
+                        if($personnage['illustration']!=null) {
+                            echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($personnage['illustration']).'" alt="Profil du personnage 1"/>';
+                        } else {
+                            echo '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage n°1">';
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="col-sm-7">
