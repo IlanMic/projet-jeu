@@ -82,4 +82,30 @@
             echo "Impossible d'obtenir la liste des poules: ". $e->getMessage();
         }
     } 
+
+    //Getter pour obtenir la poule d'un club
+    function get_poule_from_club_id($club_id)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT id_poule FROM poule WHERE club_id_1 = :club_1 OR club_id_2 = :club_2 OR club_id_3 = :club_3 OR club_id_4 = :club_4 OR club_id_5 = :club_5 OR club_id_6 = :club_6 OR club_id_7 = :club_7 OR club_id_8 = :club_8 OR club_id_9 = :club_9 OR club_id_10 = :club_10");
+            $stmt->bindParam("club_1", $club_id, PDO::PARAM_INT);
+            $stmt->bindParam("club_2", $club_id, PDO::PARAM_INT);
+            $stmt->bindParam("club_3", $club_id, PDO::PARAM_INT);
+            $stmt->bindParam("club_4", $club_id, PDO::PARAM_INT);
+            $stmt->bindParam("club_5", $club_id, PDO::PARAM_INT);
+            $stmt->bindParam("club_6", $club_id, PDO::PARAM_INT);
+            $stmt->bindParam("club_7", $club_id, PDO::PARAM_INT);
+            $stmt->bindParam("club_8", $club_id, PDO::PARAM_INT);
+            $stmt->bindParam("club_9", $club_id, PDO::PARAM_INT);
+            $stmt->bindParam("club_10", $club_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $poule_du_club = $stmt->fetch();
+            return $poule_du_club['id_poule'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la poule auquel ce club appartient: ". $e->getMessage();
+        }
+    } 
 ?>

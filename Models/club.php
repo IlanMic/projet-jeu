@@ -89,10 +89,10 @@
         try{
             require_once("../Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->query("SELECT * FROM club WHERE nom_club LIKE CONCAT('%', :nom_club, '%')");
-            $stmt->bindParam("nom_club", $nom_club, PDO::PARAM_STR);
-            $all_club = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $all_club;
+            $stmt = $pdo->prepare("SELECT * FROM club WHERE nom_club LIKE :nom_club");
+            $stmt->execute(array(":nom_club" => "%".$nom_club."%"));
+            $all_club_by_name = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $all_club_by_name;
             $pdo = null;
         } catch(PDOException $e) {
             echo "Impossible d'obtenir les clubs à partir de leur nom: ". $e->getMessage();
