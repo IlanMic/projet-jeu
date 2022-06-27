@@ -4,7 +4,12 @@
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
     require_once("../Core/Core.php");
+    require_once("../Models/club.php");
+    require_once("../Models/poule.php");
+    require_once("../Models/personnage.php");
     redirection_si_non_connecte($_SESSION['statut_connexion']);
+    $uri = $_SERVER['REQUEST_URI']; 
+    $identifiant_club = $_GET['c'];
 ?>
 
 <body>
@@ -14,18 +19,29 @@
     <!-- informations du club -->
     <div class="informations-header">
       <div id="informations-header-title">
-        Informations club
+        <h1>Informations club</h1>
       </div>
       <hr>
-      <p class="informations-header-content">Nom du club:</p>
-      <p class="informations-header-content">Division: </p>
-      <p class="informations-header-content">Nombre de joueurs: </p>
+      <?php
+        $poule_id = get_poule_from_club_id($identifiant_club);
+        if(isset($poule_id)) {
+            $poule_nom = get_nom_poule($poule_id);
+        } else {
+            $poule_nom = "Ce club n'a pas encore rejoint une division.";
+        }
+      ?>
+      <p class="informations-header-content">Nom du club: <?php echo get_club($identifiant_club) ?></p>
+      <p class="informations-header-content">Division: <?php echo $poule_nom; ?></p>
+      <p class="informations-header-content">Nombre de joueurs: <?php echo compter_personnages_club($identifiant_club); ?> </p>
       <p class="informations-header-content">Dernier match (date + score): </p>
     </div>
   </div>
 </div>
+<?php
+if($_SESSION['utilisateur_id'] == $identifiant_club) {
+?>
 <div class="text-right padding-right-short">
-    <!-- Lien pour modifier les informations du club (à ne rendre accessible qu'au propriétaire) -->
+    <!-- Lien pour modifier les informations du club -->
     <a href="modifier-club.php" class="link-info">
         Modifier les informations du club
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -34,191 +50,55 @@
         </svg>
     </a>
 </div>
+<?php
+}
+?>
 <hr>
 <br>
-<!-- Liste des personnages appartenant au club avec quelques caractéristiques -->
-<h1> Personnages appartenant au club (9): </h1>
-<br>
-  <div class=row>
-    <!-- Personnage 1 -->
-    <div class="col-lg-4 ">
-      <div class="card personnage-container-1" id="card-1">
-        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
-        <div class="card-body">
-          <h5 class="personnage-title">Personnage 1</h5>
-          <div id="circle">1</div>
-          <div class="text-left">
-            <br>
-            <p class="card-text">Race: </p>
-            <br>
-            <p class="card-text">Club: </p>
-            <br>
-            <p class="card-text">Capacité 1: </p>
-            <br>
-            <p class="card-text">Capacité 2: </p>
-          </div>
+<?php
+    $liste_personnages = get_all_personnages_club($identifiant_club);
+    foreach($liste_personnages as $personnage){
+        ?>
+        <div class="card card-list" id="card-2">
+            <div class="row no-gutters">
+                <div class="col-sm-5">
+                    <div class="card-illustration">
+                     <?php 
+                    if($personnage['illustration']!=null) {
+                      echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($personnage['illustration']).'" alt="Profil du personnage 1"/>';
+                    } else {
+                      echo '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage n°1">';
+                    }
+                    ?>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="card-body">
+                        <div class="row no-gutters">
+                            <h5 class="card-title"><?php echo $personnage['nom_personnage']; ?> <div id="circle"> <?php echo $personnage['niveau']; ?> </div></h5>
+                            <br>
+                            <hr>
+                            <div class="col-sm-7">
+                                <br>
+                                <p class="card-text">Utilisateur = <?php echo get_pseudo(get_joueur($personnage['id_personnage'])); ?></p>
+                                <br>
+                                <br>
+                                <p class="card-text">Dernière connexion le: </p>
+                                <br>
+                                <br>
+                                <p class="card-text">Dernière victoire le:</p>
+                                <br>
+                                <br>
+                                <p class="card-text">Nombre de victoires:</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <!-- Personnage 2... -->
-    <div class="col-lg-4">
-      <div class="card personnage-container-2" id="card-1">
-        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
-        <div class="card-body">
-          <h5 class="personnage-title">Personnage 2</h5>
-          <div id="circle">1</div>
-          <div class="text-left">
-            <br>
-            <p class="card-text">Race: </p>
-            <br>
-            <p class="card-text">Club: </p>
-            <br>
-            <p class="card-text">Capacité 1: </p>
-            <br>
-            <p class="card-text">Capacité 2: </p>
-          </div>
-        </div>
-      </div>  
-    </div>  
-    <div class="col-lg-4">
-      <div class="card personnage-container-1" id="card-1"5>
-        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
-        <div class="card-body">
-          <h5 class="personnage-title">Personnage 3</h5>
-          <div id="circle">1</div>
-          <div class="text-left">
-            <br>
-            <p class="card-text">Race: </p>
-            <br>
-            <p class="card-text">Club: </p>
-            <br>
-            <p class="card-text">Capacité 1: </p>
-            <br>
-            <p class="card-text">Capacité 2: </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>   
-  <div class=row>
-    <div class="col-lg-4 ">
-      <div class="card personnage-container-1" id="card-1">
-        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
-        <div class="card-body">
-          <h5 class="personnage-title">Personnage 1</h5>
-          <div id="circle">1</div>
-          <div class="text-left">
-            <br>
-            <p class="card-text">Race: </p>
-            <br>
-            <p class="card-text">Club: </p>
-            <br>
-            <p class="card-text">Capacité 1: </p>
-            <br>
-            <p class="card-text">Capacité 2: </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="card personnage-container-2" id="card-1">
-        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
-        <div class="card-body">
-          <h5 class="personnage-title">Personnage 2</h5>
-          <div id="circle">1</div>
-          <div class="text-left">
-            <br>
-            <p class="card-text">Race: </p>
-            <br>
-            <p class="card-text">Club: </p>
-            <br>
-            <p class="card-text">Capacité 1: </p>
-            <br>
-            <p class="card-text">Capacité 2: </p>
-          </div>
-        </div>
-      </div>  
-    </div>  
-    <div class="col-lg-4">
-      <div class="card personnage-container-1" id="card-1">
-        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
-        <div class="card-body">
-          <h5 class="personnage-title">Personnage 3</h5>
-          <div id="circle">1</div>
-          <div class="text-left">
-            <br>
-            <p class="card-text">Race: </p>
-            <br>
-            <p class="card-text">Club: </p>
-            <br>
-            <p class="card-text">Capacité 1: </p>
-            <br>
-            <p class="card-text">Capacité 2: </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>    
-  <div class=row>
-    <div class="col-lg-4 ">
-      <div class="card personnage-container-1" id="card-1">
-        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
-        <div class="card-body">
-          <h5 class="personnage-title">Personnage 1</h5>
-          <div id="circle">1</div>
-          <div class="text-left">
-            <br>
-            <p class="card-text">Race: </p>
-            <br>
-            <p class="card-text">Club: </p>
-            <br>
-            <p class="card-text">Capacité 1: </p>
-            <br>
-            <p class="card-text">Capacité 2: </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="card personnage-container-2" id="card-1">
-        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
-        <div class="card-body">
-          <h5 class="personnage-title">Personnage 2</h5>
-          <div id="circle">1</div>
-          <div class="text-left">
-            <br>
-            <p class="card-text">Race: </p>
-            <br>
-            <p class="card-text">Club: </p>
-            <br>
-            <p class="card-text">Capacité 1: </p>
-            <br>
-            <p class="card-text">Capacité 2: </p>
-          </div>
-        </div>
-      </div>  
-    </div>  
-    <div class="col-lg-4">
-      <div class="card personnage-container-1" id="card-1"5>
-        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="image de personnage par défaut">
-        <div class="card-body">
-          <h5 class="personnage-title">Personnage 3</h5>
-          <div id="circle">1</div>
-          <div class="text-left">
-            <br>
-            <p class="card-text">Race: </p>
-            <br>
-            <p class="card-text">Club: </p>
-            <br>
-            <p class="card-text">Capacité 1: </p>
-            <br>
-            <p class="card-text">Capacité 2: </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>    
-</div>
+        <?php
+    }
+    ?>
 <!-- Footer -->
 <?php
   include dirname(dirname(__FILE__)) .'/Views/layout/footer.php';
