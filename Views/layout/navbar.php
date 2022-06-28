@@ -46,12 +46,12 @@
                             $club = $_SESSION['club_id'];
                             ?>
                               <a class="nav-link" href="modification-club.php?club=<?php echo $club; ?>">Modifier le club</a>
+                              <a class="nav-link" href="profil-club.php?c=<?php echo $club; ?>">Mon club</a>
                             <?php
                           }
                         }
                       ?>
-                        <a class="nav-link" href="profil-club.php">Profil club</a>
-                        <a class="nav-link" href="rechercher-club.php">Recherche club</a>
+                      <a class="nav-link" href="rechercher-club.php">Recherche club</a>
                     </div>
                   </div>
                 </li>
