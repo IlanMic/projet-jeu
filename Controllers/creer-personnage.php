@@ -130,7 +130,7 @@ session_start();
                 $dernier_id = $pdo->lastInsertId();
                 if($personnage_id == "personnage_1_id"){
                     $_SESSION['utilisateur_personnage_1'] = $dernier_id;
-                }else if($personnage_id == "personnage_2y_id"){
+                }else if($personnage_id == "personnage_2_id"){
                     $_SESSION['utilisateur_personnage_2'] = $dernier_id;
                 }else if($personnage_id == "personnage_3_id"){
                     $_SESSION['utilisateur_personnage_3'] = $dernier_id;
