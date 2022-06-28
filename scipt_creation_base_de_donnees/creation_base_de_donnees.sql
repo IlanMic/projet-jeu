@@ -246,6 +246,8 @@ UPDATE `projet_jeu`.`utilisateur` SET `personnage_1_id`=1,`personnage_2_id`=2 WH
 UPDATE `projet_jeu`.`utilisateur` SET `personnage_1_id`=3 WHERE id_utilisateur = 2;
 ALTER TABLE `projet_jeu`.`personnage` CHANGE `illustration` `illustration` LONGBLOB NULL DEFAULT NULL;
 ALTER TABLE match RENAME matchs;
+ALTER TABLE `projet_jeu`.`utilisateur` ADD `derniere_connexion` DATETIME NULL AFTER `personnage_3_id`;
+ALTER TABLE `projet_jeu`.`utilisateur` ADD `dernier_personnage_utilise` INT NULL AFTER `derniere_connexion`;
 INSERT INTO `projet_jeu`.`poule` (`nom_poule`, `club_id_1`, `club_id_2`, `point_club_1`, `point_club_2`) VALUES ('Argent', '1', '2', '0', '0');
 
 
