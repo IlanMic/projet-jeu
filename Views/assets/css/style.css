@@ -812,3 +812,8 @@ body{
     position: relative;
     top: 0%;
 }
+
+.a-title{
+    text-decoration: none;
+    color: black;
+}
