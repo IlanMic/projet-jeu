@@ -47,12 +47,22 @@
             else if(is_null($data['personnage_3_id'])) {
                 $_SESSION['dernier_personnage_cree'] = "personnage_2_id";
             }
-            else if(!is_null ($data['personnage_3_id'])) {
-                $_SESSION['dernier_personnage_cree'] = "personnage_2_id";
+            else if(is_null ($data['personnage_3_id'])) {
+                $_SESSION['dernier_personnage_cree'] = "personnage_3_id";
             }
             else{
                 $_SESSION['dernier_personnage_cree'] = "";
             }
+
+            //Mise à jour de la date de dernière connexion pour l'utilisateur
+            $date = date('Y-m-d H:i:s');
+            $update_last_connection = $pdo->prepare("UPDATE utilisateur SET derniere_connexion = :date_now WHERE id_utilisateur = :id_utilisateur");
+            $update_last_connection->bindParam("date_now", $date, PDO::PARAM_STR);
+            $update_last_connection->bindParam("id_utilisateur", $data['id_utilisateur'], PDO::PARAM_INT);
+            if($update_last_connection->execute()) {
+                $_SESSION['derniere_connexion'] = $date;
+            }
+            $_SESSION['dernier_personnage_utilise'] = $data['dernier_personnage_utilise'];
 
             $_SESSION['etat'] = "Succès";
             header('Location: ../Views/jeu.php');
