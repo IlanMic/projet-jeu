@@ -70,7 +70,13 @@
         ?>
 
         <!-- Dernière connexion du joueur -->
-        <p class="informations-header-content">Dernière connexion: dd/mm/yyyy hh:mm (il faudra modifier la base de données pour cela)</p>
+        <p class="informations-header-content">Dernière connexion:
+            <?php if($_SESSION['derniere_connexion'] != null) {
+                echo $_SESSION['derniere_connexion']; 
+            } else {
+                echo "N/A";
+            } ?>     
+        </p>
         <!-- Dernière match du joueur -->
         <p class="informations-header-content">Dernier match (date + score): </p>
         <!-- Nombre de matchs joués par le joueur -->
@@ -159,7 +165,7 @@
     <!-- Affichage de la carte du second personnage -->
     <?php
     //Création du personnage 2 bloqué car le premier n'a pas encore été créé
-    if(!isset($_SESSION['utilisateur_personnage_1'])) {
+    if($_SESSION['utilisateur_personnage_1'] == null) {
         ?>
         <div class="col-lg-4">
             <div class="card personnage-container" id="card-1">
@@ -179,7 +185,7 @@
         </div>
     <?php
     //Affichage de la carte de création du second personnage
-    }else if(!isset($_SESSION['utilisateur_personnage_2'])){
+    }else if($_SESSION['utilisateur_personnage_2'] == null){
         ?>
         <div class="col-lg-4">
             <div class="card personnage-container" id="card-1">
@@ -244,7 +250,7 @@
     <!-- Carte personnage 3 -->
     <?php
     //Impossible de débloquer le troisième personnage si le compte n'est pas premium
-    if($_SESSION['compte_premium'] == 0 && isset($_SESSION['utilisateur_personnage_1']) && isset($_SESSION['utilisateur_personnage_2'])){
+    if($_SESSION['compte_premium'] == 0){
         ?>
             <div class="col-lg-4">
                 <div class="card personnage-container" id="card-1"5>
@@ -265,81 +271,83 @@
             </div>
         <?php
     //Création d'un compte premium si l'utilisateur a un compte premium
-    }else if($_SESSION['compte_premium'] == 1 && !isset($_SESSION['utilisateur_personnage_3'])) {
-        ?>
-        <div class="col-lg-4">
-            <div class="card personnage-container" id="card-1">
-                <img class="card-img-top img-illustration" src="assets/images/illustration-placeholder.png" alt="Personnage n°3 en attente de création">
-                <div class="card-body">
-                    <h5 class="personnage-title">Troisième personnage non créé</h5>
-                    <hr>
-                    <div class="text-left">
-                        <p class="card-text">Veuillez cliquer ci-dessous pour créer votre troisième personnage </p>
+    }else {
+        if($_SESSION['utilisateur_personnage_1'] == null || $_SESSION['utilisateur_personnage_2'] == null) {
+            ?>
+                <div class="col-lg-4">
+                    <div class="card personnage-container" id="card-1">
+                        <img class="card-img-top img-illustration" src="assets/images/bloque.png" alt="Personnage n°3 bloqué car les deux premiers personnages n'ont pas été créés">
+                            <div class="card-body">
+                            <h5 class="personnage-title">La création de deux personnage est nécessaire avant d'en créer un troisième.</h5>
+                            <hr>
+                            <div class="text-left">
+                                <p class="card-text">Veuillez créer deux premiers personnages avant de créer ce troisième personnage. </p>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="card-footer link-container">
+                            <p class="card-text">Créer deux personnages avant de débloquer celui-ci</a>  
+                        </div>
                     </div>
                 </div>
-                <div class="card-footer link-container">
-                    <a class="link" href="creation-personnage.php">Créer un personnage</a>  
-                </div>
-            </div>
-        </div>
-        <?php
-    //Impossible de créer un troisième personnage si les deux précédent ne l'ont pas été 
-    }else if(!isset($_SESSION['utilisateur_personnage_1']) || !isset($_SESSION['utilisateur_personnage_2'])){
-        ?>
+            <?php
+        //Impossible de créer un troisième personnage si les deux précédent ne l'ont pas été 
+        }else if(($_SESSION['utilisateur_personnage_1'] != null) && ($_SESSION['utilisateur_personnage_2'] != null) && $_SESSION['utilisateur_personnage_3'] == null){
+            ?>
             <div class="col-lg-4">
                 <div class="card personnage-container" id="card-1">
-                    <img class="card-img-top img-illustration" src="assets/images/bloque.png" alt="Personnage n°3 bloqué car les deux premiers personnages n'ont pas été créés">
-                        <div class="card-body">
-                        <h5 class="personnage-title">La création de deux personnage est nécessaire avant d'en créer un troisième.</h5>
+                    <img class="card-img-top img-illustration" src="assets/images/illustration-placeholder.png" alt="Personnage n°3 en attente de création">
+                    <div class="card-body">
+                        <h5 class="personnage-title">Troisième personnage non créé</h5>
                         <hr>
                         <div class="text-left">
-                            <p class="card-text">Veuillez créer deux premiers personnages avant de créer ce troisième personnage. </p>
+                            <p class="card-text">Veuillez cliquer ci-dessous pour créer votre troisième personnage </p>
+                        </div>
+                    </div>
+                    <div class="card-footer link-container">
+                        <a class="link" href="creation-personnage.php">Créer un personnage</a>  
+                    </div>
+                </div>
+            </div>
+            <?php
+        }else {
+            ?>
+                <div class="col-lg-4">
+                    <div class="card personnage-container" id="card-1">
+                        <?php
+                        if($perso_3['illustration']!=null) {
+                        echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($perso_3['illustration']).'" alt="Profil du personnage 1"/>';
+                        } else {
+                        echo '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage n°1">';
+                        }
+                        ?>
+                        <div class="card-body">
+                        <h5 class="personnage-title"><?php echo $perso_3['nom_personnage'] ?></h5>
+                        <div id="circle"><?php echo $perso_3['niveau'] ?></div>
+                        <hr>
+                        <div class="text-left">
+                        <p class="card-text">Race: <?php $race = get_nom_race($perso_3['race_id']);
+                        echo $race; ?> </p>
+                            <br>
+                            <p class="card-text">Club: </p>
+                            <br>
+                            <p class="card-text">Capacité 1: </p>
+                            <br>
+                            <p class="card-text">Capacité 2: </p>
+                            <br>
+                            <p class="card-text">Nombre de matchs: </p>
+                            <br>
+                            <p class="card-text">Nombre de victoires: </p>
                             <br>
                         </div>
                     </div>
                     <div class="card-footer link-container">
-                        <p class="card-text">Créer deux personnages avant de débloquer celui-ci</a>  
+                        <a class="link" href="modification-personnage.php?p=<?php echo $perso_3['id_personnage']?>">Modifier le personnage</a>  
+                    </div>
                     </div>
                 </div>
-            </div>
-        <?php
-    }else{
-        ?>
-            <div class="col-lg-4">
-                <div class="card personnage-container" id="card-1">
-                    <?php
-                    if($perso_3['illustration']!=null) {
-                    echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($perso_3['illustration']).'" alt="Profil du personnage 1"/>';
-                    } else {
-                    echo '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage n°1">';
-                    }
-                    ?>
-                    <div class="card-body">
-                    <h5 class="personnage-title"><?php echo $perso_3['nom_personnage'] ?></h5>
-                    <div id="circle"><?php echo $perso_3['niveau'] ?></div>
-                    <hr>
-                    <div class="text-left">
-                    <p class="card-text">Race: <?php $race = get_nom_race($perso_3['race_id']);
-                    echo $race; ?> </p>
-                        <br>
-                        <p class="card-text">Club: </p>
-                        <br>
-                        <p class="card-text">Capacité 1: </p>
-                        <br>
-                        <p class="card-text">Capacité 2: </p>
-                        <br>
-                        <p class="card-text">Nombre de matchs: </p>
-                        <br>
-                        <p class="card-text">Nombre de victoires: </p>
-                        <br>
-                    </div>
-                </div>
-                <div class="card-footer link-container">
-                    <a class="link" href="modification-personnage.php?p=<?php echo $perso_3['id_personnage']?>">Modifier le personnage</a>  
-                </div>
-                </div>
-            </div>
-        <?php
+            <?php
+        }
     }
     ?>
 </div>    
