@@ -118,6 +118,23 @@
         }
     }
 
+    //Getter pour la date de dernière connexion d'un utilisateur
+    function get_derniere_connexion($id_utilisateur)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT derniere_connexion FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
+            $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+            $stmt->execute();
+            $derniere_connexion = $stmt->fetch();
+            return $derniere_connexion['derniere_connexion'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la date de dernière connexion de l'utilisateur: ". $e->getMessage();
+        }
+    }
+
     //Getter pour le club dont l'utilisateur est propriétaire
     function get_club_nom($id_utilisateur)
     {
