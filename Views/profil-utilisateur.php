@@ -35,7 +35,15 @@
         <hr>
         <p class="informations-header-content">Nom utilisateur: <?php echo get_pseudo($identifiant_utilisateur) ?></p>
         <p class="informations-header-content">Club: <?php echo get_club_nom($identifiant_utilisateur) ?></p>
-        <p class="informations-header-content">Dernière connexion: dd/mm/yyyy hh:mm (il faudra modifier la base de données pour cela)</p>
+        <p class="informations-header-content">Dernière connexion: 
+          <?php
+            if(get_derniere_connexion($identifiant_utilisateur) != null) {
+              echo get_derniere_connexion($identifiant_utilisateur); 
+            } else {
+                echo "N/A";
+            } 
+          ?>
+        </p>
         <p class="informations-header-content">Dernier match (date + score): N/A </p>
         <p class="informations-header-content">Nombre de matchs joués: N/A </p>
         <p class="informations-header-content">Nombre de victoires : N/A</p>

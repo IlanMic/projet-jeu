@@ -76,7 +76,13 @@
                                 <p class="card-text">Utilisateur = <?php echo get_pseudo(get_joueur($personnage['id_personnage'])); ?></p>
                                 <br>
                                 <br>
-                                <p class="card-text">Dernière connexion le: </p>
+                                <p class="card-text">Dernière connexion de l'utilisateur le: 
+                                    <?php if(get_derniere_connexion(get_joueur($personnage['id_personnage'])) != null) {
+                                       echo get_derniere_connexion(get_joueur($personnage['id_personnage'])); 
+                                    } else {
+                                        echo "N/A";
+                                    } ?> 
+                                </p>
                                 <br>
                                 <br>
                                 <p class="card-text">Dernière victoire le:</p>
