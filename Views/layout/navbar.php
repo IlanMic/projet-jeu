@@ -25,12 +25,30 @@
                     </svg>
                       <?php
                       require_once("../Models/utilisateur.php");
+                      require_once("../Core/Core.php");
                       if(isset($_SESSION['utilisateur_pseudo'])) {
                         echo $_SESSION['utilisateur_pseudo'];
                       }
                       ?>
                     </p>
                   </a>
+                </li>
+                <li class="nav-item">
+                  <div class="dropdown">
+                    <button class="btn dropdown-toggle btn-dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Personnages
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <?php
+                        if(($_SESSION['compte_premium'] == 1 && compter_personnages_utilisateur($_SESSION['utilisateur_id']) < 3) || ($_SESSION['compte_premium'] == 0 && compter_personnages_utilisateur($_SESSION['utilisateur_id']) < 2)){
+                          echo '<a class="nav-link" href="creation-personnage.php">Création de personnage</a>';
+                        }
+                        if(compter_personnages_utilisateur($_SESSION['utilisateur_id']) > 0) {
+                          echo '<a class="nav-link" href="selection-personnage.php">Sélection de personnage</a>';
+                        }
+                      ?>
+                    </div>
+                  </div>
                 </li>
                 <li class="nav-item">
                   <div class="dropdown">
@@ -54,18 +72,6 @@
                       <a class="nav-link" href="rechercher-club.php">Recherche club</a>
                     </div>
                   </div>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="creation-personnage.php">Création de personnage</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="selection-personnage.php">Sélection de personnage</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="queue-match.php">Fil d'attente de match</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="jeu.php">Page de jeu</a>
                 </li>
                 <li class="nav-item">
                 <?php if($_SESSION['statut_connexion'] == true) { ?>
