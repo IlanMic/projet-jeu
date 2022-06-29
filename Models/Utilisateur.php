@@ -135,6 +135,23 @@
         }
     }
 
+    //Getter pour le dernier personnage sélectionné par l'utilisateur
+    function get_dernier_personnage($id_utilisateur)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT dernier_personnage_utilise FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
+            $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+            $stmt->execute();
+            $dernier_personnage_utilise = $stmt->fetch();
+            return $dernier_personnage_utilise['dernier_personnage_utilise'];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir le dernier personnage sélectionné par l'utilisateur: ". $e->getMessage();
+        }
+    }
+
     //Getter pour le club dont l'utilisateur est propriétaire
     function get_club_nom($id_utilisateur)
     {
