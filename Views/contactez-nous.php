@@ -8,7 +8,7 @@
 <body>
 <div class="contact-form-container">
     <!-- Formulaire de contact -->
-    <form class="contact-form" action="Controllers/contact.php">
+    <form class="contact-form" action="../Controllers/contact.php">
         <div class="label-connexion-head">
             <h1>Nous contacter</h1>
             <hr>
@@ -18,7 +18,7 @@
         <div class="connexion-content">
             <div class="row">
                 <div class="mb-4">
-                    <label for="mail" class="form-label">Pseudo *:</label><br>
+                    <label for="mail" class="form-label">Adresse mail *:</label><br>
                     <input type="email" id="mail" class="form-control" name="mail" placeholder="Entrez votre adresse mail..." required>
                 </div>
                 <div class="mb-4">
