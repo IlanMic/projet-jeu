@@ -65,7 +65,7 @@
             $_SESSION['dernier_personnage_utilise'] = $data['dernier_personnage_utilise'];
 
             $_SESSION['etat'] = "Succès";
-            header('Location: ../Views/jeu.php');
+            header('Location: ../Views/index.php');
             $_SESSION['message'] = "Connexion réussie.";
         } else{
             $_SESSION['statut_connexion'] = false;
