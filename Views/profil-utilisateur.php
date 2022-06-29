@@ -8,11 +8,15 @@
     require_once("../Models/utilisateur.php");
     require_once("../Models/personnage.php");
     require_once("../Models/race.php");
+    require_once("../Models/club.php");
     $uri = $_SERVER['REQUEST_URI']; 
     $identifiant_utilisateur = $_GET['u'];
     $identifiant_perso_1 = get_personnage_1($identifiant_utilisateur);
     $identifiant_perso_2 = get_personnage_2($identifiant_utilisateur);
     $identifiant_perso_3 = get_personnage_3($identifiant_utilisateur);
+    if(get_dernier_personnage($identifiant_utilisateur) != null) {
+      $dernier_personnage = get_dernier_personnage($identifiant_utilisateur);
+    }
 ?>
 
 <body>
@@ -20,12 +24,25 @@
 <div class="container-informations">
   <div class="row">
     <!-- Illustration du dernier personnage utilisé -->
-    <div class="picture-container">
-      <img src="assets/images/illustration-placeholder.png" alt="illustration du dernier personnage utilisé">
-      <br>
-      <br>
-      <p class="center-text">Dernier personnage utilisé: <p>
-    </div>
+    <?php
+        if(get_dernier_personnage($identifiant_utilisateur) != null){
+            ?>
+                <div class="picture-container-3">
+                <?php
+                if(get_illustration($dernier_personnage)!=null) {
+                echo '<img class="card-img-top img-illustration-2" src="data:image/jpeg;base64,'.base64_encode(get_illustration($dernier_personnage)).'" alt="Profil du dernier personnage utilisé par cet utilisateur"/>';
+                } else {
+                echo '<img class="card-img-top img-illustration-2" src="assets/images/illustration-placeholder.png" alt="Profil du dernier personnage utilisé par cet utilisateur">';
+                var_dump($dernier_personnage['illustration']);
+                }
+                ?>
+                <br>
+                <br>
+                <p class="center-text">Dernier personnage utilisé: <?php echo get_nom_personnage($dernier_personnage); ?><p>
+                </div>
+            <?php
+        }
+    ?>
     <!-- Informations de l'utilisateurs -->
     <div class="informations-utilisateur">
       <div class="informations-header">
@@ -78,7 +95,17 @@ if(isset($identifiant_perso_1)) {
         <div class="text-left">
         <p class="card-text">Race: <?php echo get_nom_race(get_race_id($identifiant_perso_1))?></p>
           <br>
-          <p class="card-text">Club: </p>
+          <p class="card-text">Club:
+          <?php
+            if(get_club_id($identifiant_perso_1) != null) {
+            ?>
+                <a class="a-title" href="profil-club.php?c=<?php  echo get_club_id($identifiant_perso_1) ?>"><?php echo get_club(get_club_id($identifiant_perso_1)) ?> </a>
+            <?php
+            } else {
+                echo "Le personnage n'a pas encore rejoint de club.";
+            }
+            ?>
+          </p>
           <br>
           <p class="card-text">Capacité 1: N/A </p>
           <br>
@@ -112,7 +139,17 @@ if(isset($identifiant_perso_1)) {
         <div class="text-left">
           <p class="card-text">Race: <?php echo get_nom_race(get_race_id($identifiant_perso_2))?></p>
           <br>
-          <p class="card-text">Club: </p>
+          <p class="card-text">Club: 
+          <?php
+            if(get_club_id($identifiant_perso_2) != null) {
+            ?>
+                <a class="a-title" href="profil-club.php?c=<?php  echo get_club_id($identifiant_perso_2) ?>"><?php echo get_club(get_club_id($identifiant_perso_2)) ?> </a>
+            <?php
+            } else {
+                echo "Le personnage n'a pas encore rejoint de club.";
+            }
+          ?>
+          </p>
           <br>
           <p class="card-text">Capacité 1: </p>
           <br>
@@ -147,7 +184,17 @@ if(isset($identifiant_perso_1)) {
         <div class="text-left">
           <p class="card-text">Race: <?php echo get_nom_race(get_race_id($identifiant_perso_3))?></p>
           <br>
-          <p class="card-text">Club: </p>
+          <p class="card-text">Club: 
+          <?php
+            if(get_club_id($identifiant_perso_3) != null) {
+            ?>
+                <a class="a-title" href="profil-club.php?c=<?php  echo get_club_id($identifiant_perso_3) ?>"><?php echo get_club(get_club_id($identifiant_perso_3)) ?> </a>
+            <?php
+            } else {
+                echo "Le personnage n'a pas encore rejoint de club.";
+            }
+          ?>
+          </p>
           <br>
           <p class="card-text">Capacité 1: </p>
           <br>
