@@ -17,7 +17,7 @@
 <body>
 <div class="personnage-creation-form-container">
     <!-- Sélection de personnage -->
-    <form class="creation-form" action="Controllers/modifier-personnage.php">
+    <form class="creation-form" action="../Controllers/selectionner-personnage.php">
         <div class="label-connexion-head">
             <h1>Sélection de personnage</h1>
             <hr>
@@ -27,7 +27,6 @@
         <div class="connexion-content">
             <div class="liste-personnage-container">
                 <div class=row>
-                    <!--<form action="../Controllers/choisir-personnage.php" method="POST"></form>-->
                     <!-- Carte personnage 1 -->
                     <?php
                     if($perso_1 != null){
@@ -70,7 +69,7 @@
                                     <p class="card-text">Capacité 2: </p>
                                     <br>
                                 </div>
-                                <div class="card-footer"><button type="button" class="card-button-footer tick-1">Choisis-moi !</button</div>
+                                <div class="card-footer"><button type="submit" name="personnage-selectionne" value="<?php echo $perso_1 ['id_personnage']; ?>"  class="card-button-footer tick-1">Choisis-moi !</button</div>
                             </div>
                         </div>
                     </div>
@@ -84,11 +83,6 @@
                     <div class="col-lg-4">
                         <div class="card personnage-container">
                             <div class="ticking-box-container">
-                                <div class="ticking-box" id="tick-box-2">
-                                    <svg class="tick invisible svg-2" xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                                    </svg>
-                                </div>
                                 <?php
                                 if($perso_2['illustration']!=null) {
                                     echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($perso_2['illustration']).'" alt="Profil du personnage 1"/>';
@@ -97,29 +91,30 @@
                                 }
                                 ?>
                             </div>
-                                <div class="card-body">
-                                    <h5 class="personnage-title"><?php echo $perso_2['nom_personnage']?></h5>
-                                    <div id="circle"><?php echo $perso_2['niveau']?></div>
-                                    <hr>
-                                    <div class="text-left">
-                                        <p class="card-text">Race: <?php echo get_nom_race($perso_2['race_id'])?></p>
-                                        <br>
-                                        <p class="card-text">Club:
-                                        <?php
-                                        if($perso_2['club_id'] != null) {
-                                            echo get_club($perso_2['club_id']);
-                                        }else{
-                                            echo "Ce personnage n'a pas encore rejoint de club";
-                                        }
-                                        ?>
-                                        </p>
-                                        <br>
-                                        <p class="card-text">Capacité 1: </p>
-                                        <br>
-                                        <p class="card-text">Capacité 2: </p>
-                                        <br>
-                                    </div>
-                                    <div class="card-footer"><button type="button" class="card-button-footer tick-2">Choisis-moi !</button</div>
+                            <div class="card-body">
+                                <h5 class="personnage-title"><?php echo $perso_2['nom_personnage']?></h5>
+                                <div id="circle"><?php echo $perso_2['niveau']?></div>
+                                <hr>
+                                <div class="text-left">
+                                    <p class="card-text">Race: <?php echo get_nom_race($perso_2['race_id'])?></p>
+                                    <br>
+                                    <p class="card-text">Club:
+                                    <?php
+                                    if($perso_2['club_id'] != null) {
+                                        echo get_club($perso_2['club_id']);
+                                    }else{
+                                        echo "Ce personnage n'a pas encore rejoint de club";
+                                    }
+                                    ?>
+                                    </p>
+                                    <br>
+                                    <p class="card-text">Capacité 1: </p>
+                                    <br>
+                                    <p class="card-text">Capacité 2: </p>
+                                    <br>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" name="personnage-selectionne" value="<?php echo $perso_2['id_personnage']; ?>"  class="card-button-footer tick-2">Choisis-moi !</button>
                                 </div>
                             </div>
                         </div>  
@@ -132,11 +127,6 @@
                     <div class="col-lg-4">
                         <div class="card personnage-container">
                             <div class="ticking-box-container">
-                                <div class="ticking-box" id="tick-box-3">
-                                    <svg class="tick invisible svg-3" xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                                    </svg>
-                                </div>
                                 <?php
                                 if($perso_3['illustration']!=null) {
                                     echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($perso_3['illustration']).'" alt="Profil du personnage 1"/>';
@@ -167,16 +157,17 @@
                                             <p class="card-text">Capacité 2: </p>
                                             <br>
                                         </div>
-                                        <div class="card-footer"><button type="button" class="card-button-footer tick-3">Choisis-moi !</button</div>
+                                        <div class="card-footer"><button type="submit" name="personnage-selectionne" value="<?php echo $perso_3['id_personnage']; ?>" class="card-button-footer tick-3">Choisis-moi !</button</div>
                                     </div>
                                 </div>
                             </div>
                         </div>    
                     </div>
-                </div>
-                <?php
+                    <?php
                     }
-                ?>
+                    ?>
+                </div>
+
             </div>
         </div>
     </form>
