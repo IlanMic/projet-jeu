@@ -45,9 +45,9 @@
                         <div class="inner">
                             <button class="btn-inscription mt-2 sub-btn" type="button">S'inscrire</button>
                         </div>
-                        <div class="inner">
+                        <!--<div class="inner">
                             <button class="btn-recuperation mt-2 sub-btn" type="button">Mot de passe oublié</button>
-                        </div>
+                        </div>-->
                     </div> 
                 </form> 
 
@@ -95,14 +95,14 @@
                         <div class="inner">
                             <button class="btn-connexion mt-2 sub-btn" class="form-btn"  type="button">Se connecter</button>
                         </div>
-                        <div class="inner">
+                        <!--<div class="inner">
                             <button class="btn-recuperation mt-2 sub-btn" class="form-btn" type="button">Mot de passe oublié</button>
-                        </div>
+                        </div>-->
                     </div>
                 </form> 
 
                 <!-- Formulaire de réinitialisation de mot de passe  -->
-                <form class="reinitialisation-form d-none" action="Controllers/recuperation.php" method="POST">
+                <!--<form class="reinitialisation-form d-none" action="Controllers/recuperation.php" method="POST">
                     <div class="label-reinitialisation-head">
                         <h1>Réinitialisation du mot de passe</h1>
                         <hr>
@@ -129,7 +129,7 @@
                             <button class="btn-inscription mt-2 sub-btn" class="form-btn"  type="button">S'inscrire</button>
                         </div>
                     </div>    
-                </form> 
+                </form> -->
             </div>
 
             <button class="play-as-guest-btn" onclick="location.href='../Views/queue-match.php'">Voulez vous jouer une partie en tant qu'invité ?</button>
