@@ -2,7 +2,7 @@
 
 CREATE DATABASE IF NOT EXISTS `projet_jeu` DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-
+USE `projet_jeu`;
 -- Creation de la table "race" --
 
 CREATE TABLE IF NOT EXISTS `projet_jeu`.`race` ( `id_race` INT NOT NULL AUTO_INCREMENT , `nom_race` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL , PRIMARY KEY (`id_race`)) ENGINE = InnoDB;
@@ -245,10 +245,13 @@ ALTER TABLE `projet_jeu`.`personnage` CHANGE `poste_id` `poste_id` INT(11) NULL;
 UPDATE `projet_jeu`.`utilisateur` SET `personnage_1_id`=1,`personnage_2_id`=2 WHERE id_utilisateur = 1;
 UPDATE `projet_jeu`.`utilisateur` SET `personnage_1_id`=3 WHERE id_utilisateur = 2;
 ALTER TABLE `projet_jeu`.`personnage` CHANGE `illustration` `illustration` LONGBLOB NULL DEFAULT NULL;
-ALTER TABLE match RENAME matchs;
+ALTER TABLE `projet_jeu`.`match` RENAME matchs;
 ALTER TABLE `projet_jeu`.`utilisateur` ADD `derniere_connexion` DATETIME NULL AFTER `personnage_3_id`;
 ALTER TABLE `projet_jeu`.`utilisateur` ADD `dernier_personnage_utilise` INT NULL AFTER `derniere_connexion`;
 INSERT INTO `projet_jeu`.`poule` (`nom_poule`, `club_id_1`, `club_id_2`, `point_club_1`, `point_club_2`) VALUES ('Argent', '1', '2', '0', '0');
+ALTER TABLE `projet_jeu`.`poule` ADD `division` TINYINT NULL AFTER `nom_poule`;
+ALTER TABLE `projet_jeu`.`poule` ADD `type_poule` TINYINT NULL AFTER `division`;
+INSERT INTO `projet_jeu`.`type_match` (`id_type_match`, `type_match`, `points_gagnant`, `points_perdant`) VALUES (NULL, 'Tournoi', '15', '0'), (NULL, 'Championnat', '3', '0'), (NULL, 'Coupe', '5', '0')
 
 
-INSERT INTO `projet_jeu`.`match` (`id_match`, `type_match_id`, `club_1_id`, `club_2_id`, `date_match`, `score_club_1`, `score_club_2`) VALUES (NULL, '2', '1', '2', '2022-05-27 00:00:00', '0', '0');
+INSERT INTO `projet_jeu`.`matchs` (`id_match`, `type_match_id`, `club_1_id`, `club_2_id`, `date_match`, `score_club_1`, `score_club_2`) VALUES (NULL, '2', '1', '2', '2022-05-27 00:00:00', '0', '0');
