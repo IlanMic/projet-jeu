@@ -3,6 +3,7 @@ $(document).ready(function () {
     matchTimer();
     activateCapacite();
     activateCapaciteByKey();
+    showAdminForm();
     
 
     /**
@@ -31,6 +32,64 @@ $(document).ready(function () {
             $(inscription_form).addClass("d-none")
         });
     }
+
+    /**
+     * Permet d'afficher le formulaire de création d'une poule, d'un personnage ou d'un club
+     */
+    function showAdminForm(){
+        var club_creation_form = document.getElementsByClassName("club-admin-form")
+        var poule_creation_form = document.getElementsByClassName("poule-admin-form")
+        var personnage_creation_form = document.getElementsByClassName("personnage-admin-form")
+
+        $(".btn-poule").click(function() {
+            $(poule_creation_form).removeClass("d-none")
+            $(club_creation_form).addClass("d-none")
+            $(personnage_creation_form).addClass("d-none")
+        });
+        
+        $(".btn-personnage").click(function() {
+            $(personnage_creation_form).removeClass("d-none")
+            $(poule_creation_form).addClass("d-none")
+            $(club_creation_form).addClass("d-none")
+        });
+        
+        $(".btn-club").click(function() {
+            $(club_creation_form).removeClass("d-none")
+            $(poule_creation_form).addClass("d-none")
+            $(personnage_creation_form).addClass("d-none")
+        });
+    }
+
+    /**
+     * Permet de retirer des menus select une valeur sélectionnée dans le précedent menu select
+     */
+     $(".joueur").change(function() {
+        var SaveSpot	=	{};
+        // loop through same-named dropdowns
+        $.each($(".joueur"),function(keys,vals) {
+            // store value
+            var ThisVal	=	$(this).val();
+            // If there is selection, store value and name
+            if(ThisVal != '-')
+                SaveSpot[ThisVal]	=	$(this).prop("name");
+        });
+        
+        
+        $.each($(".joueur"), function(key,value) {
+            $.each($(this).children(), function(subkey,subvalue) {
+                if(SaveSpot[$(this).val()]) {
+                        if($(this).parent("select").prop("name") != SaveSpot[$(this).val()])
+                            $(this).prop("disabled",true);
+                        else
+                            $(this).prop("selected",true);
+                    }
+                else
+                    $(this).prop("disabled",false);
+            });
+        });
+        
+        console.log(SaveSpot);
+    });
 
 
     /**
