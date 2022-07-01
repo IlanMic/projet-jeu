@@ -389,6 +389,22 @@
         } catch(PDOException $e) {
             echo "Impossible d'obtenir la liste des personnages: ". $e->getMessage();
         }
+    }  
+    
+    
+    //Getter pour obtenir tous les personnages sans club
+    function get_40_personnages_sans_club()
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT * FROM personnage WHERE club_id IS NULL ORDER BY RAND() LIMIT 40");
+            $all_personnages_sans_club= $stmt->fetchAll();
+            return $all_personnages_sans_club;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des personnages: ". $e->getMessage();
+        }
     }    
 
 ?>

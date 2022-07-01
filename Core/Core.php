@@ -83,6 +83,53 @@
             return false;
         }
     }
+
+    //Passe au niveau supérieur d'un personnage
+    function level_up($id_personnage){
+        try {
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT experience FROM personnage WHERE id_personnage = :id_personnage");
+            $stmt->bindParam("id_personnage", $id_personnage, PDO::PARAM_INT);
+            if($stmt->execute()) {
+                $resultat = $stmt->fetch();
+                $experience = $resultat['experience'];
+                if($experience == 9) {
+                    $experience = 0;
+                    try{
+                        $level_up = $pdo->prepare("UPDATE personnage SET niveau = niveau+1, experience = :experience WHERE id_personnage = :id_personnage");
+                        $level_up->bindParam("experience", $experience, PDO::PARAM_INT);
+                        $level_up->bindParam("id_personnage", $id_personnage, PDO::PARAM_INT);
+                        $level_up->execute();
+                    } catch (PDOException $e){
+                        echo "Echec lors du passage au niveau supérieur du personnage: ". $e->getMessage();
+                    }
+                }
+                $pdo = null;
+            }
+        } catch(PDOException $e) {
+            echo "Echec lors du passage au niveau supérieur du personnage: ". $e->getMessage();
+        }
+    }
+
+    /**
+     * Redirige l'utilisateur vers la page d'accueille s'il n'est pas administrateur
+     */
+    function redirect_si_non_admin($id_utilisateur)
+    {
+        if(isset($_SESSION['utilisateur_pseudo'])) {
+            $pseudo = $_SESSION['utilisateur_pseudo'];
+        }
+        if(isset($_SESSION['mdp'])) {
+            $mdp = $_SESSION['mdp'];
+            $mdpcheck = password_verify("Administrateur",$mdp);
+        }   
+        if($pseudo !="Administrateur" || $mdpcheck != 1) {
+            $_SESSION['etat'] = "Echec";
+            $_SESSION['message'] = "Il faut être administrateur du site pour accéder à cette page.";
+            ?><script> location.replace("../Views/index.php"); </script><?php
+        }
+    }
     
 
 ?>

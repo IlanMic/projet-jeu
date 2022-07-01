@@ -83,6 +83,21 @@
         }
     }
 
+    //Getter pour obtenir tous 25 clubs n'appartenant pas à une poule
+    function get_40_clubs()
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT club.* FROM club ORDER BY RAND() LIMIT 40");
+            $all_club = $stmt->fetchAll();
+            return $all_club;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir les clubs: ". $e->getMessage();
+        }
+    }
+
     //Getter pour obtenir tous les clubs
     function get_all_clubs_from_name($nom_club)
     {
