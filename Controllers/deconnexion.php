@@ -7,6 +7,7 @@
     unset($_SESSION['utilisateur_id']);
     unset($_SESSION['utilisateur_pseudo']);
     unset($_SESSION['mail']);
+    unset($_SESSION['mdp']);
     unset($_SESSION['utilisateur_club']);
     unset($_SESSION['compte_premium']);
     unset($_SESSION['utilisateur_personnage_1']);

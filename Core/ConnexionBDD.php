@@ -9,10 +9,11 @@
             );
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            return $db;
         }
         catch(PDOException $e) {
             error_log("Echec de connexion à la base de données".$e->getMessage());
         }
-        return $db;
+        
     }
 ?>

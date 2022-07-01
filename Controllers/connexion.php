@@ -30,6 +30,7 @@
             $_SESSION['utilisateur_id'] = $data['id_utilisateur'];
             $_SESSION['utilisateur_pseudo'] = $data['pseudo'];
             $_SESSION['mail'] = $data['adresse_mail'];
+            $_SESSION['mdp'] = $data['mot_de_passe'];
             $_SESSION['utilisateur_club'] = $data['club_id'];
             $_SESSION['compte_premium'] = $data['compte_premium'];
             $_SESSION['utilisateur_personnage_1'] = $data['personnage_1_id'];
