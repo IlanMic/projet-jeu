@@ -3,7 +3,7 @@
     require_once("../../Core/Core.php");
     require_once("../../Core/ConnexionBDD.php");
 
-    if(isset($_POST['nom_perso']) && isset($_POST['race'])) {
+    if(isset($_POST['nom_perso']) && isset($_POST['race']) && $_POST['race']!="null") {
 
         $zero = 0;
 
@@ -120,9 +120,40 @@
             $stmt->bindParam("biographie", $biographie, PDO::PARAM_STR);
         }
         if($stmt->execute()) {
+            $dernier_id = $pdo->lastInsertId();
+            if($_POST['capacite_1'] && $_POST['race']!="null") {
+                $capacite_1 = $_POST['capacite_1'];
+                $update_capacite_1 = $pdo->prepare("UPDATE personnage SET capacite_1_id = :capacite_1 WHERE id_personnage = :id_personnage");
+                $update_capacite_1->bindParam("capacite_1", $capacite_1, PDO::PARAM_INT);
+                $update_capacite_1->bindParam("id_personnage", $dernier_id, PDO::PARAM_INT);
+                if($update_capacite_1->execute()) {
+                    $_SESSION['etat'] = "Succès";
+                    $_SESSION['message'] = "Ajout de la capacité 1 réussi";
+                    header('Location: ../../Views/page-admin.php');
+                } else {
+                    $_SESSION['etat'] = "Echec";
+                    header('Location: ../../Viewspage-admin.php');
+                    $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été saisi. La création de club ne peut aboutir.";
+                }
+            }
+            if($_POST['capacite_2'] && $_POST['race']!="null") {
+                $capacite_2 = $_POST['capacite_2'];
+                $update_capacite_2 = $pdo->prepare("UPDATE personnage SET capacite_2_id = :capacite_2 WHERE id_personnage = :id_personnage");
+                $update_capacite_2->bindParam("capacite_2", $capacite_2, PDO::PARAM_INT);
+                $update_capacite_2->bindParam("id_personnage", $dernier_id, PDO::PARAM_INT);
+                if($update_capacite_2->execute()) {
+                    $_SESSION['etat'] = "Succès";
+                    $_SESSION['message'] = "Ajout de la capacité 1 réussi";
+                    header('Location: ../../Views/page-admin.php');
+                } else {
+                    $_SESSION['etat'] = "Echec";
+                    header('Location: ../../Views/page-admin.php');
+                    $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été saisi. La création de club ne peut aboutir.";
+                }
+            }
             $_SESSION['etat'] = "Succès";
             $_SESSION['message'] = "Ajout de personnage réussi";
-            header('Location: ../../Views/index.php');
+            header('Location: ../../Views/page-admin.php');
         } else {
             print_r($pdo->errorInfo());
         }
@@ -132,7 +163,7 @@
 
     } else {
         $_SESSION['etat'] = "Echec";
-        header('Location: ../../Views/Admin/page-admin.php');
+        header('Location: ../../Views/page-admin.php');
         $_SESSION['message'] = "Au moins un des champs obligatoires n'a pas été saisi. La création de club ne peut aboutir.";
     }
 

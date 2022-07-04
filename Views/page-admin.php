@@ -36,7 +36,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="division" class="form-label">Division de la poule * :</label><br>
-                    <input type="text" class="form-control" id="division" name="division" placeholder="Entrez la division de la poule" required>
+                    <input type="number" min="1" max="4" value="4" class="form-control" id="division" name="division" placeholder="Entrez la division de la poule" required>
                 </div>
                 <?php
                 $liste_type = get_all_types_match();
@@ -54,9 +54,9 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="club_1" class="form-label">Club 1 de la poule * :</label><br>
-                    <select class= "form-select joueur" name="club_1" id="club_1" required>
-                        <option selected disabled>Sélectionnez le premier club de la poule</option>
+                    <label for="club_1" class="form-label">Club 1 de la poule :</label><br>
+                    <select class= "form-select joueur" name="club_1" id="club_1">
+                        <option selected disabled value="null">Sélectionnez le premier club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -65,9 +65,9 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                <label for="club_2" class="form-label">Club 2 de la poule * :</label><br>
-                <select class= "form-select joueur" name="club_2" id="club_2" required>
-                        <option selected disabled>Sélectionnez le second club de la poule</option>
+                <label for="club_2" class="form-label">Club 2 de la poule :</label><br>
+                <select class= "form-select joueur" name="club_2" id="club_2">
+                        <option selected disabled value="null">Sélectionnez le second club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -76,9 +76,9 @@
                 </select>
                 </div>
                 <div class="mb-4">
-                <label for="club_3" class="form-label">Club 3 de la poule * :</label><br>
-                <select class= "form-select joueur" name="club_3" id="club_3" required>
-                        <option selected disabled>Sélectionnez le troisème club de la poule</option>
+                <label for="club_3" class="form-label">Club 3 de la poule :</label><br>
+                <select class= "form-select joueur" name="club_3" id="club_3">
+                        <option selected disabled value="null">Sélectionnez le troisème club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -87,9 +87,9 @@
                 </select>
                 </div>
                 <div class="mb-4">
-                <label for="club_4" class="form-label">Club 4 de la poule * :</label><br>
-                <select class= "form-select joueur" name="club_4" id="club_4" required>
-                        <option selected disabled>Sélectionnez le quatrième club de la poule</option>
+                <label for="club_4" class="form-label">Club 4 de la poule :</label><br>
+                <select class= "form-select joueur" name="club_4" id="club_4">
+                        <option selected disabled value="null">Sélectionnez le quatrième club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -98,9 +98,9 @@
                 </select>
                 </div>
                 <div class="mb-4">
-                <label for="club_5" class="form-label">Club 5 de la poule * :</label><br>
-                <select class= "form-select joueur" name="club_5" id="club_5" required>
-                        <option selected disabled>Sélectionnez le cinquième club de la poule</option>
+                <label for="club_5" class="form-label">Club 5 de la poule :</label><br>
+                <select class= "form-select joueur" name="club_5" id="club_5">
+                        <option selected disabled value="null">Sélectionnez le cinquième club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -109,9 +109,9 @@
                 </select>
                 </div>
                 <div class="mb-4">
-                <label for="club_6" class="form-label">Club 6 de la poule * :</label><br>
-                <select class= "form-select joueur" name="club_6" id="club_6" required>
-                        <option selected disabled>Sélectionnez le sixième club de la poule</option>
+                <label for="club_6" class="form-label">Club 6 de la poule :</label><br>
+                <select class= "form-select joueur" name="club_6" id="club_6">
+                        <option selected disabled value="null">Sélectionnez le sixième club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -120,9 +120,9 @@
                 </select>
                 </div>
                 <div class="mb-4">
-                <label for="club_7" class="form-label">Club 7 de la poule * :</label><br>
-                <select class= "form-select joueur" name="club_7" id="club_7" required>
-                        <option selected disabled>Sélectionnez le septième club de la poule</option>
+                <label for="club_7" class="form-label">Club 7 de la poule :</label><br>
+                <select class= "form-select joueur" name="club_7" id="club_7">
+                        <option selected disabled value="null">Sélectionnez le septième club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -131,9 +131,9 @@
                 </select>
                 </div>
                 <div class="mb-4">
-                <label for="club_8" class="form-label">Club 8 de la poule * :</label><br>
-                <select class= "form-select joueur" name="club_8" id="club_8" required>
-                        <option selected disabled>Sélectionnez le huitième club de la poule</option>
+                <label for="club_8" class="form-label">Club 8 de la poule :</label><br>
+                <select class= "form-select joueur" name="club_8" id="club_8">
+                        <option selected disabled value="null">Sélectionnez le huitième club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -142,9 +142,9 @@
                 </select>
                 </div>
                 <div class="mb-4">
-                <label for="club_9" class="form-label">Club 9 de la poule * :</label><br>
-                <select class= "form-select joueur" name="club_9" id="club_9" required>
-                        <option selected disabled>Sélectionnez le neuvième club de la poule</option>
+                <label for="club_9" class="form-label">Club 9 de la poule :</label><br>
+                <select class= "form-select joueur" name="club_9" id="club_9">
+                        <option selected disabled value="null">Sélectionnez le neuvième club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -153,9 +153,9 @@
                 </select>
                 </div>
                 <div class="mb-4">
-                <label for="club_10" class="form-label">Club 10 de la poule * :</label><br>
-                <select class= "form-select joueur" name="club_10" id="club_10" required>
-                        <option selected disabled>Sélectionnez le dixième club de la poule</option>
+                <label for="club_10" class="form-label">Club 10 de la poule :</label><br>
+                <select class= "form-select joueur" name="club_10" id="club_10">
+                        <option selected disabled value="null">Sélectionnez le dixième club de la poule</option>
                             <?php
                                 foreach($liste_clubs as $club) {
                                     echo '<option value="' . $club['id_club'] . '">' . $club['nom_club'] . '</option>';
@@ -194,16 +194,26 @@
                     <input type="text" id="nom" class="form-control" name="nom" placeholder="Entrez le nom du club..." required>
                 </div>
                 <div class="mb-4">
+                    <?php
+                        $liste_utilisateurs_non_proprietaires = get_all_utilisateurs_non_proprietaires();
+                    ?>
                     <label for="proprietaire" class="form-label">Propriétaire du club *:</label><br>
-                    <input type="email" id="mail" class="form-control" name="mail" placeholder="Entrez votre adresse mail..." required>
+                    <select class= "form-select joueur" name="proprietaire" id="proprietaire" required>
+                            <option selected disabled value="null">Sélectionnez le propriétaire</option>
+                            <?php
+                                foreach($liste_utilisateurs_non_proprietaires as $utilisateur_non_proprietaire) {
+                                    echo '<option value="' . $utilisateur_non_proprietaire['id_utilisateur'] . '">' . $utilisateur_non_proprietaire['pseudo'] . '</option>';
+                                }
+                            ?>
+                    </select>
                 </div>
                 <?php
                     $liste_40_personnages_sans_clubs = get_40_personnages_sans_club();
                 ?>
                 <div class="mb-4">
-                    <label for="joueur" class="form-label">Personnage 1* : Le gardien</label><br>
-                    <select class= "form-select joueur" name="joueur" id="joueur">
-                            <option selected disabled>Sélectionnez le gardien</option>
+                    <label for="joueur" class="form-label">Personnage 1 :</label><br>
+                    <select class= "form-select joueur" name="joueur" id="joueur" >
+                            <option selected disabled value="null">Sélectionnez le premier personnage</option>
                             <?php
                                 foreach($liste_40_personnages_sans_clubs as $personnage) {
                                     echo '<option value="' . $personnage['id_personnage'] . '">' . $personnage['nom_personnage'] . '</option>';
@@ -212,9 +222,9 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="joueur2" class="form-label">Personnage 2* : Le premier défenseur</label><br>
-                    <select class= "form-select joueur" name="joueur2" id="joueur2">
-                            <option selected disabled>Sélectionnez le premier défenseur</option>
+                    <label for="joueur2" class="form-label">Personnage 2 : </label><br>
+                    <select class= "form-select joueur" name="joueur2" id="joueur2" >
+                            <option selected disabled value="null">Sélectionnez le deuxième personnage</option>
                             <?php
                                 foreach($liste_40_personnages_sans_clubs as $personnage) {
                                     echo '<option value="' . $personnage['id_personnage'] . '">' . $personnage['nom_personnage'] . '</option>';
@@ -223,9 +233,9 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="joueur3" class="form-label">Personnage 3* : Le second défenseur</label><br>
-                    <select class= "form-select joueur" name="joueur3" id="joueur3">
-                            <option selected disabled>Sélectionnez le second défenseur</option>
+                    <label for="joueur3" class="form-label">Personnage 3 : </label><br>
+                    <select class= "form-select joueur" name="joueur3" id="joueur3" >
+                            <option selected disabled value="null">Sélectionnez le troisième personnage</option>
                             <?php
                                 foreach($liste_40_personnages_sans_clubs as $personnage) {
                                     echo '<option value="' . $personnage['id_personnage'] . '">' . $personnage['nom_personnage'] . '</option>';
@@ -234,9 +244,9 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="joueur4" class="form-label">Personnage 4* : Le premier milieu de terrain</label><br>
-                    <select class= "form-select joueur" name="joueur4" id="joueur4">
-                            <option selected disabled>Sélectionnez le premier milieu</option>
+                    <label for="joueur4" class="form-label">Personnage 4 :</label><br>
+                    <select class= "form-select joueur" name="joueur4" id="joueur4" >
+                            <option selected disabled value="null">Sélectionnez le quatrième personnage</option>
                             <?php
                                 foreach($liste_40_personnages_sans_clubs as $personnage) {
                                     echo '<option value="' . $personnage['id_personnage'] . '">' . $personnage['nom_personnage'] . '</option>';
@@ -245,9 +255,9 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="joueur5" class="form-label">Personnage 5* : Le second milieu de terrain</label><br>
-                    <select class= "form-select joueur" name="joueur5" id="joueur5">
-                            <option selected disabled>Sélectionnez le second milieu</option>
+                    <label for="joueur5" class="form-label">Personnage 5 :</label><br>
+                    <select class= "form-select joueur" name="joueur5" id="joueur5" >
+                            <option selected disabled value="null">Sélectionnez le  cinquième personnage</option>
                             <?php
                                 foreach($liste_40_personnages_sans_clubs as $personnage) {
                                     echo '<option value="' . $personnage['id_personnage'] . '">' . $personnage['nom_personnage'] . '</option>';
@@ -256,9 +266,9 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="joueur6" class="form-label">Personnage 6* : Le premier attaquant</label><br>
-                    <select class= "form-select joueur" name="joueur6" id="joueur6">
-                            <option selected disabled>Sélectionnez le premier attaquant</option>
+                    <label for="joueur6" class="form-label">Personnage 6 : </label><br>
+                    <select class= "form-select joueur" name="joueur6" id="joueur6" >
+                            <option selected disabled value="null">Sélectionnez le sixième personnage</option>
                             <?php
                                 foreach($liste_40_personnages_sans_clubs as $personnage) {
                                     echo '<option value="' . $personnage['id_personnage'] . '">' . $personnage['nom_personnage'] . '</option>';
@@ -267,9 +277,9 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="joueur7" class="form-label">Personnage 7* : Le second attaquant</label><br>
-                    <select class= "form-select joueur" name="joueur7" id="joueur7">
-                            <option selected disabled>Sélectionnez le second attaquant</option>
+                    <label for="joueur7" class="form-label">Personnage 7 : </label><br>
+                    <select class= "form-select joueur" name="joueur7" id="joueur7" >
+                            <option selected disabled value="null">Sélectionnez le septième personnage</option>
                             <?php
                                 foreach($liste_40_personnages_sans_clubs as $personnage) {
                                     echo '<option value="' . $personnage['id_personnage'] . '">' . $personnage['nom_personnage'] . '</option>';
@@ -309,7 +319,7 @@
                 <div class="mb-4">
                     <label for="race">Race *:</label>
                     <select class= "form-select" name="race" id="race" required>
-                        <option selected disabled>Sélectionnez votre race...</option>
+                        <option selected disabled value="null">Sélectionnez votre race...</option>
                         <option value="1">Humain</option>
                         <option value="2">Elfe</option>
                         <option value="3">Nain</option>
@@ -445,7 +455,7 @@
                 <br>
                 <div class="mb-4">
                     <select class= "form-select joueur" name="capacite_1" id="capacite_1">
-                                <option selected disabled>Sélectionnez la capacite 1 du personnage :</option>
+                                <option selected disabled value="null">Sélectionnez la capacite 1 du personnage :</option>
                                 <?php
                                 foreach($liste_capacite as $capacite){
                                     echo '<option value="' . $capacite['id_capacite'] . '">' . $capacite['nom_capacite'] . '</option>';
@@ -455,7 +465,7 @@
                 </div>
                 <div class="mb-4">
                     <select class= "form-select joueur" name="capacite_2" id="capacite_2">
-                                <option selected disabled>Sélectionnez la capacite 2 du personnage :</option>
+                                <option selected disabled value="null">Sélectionnez la capacite 2 du personnage :</option>
                                 <?php
                                 foreach($liste_capacite as $capacite){
                                     echo '<option value="' . $capacite['id_capacite'] . '">' . $capacite['nom_capacite'] . '</option>';
