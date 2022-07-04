@@ -199,5 +199,20 @@
         } catch(PDOException $e) {
             echo "Impossible d'obtenir la liste des utilisateur: ". $e->getMessage();
         }
-    } 
+    }
+
+        //Getter pour obtenir tous les utilisateurs non proprietaires
+        function get_all_utilisateurs_non_proprietaires()
+        {
+            try{
+                require_once("../Core/ConnexionBDD.php");
+                $pdo = connect_db();
+                $stmt = $pdo->query("SELECT utilisateur.* FROM utilisateur LEFT JOIN club ON utilisateur.id_utilisateur = club.proprietaire_id WHERE club.proprietaire_id IS NULL");
+                $all_utilisateurs_non_proprietaires = $stmt->fetchAll();
+                return $all_utilisateurs_non_proprietaires;
+                $pdo = null;
+            } catch(PDOException $e) {
+                echo "Impossible d'obtenir la liste des utilisateur non propriétaires: ". $e->getMessage();
+            }
+        } 
 ?>

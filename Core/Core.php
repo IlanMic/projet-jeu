@@ -18,6 +18,26 @@
             echo 'Impossible de vérifier si le nom de club saisi est unique: '. $e->getMessage();
         }
     }
+
+    //Vérifie qu'aucun autre club ne possède le même nom (vrai si unique, faux sinon)
+    function club_est_unique_depuis_Admin($nom_club){
+        try{
+            require_once("../../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM club WHERE nom_club = :nom_club");
+            $stmt->bindParam("nom_club", $nom_club, PDO::PARAM_STR);
+            $stmt->execute();
+            $unique = $stmt->fetchColumn();
+            if($unique ==0) {
+                return true;
+            } else {
+                return false;
+            }
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo 'Impossible de vérifier si le nom de club saisi est unique: '. $e->getMessage();
+        }
+    }
     
     //Compter le nombre de personnages appartenant à un utilisateur
     function compter_personnages_utilisateur($id_utilisateur)
