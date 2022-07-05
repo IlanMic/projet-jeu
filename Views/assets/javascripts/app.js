@@ -33,6 +33,23 @@ $(document).ready(function () {
         });
     }
 
+    $('#perso_1').change(function(e){
+        $('#perso_2').prop('disabled', !$(this).val());
+    });
+
+    $(function(){
+    $('#perso_2').prop('disabled', true);
+    });
+
+
+    $('#perso_2').change(function(e){
+        $('#perso_3').prop('disabled', !$(this).val());
+    });
+
+    $(function(){
+    $('#perso_3').prop('disabled', true);
+    });
+    
     /**
      * Permet d'afficher le formulaire de création d'une poule, d'un personnage ou d'un club
      */
@@ -40,23 +57,34 @@ $(document).ready(function () {
         var club_creation_form = document.getElementsByClassName("club-admin-form")
         var poule_creation_form = document.getElementsByClassName("poule-admin-form")
         var personnage_creation_form = document.getElementsByClassName("personnage-admin-form")
+        var utilisateur_creation_form = document.getElementsByClassName("utilisateur-admin-form")
 
         $(".btn-poule").click(function() {
             $(poule_creation_form).removeClass("d-none")
             $(club_creation_form).addClass("d-none")
             $(personnage_creation_form).addClass("d-none")
+            $(utilisateur_creation_form).addClass("d-none")
         });
         
         $(".btn-personnage").click(function() {
             $(personnage_creation_form).removeClass("d-none")
             $(poule_creation_form).addClass("d-none")
             $(club_creation_form).addClass("d-none")
+            $(utilisateur_creation_form).addClass("d-none")
         });
         
         $(".btn-club").click(function() {
             $(club_creation_form).removeClass("d-none")
             $(poule_creation_form).addClass("d-none")
             $(personnage_creation_form).addClass("d-none")
+            $(utilisateur_creation_form).addClass("d-none")
+        });
+
+        $(".btn-utilisateur").click(function() {
+            $(utilisateur_creation_form).removeClass("d-none")
+            $(poule_creation_form).addClass("d-none")
+            $(personnage_creation_form).addClass("d-none")
+            $(club_creation_form).addClass("d-none")
         });
     }
 
@@ -91,6 +119,7 @@ $(document).ready(function () {
         console.log(SaveSpot);
     });
 
+    
 
     /**
      * Timer pour le match
