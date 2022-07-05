@@ -390,6 +390,26 @@
             echo "Impossible d'obtenir la liste des personnages: ". $e->getMessage();
         }
     }  
+
+    function get_all_personnages_sans_proprietaire()
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT personnage.* FROM personnage
+            LEFT JOIN utilisateur p1 ON personnage.id_personnage = p1.personnage_1_id
+            LEFT JOIN utilisateur p2 ON personnage.id_personnage = p2.personnage_2_id
+            LEFT JOIN utilisateur p3 ON personnage.id_personnage = p3.personnage_3_id
+            WHERE p1.personnage_1_id IS NULL
+            AND p2.personnage_2_id IS NULL
+            AND p3.personnage_3_id IS NULL");
+            $all_personnages_sans_proprietaire = $stmt->fetchAll();
+            return $all_personnages_sans_proprietaire;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des personnages: ". $e->getMessage();
+        }
+    }
     
     
     //Getter pour obtenir tous les personnages sans club
