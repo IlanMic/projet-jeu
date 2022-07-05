@@ -174,6 +174,8 @@
         $_SESSION['message'] = "La création de la poule n'a pu aboutir: veuillez renseigner tous les champs obligatoires.";
         }
 
+        $pdo = null;
+
     //Message d'erreure en cas de non saisie des champs obligatoires
     } else {
         $_SESSION['etat'] = "Echec";

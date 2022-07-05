@@ -176,6 +176,9 @@
             <div class="inner">
                 <button class="btn-personnage mt-2 sub-btn" type="button">Créer un personnage</button>
             </div>
+            <div class="inner">
+                <button class="btn-utilisateur mt-2 sub-btn" type="button">Créer un utilisateur</button>
+            </div>
         </div> 
     </form> 
 
@@ -300,8 +303,12 @@
             <div class="inner">
                 <button class="btn-personnage mt-2 sub-btn" type="button">Créer un personnage</button>
             </div>
+            <div class="inner">
+                <button class="btn-utilisateur mt-2 sub-btn" type="button">Créer un utilisateur</button>
+            </div>
         </div>
     </form> 
+
     <!-- Formulaire de création de personnage en tant qu'administrateur -->
     <form class="personnage-admin-form d-none" action="../Controllers/Admin/generer-admin-personnage.php" method="POST" enctype="multipart/form-data">
         <div class="label-connexion-head">
@@ -485,6 +492,96 @@
             </div>
             <div class="inner">
                 <button class="btn-club mt-2 sub-btn" type="button">Créer un club</button>
+            </div>
+            <div class="inner">
+                <button class="btn-utilisateur mt-2 sub-btn" type="button">Créer un utilisateur</button>
+            </div>
+        </div>
+    </form> 
+                                
+    <!-- Formulaire de création d'utilisateur -->
+    <form class="utilisateur-admin-form d-none" action="../Controllers/Admin/generer-admin-utilisateur.php" method="POST">
+        <div class="label-inscription-head">
+            <h1>Création d'un BOT utilisateur</h1>
+            <hr>
+            <h3>Veuillez saisir les informations obligatoires (*) afin de créer ce BOT: <h2>
+            <br>
+        </div>
+        <div class="inscription-content">
+            <div class="row">
+                <div class="mb-4">
+                    <label for="pseudo" class="form-label">Pseudo *:</label><br>
+                    <input type="text" id="pseudo" class="form-control" name="pseudo" placeholder="Entrez le pseudonyme de votre BOT utilisateur..." required>
+                </div>
+                <div class="mb-4">
+                    <label for="mail" class="form-label">Adresse mail *:</label><br>
+                    <input type="email" id="mail" class="form-control" name="mail" placeholder="Entrez l'adresse mail de votre BOT..." required>
+                </div>
+                <div class="mb-4">
+                    <label for="pass" class="form-label">Mot de passe * :</label><br>
+                    <input type="password" class="form-control" id="pass" name="pass" placeholder="Entrez le mot de passe de votre BOT..." required>
+                </div>
+                <div class="switch">
+                    <div class="row">
+                        <div class="col-9">Cliquer ici pour activer le compte premium de votre BOT ?</div>
+                        <div class="col-3">
+                            <label class="switch-premium">
+                                <input type="hidden" name="premium" id="premium" value="2">
+                                <input type="checkbox" name="premium" id="premium" value="1">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <?php
+                $liste_personnages_sans_proprietaires = get_all_personnages_sans_proprietaire();
+                ?>
+                <div class="mb-4">
+                    <select class= "form-select joueur" name="perso_1" id="perso_1">
+                        <option selected disabled value="null">Sélectionnez le personnage 1 :</option>
+                        <?php
+                        foreach($liste_personnages_sans_proprietaires as $perso){
+                            echo '<option value="' . $perso['id_personnage'] . '">' . $perso['nom_personnage'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <select class= "form-select joueur" name="perso_2" id="perso_2">
+                        <option selected disabled value="null">Sélectionnez le personnage 2 :</option>
+                        <?php
+                        foreach($liste_personnages_sans_proprietaires as $perso){
+                            echo '<option value="' . $perso['id_personnage'] . '">' . $perso['nom_personnage'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <select class= "form-select joueur" name="perso_3" id="perso_3">
+                        <option selected disabled value="null">Sélectionnez le personnage 3 :</option>
+                        <?php
+                        foreach($liste_personnages_sans_proprietaires as $perso){
+                            echo '<option value="' . $perso['id_personnage'] . '">' . $perso['nom_personnage'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="text-center mt-4 mb-3">
+                    <button type="submit" name="submit" class="form-btn">Créer un utilisateur BOT</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="outer">
+        <div class="inner">
+                <button class="btn-poule mt-2 sub-btn" class="form-btn"  type="button">Créer une poule</button>
+            </div>
+            <div class="inner">
+                <button class="btn-club mt-2 sub-btn" type="button">Créer un club</button>
+            </div>
+            <div class="inner">
+                <button class="btn-personnage mt-2 sub-btn" type="button">Créer un personnage</button>
             </div>
         </div>
     </form> 
