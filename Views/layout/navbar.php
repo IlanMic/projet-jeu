@@ -74,6 +74,11 @@
                   </div>
                 </li>
                 <li class="nav-item">
+                <?php if($_SESSION['statut_connexion'] == true && $_SESSION['utilisateur_pseudo'] == "Administrateur") { ?>
+                  <a class="nav-link" href="page-admin.php">Espace administrateur</a>
+                <?php } ?>
+                </li>
+                <li class="nav-item">
                 <?php if($_SESSION['statut_connexion'] == true) { ?>
                   <form action="../Controllers/deconnexion.php" method="post">
                     <button class="logout-btn" type="submit">Déconnexion</button>
