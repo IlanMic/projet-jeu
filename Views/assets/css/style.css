@@ -829,3 +829,41 @@ body{
     text-decoration: none;
     color: black;
 }
+
+.launch-game-btn{
+    border: none;
+    background: none;
+}
+
+.black-text h3, .black-text p, .black-text{
+    color: #000;
+}
+
+.creation-form-2{
+    width: 99%;
+    height: 70vh;
+    position: absolute;
+}
+
+.index-container-svg{
+    width: 80%;
+    max-height: 75%;
+    position: absolute;
+}
+
+.index-content{
+    position: absolute;
+    bottom: 1%;
+    width: 100%;
+}
+
+.index-btn{
+    border: 1px solid #000;
+	color: rgb(0, 0, 0);
+	font-weight: 500;
+	background: #f6f6f9;
+	padding: .8rem 1rem;
+    text-align: center;
+	width: 80%;
+}
+
