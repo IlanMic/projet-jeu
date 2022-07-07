@@ -120,6 +120,24 @@
         }
     }
 
+    //Getter de match par club
+    function get_match_by_club($id_club)
+    {
+        try{
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT * FROM matchs WHERE club_1_id = :id_club OR club_2_id = :id_club2");
+            $stmt->bindParam("id_match", $id_club, PDO::PARAM_INT);
+            $stmt->bindParam("id_match", $id_club2, PDO::PARAM_INT);
+            $stmt->execute();
+            $match = $stmt->fetch();
+            return $match;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir les informations du match: ". $e->getMessage();
+        }
+    }
+
     //Getter pour obtenir tous les matchs
     function get_all_matchs()
     {
