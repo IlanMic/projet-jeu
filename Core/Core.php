@@ -133,6 +133,89 @@
     }
 
     /**
+     * Permet de déterminer si l'équipe du club d'un personnage est complète pour un match
+     * Retourne le nombre de personnage présents dans l'équipe
+     * Si c'est inférieur à 7, alors l'équipe est incomplète
+     */
+    function equipe_est_complete($id_personnage, $id_match)
+    {
+        try {
+            require_once("../Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $count = NULL;
+            $query_club = $pdo->prepare("SELECT club_id FROM personnage WHERE id_personnage =:id_personnage");
+            $query_club->bindParam("id_personnage", $id_personnage, PDO::PARAM_INT);
+            if($query_club->execute()) {
+                $resultats = $query_club->fetch();
+                $club_personnage = $resultats['club_id'];
+                try {
+                    $query_club_match = $pdo->prepare("SELECT club_1_id, club_2_id FROM matchs WHERE id_match =:id_match");
+                    $query_club_match->bindParam("id_match", $id_match, PDO::PARAM_INT);
+                    if($query_club_match->execute()) {
+                        $resultats_club_match = $query_club_match->fetch();
+                        $club_1 = $resultats_club_match['club_1_id'];
+                        $club_2 = $resultats_club_match['club_2_id'];
+                        if($club_1 == $club_personnage) {
+                            $query_full_1 = $pdo->prepare("SELECT club_1_joueur_1, club_1_joueur_2, club_1_joueur_3, club_1_joueur_4, club_1_joueur_5, club_1_joueur_6, club_1_joueur_7,
+                            (
+                            COALESCE((CASE WHEN club_1_joueur_1 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_1_joueur_2 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_1_joueur_3 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_1_joueur_4 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_1_joueur_5 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_1_joueur_6 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_1_joueur_7 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                            ) AS SOMME
+                            FROM matchs
+                            WHERE id_match =:id_match");
+                            $query_full_1->bindParam("id_match", $id_match, PDO::PARAM_INT);
+                            if($query_full_1->execute()) {
+                                $resultats_full_1 = $query_full_1->fetch();
+                                $count = $resultats_full_1['SOMME'];
+                            } else {
+                                $count = NULL;
+                            }
+                        } else if($club_2 == $club_personnage) {
+                            $query_full_2 = $pdo->prepare("SELECT club_2_joueur_1, club_2_joueur_2, club_2_joueur_3, club_2_joueur_4, club_2_joueur_5, club_2_joueur_6, club_2_joueur_7,
+                            (
+                            COALESCE((CASE WHEN club_2_joueur_1 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_2_joueur_2 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_2_joueur_3 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_2_joueur_4 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_2_joueur_5 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_2_joueur_6 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN club_2_joueur_7 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                            ) AS SOMME
+                            FROM matchs
+                            WHERE id_match =:id_match");
+                            $query_full_2->bindParam("id_match", $id_match, PDO::PARAM_INT);
+                            if($query_full_2->execute()) {
+                                $resultats_full_2 = $query_full_1->fetch();
+                                $count = $resultats_full_1['SOMME'];
+                            } else {
+                                $count = NULL;
+                            }
+                        } else {
+                            echo "Le club du personnage ne participe pas à ce match";
+                        }
+                    } else {
+                        echo "Impossible de trouver le club du personnage dans le match.";
+                    }
+                } catch(PDOException $e) {
+                    echo "Impossible de déterminer si le club participe au match ou non: ". $e->getMessage();
+                }
+            } else{
+                echo "Impossible de trouver le club du personnage.";
+            }
+            return $count;
+
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible de savoir si l'équipe de votre club est complète: ". $e->getMessage();
+        }
+    }
+
+    /**
      * Redirige l'utilisateur vers la page d'accueille s'il n'est pas administrateur
      */
     function redirect_si_non_admin($id_utilisateur)
