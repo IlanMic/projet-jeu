@@ -138,15 +138,48 @@
     else {?>
     <!-- ajouter en fond de ce container des images du jeu -->
     <h1>Lancer une partie</h1>
-    <div class="index-container">
-        <a href="queue-match.php">
-            <div class="index-launcher d-flex flex-wrap align-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
-                    <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
-                </svg>
+    <form action="../Controllers/Jeu/matchmaking.php" class="creation-form-2" method="POST">
+    <div class="row">
+        <div class="index-container">
+            <img src="assets/images/_svg_competition.svg" class="index-container-svg" alt="Tournoi">
+            <div class="index-content">
+                <input type="submit" class="index-btn" name="tournoi" value="Rejoindre un tournoi">
+                <hr>
+                <p>Cette compétition s'engage autour d'un tournoi durant lequel différentes équipes s'affronteront avant d'avancer à l'étape suivante.</p>
             </div>
-        </a>
+        </div>
     </div>
+    <div class="row">
+        <div class="index-container">
+            <img src="assets/images/_svg_coupe.svg" class="index-container-svg" alt="Coupe">
+            <div class="index-content">
+                <input type="submit" class="index-btn" name="coupe" value="Rejoindre une coupe">
+                <hr>
+                <p>A l'issue de cette coupe, seule la meilleure équipe restera !</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="index-container">
+            <img src="assets/images/_svg_football.svg" class="index-container-svg" alt="Championnat">
+            <div class="index-content">
+                <input type="submit" class="index-btn" name="championnat" value="Rejoindre un championnat">
+                <hr>
+                <p>Une compétition récompensant la régularité: il vous faudra affronter chaque équipe !</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="index-container">
+            <img src="assets/images/_svg_equipe_football.svg" class="index-container-svg" alt="Coupe">
+            <div class="index-content">
+                <input type="submit" class="index-btn" name="match_competitif" value="Rejoindre un match compétitif">
+                <hr>
+                <p>Un match occasionnel aux enjeus non négligeables</p>
+            </div>
+        </div>
+    </div>
+</form>
     <?php
     }?>
 
