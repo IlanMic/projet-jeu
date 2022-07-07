@@ -3,6 +3,8 @@
     $titre_page = "Fil d'attente";
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
+    require_once("../Models/personnage.php");
+    require_once("../Models/utilisateur.php");
 ?>
 
 <body>
@@ -62,11 +64,24 @@
                 <br>
                 <div class="col-sm d-flex justify-content-center">
                 </div>
+                <?php 
+                if($_SESSION['statut_connexion'] == true) {
+                    $utilisateur = get_pseudo($_SESSION['utilisateur_id']);
+                    if(get_illustration($_SESSION['dernier_personnage_utilise']) !=null) {
+                        $dernier_personnage_illustration = "data:image/jpeg;base64,".base64_encode(get_illustration($_SESSION['dernier_personnage_utilise']));
+                    } else {
+                        $dernier_personnage_illustration = "assets/images/illustration-placeholder.png";
+                    }
+                } else {
+                    $utilisateur = "Invité-". random_int(100000, 999999);
+                    $dernier_personnage_illustration = "assets/images/illustration-placeholder.png";
+                }
+                ?> 
                 <div class="col-sm d-flex justify-content-center">
                     <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage utilisé par _pseudo_">
+                            <img class="card-img-top" src="<?php echo $dernier_personnage_illustration ?>" alt="Personnage utilisé par <?php echo $utilisateur ?>">
                             <div class="card-body left">
-                                <p class="card-text">Pseudo utilisateur</p>
+                                <p class="card-text"><?php echo $utilisateur ?></p>
                             </div>
                         </div>
                 </div>                
