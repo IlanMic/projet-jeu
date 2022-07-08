@@ -13,6 +13,7 @@
     unset($_SESSION['utilisateur_personnage_1']);
     unset($_SESSION['utilisateur_personnage_2']);
     unset($_SESSION['utilisateur_personnage_3']);
+    unset($_SESSION['dernier_personnage_utilise']);
 
     //Redirection vers la page d'accueil + message
     $_SESSION['etat'] = "Succès";
