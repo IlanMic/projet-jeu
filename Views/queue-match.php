@@ -3,8 +3,8 @@
     $titre_page = "Fil d'attente";
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
-    require_once("../Models/personnage.php");
-    require_once("../Models/utilisateur.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/personnage.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/utilisateur.php");
 ?>
 
 <body>
@@ -19,6 +19,27 @@
         </div>
         <div class="queue-content">
             <h5>Actuellement en attente dans votre équipe... </h5>
+            <div class="row">
+                <div class="col-sm d-flex justify-content-center">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage utilisé par _pseudo_">
+                        <div class="card-body left">
+                            <p class="card-text">Pseudo utilisateur</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                </div>                
+                <div class="col-sm d-flex justify-content-center">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage utilisé par _pseudo_">
+                        <div class="card-body left">
+                            <p class="card-text">Pseudo utilisateur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
             <div class="row">
                 <div class="col-sm d-flex justify-content-center">
                     <div class="card" style="width: 18rem;">
