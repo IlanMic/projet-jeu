@@ -2,11 +2,11 @@
     $titre_page = "Page admin";
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
-    require_once('../Models/club.php');
-    require_once('../Models/capacite.php');
-    require_once('../Models/personnage.php');
-    require_once('../Models/type_match.php');
-    require_once('../Core/Core.php');
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/club.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/capacite.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/personnage.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/type_match.php");
     redirection_si_non_connecte($_SESSION['statut_connexion']);
     if($_SESSION['statut_connexion'] == true){
         redirect_si_non_admin($_SESSION['utilisateur_id']);

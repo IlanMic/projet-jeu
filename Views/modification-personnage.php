@@ -3,9 +3,9 @@
     $titre_page = "Modification de personnage";
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
-    require_once("../Core/Core.php");
-    require_once("../Models/personnage.php");
-    require_once("../Models/race.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/race.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/personnage.php");
     redirection_si_non_connecte($_SESSION['statut_connexion']);
     $uri = $_SERVER['REQUEST_URI']; 
     $identifiant_personnage = $_GET['p'];

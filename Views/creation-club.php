@@ -4,9 +4,9 @@
     $titre_page = " Création du Club";
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
-    require_once("../Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
     redirection_si_non_connecte($_SESSION['statut_connexion']);
-    require_once("../Models/utilisateur.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/utilisateur.php");
     if(!empty(get_club_nom($_SESSION['utilisateur_id']))){
         ?>
             <script type="text/javascript">

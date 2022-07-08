@@ -5,7 +5,7 @@
 
         $id_personnage = $_POST['personnage_id'];
 
-        require_once("../Core/ConnexionBDD.php");
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
         $pdo = connect_db();
 
         //Récupération des utilisateurs correspondants

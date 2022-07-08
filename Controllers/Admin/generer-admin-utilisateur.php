@@ -12,10 +12,10 @@
         $options = [
             'cost' => 12,
         ];
-        require_once("../../Core/Core.php");
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
         if(mot_de_passe_valide($pass)) {
             //Connexion à la base de données
-            require_once("../../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
 
             //Vérification de la volonté de créer un compte premium ou non

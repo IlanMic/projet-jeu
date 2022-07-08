@@ -4,7 +4,7 @@
     function get_club($id_club)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT nom_club FROM club WHERE id_club = :id_club");
             $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
@@ -21,7 +21,7 @@
     function get_proprietaire_id($id_club)
     {
         try {
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT proprietaire_id FROM club WHERE id_club = :id_club");
             $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
@@ -38,7 +38,7 @@
     function get_club_id_from_proprietaire_id($id_proprietaire)
     {
         try {
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT id_club FROM club WHERE proprietaire_id = :id_proprietaire");
             $stmt->bindParam("id_proprietaire", $id_proprietaire, PDO::PARAM_INT);
@@ -55,7 +55,7 @@
     function get_club_by_ID($id_club)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM club WHERE id_club = :id_club");
             $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
@@ -72,7 +72,7 @@
     function get_all_clubs()
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->query("SELECT * FROM club");
             $all_club = $stmt->fetchAll();
@@ -87,7 +87,7 @@
     function get_40_clubs()
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->query("SELECT club.* FROM club ORDER BY RAND() LIMIT 40");
             $all_club = $stmt->fetchAll();
@@ -102,7 +102,7 @@
     function get_all_clubs_from_name($nom_club)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM club WHERE nom_club LIKE :nom_club");
             $stmt->execute(array(":nom_club" => "%".$nom_club."%"));
@@ -118,7 +118,7 @@
     function get_proprietaire($proprietaire_id)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :proprietaire_id");
             $stmt->bindParam("proprietaire_id", $proprietaire_id, PDO::PARAM_INT);
@@ -135,7 +135,7 @@
     function get_all_personnages_club($club_id)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM personnage WHERE club_id = :club_id");
             $stmt->bindParam("club_id", $club_id, PDO::PARAM_INT);

@@ -3,11 +3,11 @@
     $titre_page = "Recherche de club";
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
-    require_once("../Core/Core.php");
-    require_once("../Models/club.php");
-    require_once("../Models/utilisateur.php");
-    require_once("../Models/poule.php");
-    require_once("../Models/personnage.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/club.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/poule.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/personnage.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/utilisateur.php");
     redirection_si_non_connecte($_SESSION['statut_connexion']);
 ?>
 

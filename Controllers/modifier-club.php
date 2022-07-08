@@ -1,13 +1,13 @@
 <?php
     session_start();
-    require_once("../Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
 
     if(isset($_POST['nom_club']) && $_POST['nom_club'] != "") {
         if(isset($_POST['club_id'])) {
             $nom = $_POST['nom_club'];
             if(club_est_unique($nom)){
                 try{
-                    require_once("../Core/ConnexionBDD.php");
+                    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
                     $pdo = connect_db();
                     $stmt = $pdo->prepare("UPDATE club SET nom_club = :nom_club WHERE id_club = :id_club");
                     $stmt->bindParam("nom_club", $_POST['nom_club'], PDO::PARAM_STR);

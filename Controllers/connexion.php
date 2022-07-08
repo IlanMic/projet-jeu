@@ -1,7 +1,8 @@
 <?php
     session_start();
-    require_once("../Models/club.php");
-    require_once("../Models/utilisateur.php");
+    
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/club.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/utilisateur.php");
     //Vérification de la déclaration des variables
     if(isset($_POST['pseudo']) && isset($_POST['pass'])) {
 
@@ -13,7 +14,7 @@
         ]; 
 
         //Connexion à la base de données
-        require_once("../Core/ConnexionBDD.php");
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
         $pdo = connect_db();
 
         //Récupération des utilisateurs correspondants

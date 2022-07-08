@@ -4,7 +4,7 @@
     function get_nom_poste($id_poste)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT nom_poste FROM poste WHERE id_poste = :id_poste");
             $stmt->bindParam("id_poste", $id_poste, PDO::PARAM_INT);
@@ -21,7 +21,7 @@
     function get_poste_by_ID($id_poste)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM poste WHERE id_poste = :id_poste");
             $stmt->bindParam("id_poste", $id_poste, PDO::PARAM_INT);
@@ -38,7 +38,7 @@
     function get_all_postes()
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->query("SELECT * FROM poste");
             $all_postes = $stmt->fetchAll();

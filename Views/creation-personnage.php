@@ -3,7 +3,7 @@
     $titre_page = "Création de personnage";
     include dirname(dirname(__FILE__)) .'/Views/layout/header.php';
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
-    require_once("../Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
     redirection_si_non_connecte($_SESSION['statut_connexion']);
 ?>
 

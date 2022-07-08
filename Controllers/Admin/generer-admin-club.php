@@ -1,6 +1,7 @@
 <?php
     session_start();
-    require_once("../../Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
     //On vérifie que le nom du club et son propriétaire ont bien été renseignés
     if(isset($_POST['nom']) && isset($_POST['proprietaire']) && $_POST['proprietaire']!="null") {
         //On associe les variables

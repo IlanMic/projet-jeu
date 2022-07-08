@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once("../Core/Core.php");
-require_once("../Models/utilisateur.php");
+
+require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
+require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/utilisateur.php");
 
 if(isset($_POST['nom_club'])) {
     $nom_club = $_POST['nom_club'];

@@ -4,7 +4,7 @@
     function get_nom_poule($id_poule)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT nom_poule FROM poule WHERE id_poule = :id_poule");
             $stmt->bindParam("id_poule", $id_poule, PDO::PARAM_INT);
@@ -21,7 +21,7 @@
     function get_clubs_poule($id_poule)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT club_1_id, club_2_id, club_3_id, club_4_id, club_5_id, club_6_id, club_7_id, club_8_id, club_9_id, club_10_id FROM poule WHERE id_poule = :id_poule");
             $stmt->bindParam("id_poule", $id_poule, PDO::PARAM_INT);
@@ -38,7 +38,7 @@
     function get_score_clubs_poule($id_poule)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT points_club_1, points_club_2, points_club_3, points_club_4, points_club_5, points_club_6, points_club_7, points_club_8, points_club_9, points_club_10 FROM poule WHERE id_poule = :id_poule");
             $stmt->bindParam("id_poule", $id_poule, PDO::PARAM_INT);
@@ -55,7 +55,7 @@
     function get_poule_by_ID($id_poule)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM poule WHERE id_poule = :id_poule");
             $stmt->bindParam("id_poule", $id_poule, PDO::PARAM_INT);
@@ -72,7 +72,7 @@
     function get_all_poules()
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->query("SELECT * FROM poule");
             $all_poules = $stmt->fetchAll();
@@ -87,7 +87,7 @@
     function get_poule_from_club_id($club_id)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT id_poule FROM poule WHERE club_id_1 = :club_1 OR club_id_2 = :club_2 OR club_id_3 = :club_3 OR club_id_4 = :club_4 OR club_id_5 = :club_5 OR club_id_6 = :club_6 OR club_id_7 = :club_7 OR club_id_8 = :club_8 OR club_id_9 = :club_9 OR club_id_10 = :club_10");
             $stmt->bindParam("club_1", $club_id, PDO::PARAM_INT);

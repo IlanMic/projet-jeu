@@ -2,7 +2,7 @@
     //Vérifie qu'aucun autre club ne possède le même nom (vrai si unique, faux sinon)
     function club_est_unique($nom_club){
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM club WHERE nom_club = :nom_club");
             $stmt->bindParam("nom_club", $nom_club, PDO::PARAM_STR);
@@ -22,7 +22,7 @@
     //Vérifie qu'aucun autre club ne possède le même nom (vrai si unique, faux sinon)
     function club_est_unique_depuis_Admin($nom_club){
         try{
-            require_once("../../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM club WHERE nom_club = :nom_club");
             $stmt->bindParam("nom_club", $nom_club, PDO::PARAM_STR);
@@ -45,7 +45,7 @@
         try{
             $counter = 0;
             //Connexion à la base de données
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT personnage_1_id, personnage_2_id, personnage_3_id FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -72,7 +72,7 @@
     {
         try{
             //Connexion à la base de données
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM personnage WHERE club_id = :id_club");
             $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
@@ -107,7 +107,7 @@
     //Passe au niveau supérieur d'un personnage
     function level_up($id_personnage){
         try {
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT experience FROM personnage WHERE id_personnage = :id_personnage");
             $stmt->bindParam("id_personnage", $id_personnage, PDO::PARAM_INT);
@@ -140,7 +140,7 @@
     function equipe_est_complete($id_personnage, $id_match)
     {
         try {
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $count = NULL;
             $query_club = $pdo->prepare("SELECT club_id FROM personnage WHERE id_personnage =:id_personnage");

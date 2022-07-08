@@ -3,7 +3,7 @@
     function get_nom_race($id_race)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT nom_race FROM race WHERE id_race = :id_race");
             $stmt->bindParam("id_race", $id_race, PDO::PARAM_INT);
@@ -20,7 +20,7 @@
     function get_race_by_ID($id_race)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM race WHERE id_race = :id_race");
             $stmt->bindParam("id_race", $id_race, PDO::PARAM_INT);
@@ -37,7 +37,7 @@
     function get_all_races()
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->query("SELECT * FROM race");
             $all_races = $stmt->fetchAll();

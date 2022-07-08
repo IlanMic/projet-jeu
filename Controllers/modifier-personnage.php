@@ -48,7 +48,7 @@
     if($valeurs_a_remplacer !="") {
         $valeurs_a_remplacer = rtrim($valeurs_a_remplacer, " ,");
         //Connexion à la base de données
-        require_once("../Core/ConnexionBDD.php");
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
         $pdo = connect_db();
 
         //On prépare la requête et associe les colonnes à mettre à jour

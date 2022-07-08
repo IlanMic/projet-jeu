@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once("../../Core/Core.php");
-    require_once("../../Core/ConnexionBDD.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
 
     //On vérifie que les champs obligatoires ont été saisis 
     if(isset($_POST['nom_poule']) && isset($_POST['division']) && isset($_POST['type'])) {

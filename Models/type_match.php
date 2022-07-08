@@ -3,7 +3,7 @@
     function get_type_match($id_type_match)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT type_match FROM type_match WHERE id_type_match = :id_type_match");
             $stmt->bindParam("id_type_match", $id_type_match, PDO::PARAM_INT);
@@ -20,7 +20,7 @@
     function get_points_gagnant($id_type_match)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT points_gagnant FROM type_match WHERE id_type_match = :id_type_match");
             $stmt->bindParam("id_type_match", $id_type_match, PDO::PARAM_INT);
@@ -37,7 +37,7 @@
     function get_points_perdant($id_type_match)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT points_perdant FROM poule WHERE id_type_match = :id_type_match");
             $stmt->bindParam("id_type_match", $id_type_match, PDO::PARAM_INT);
@@ -54,7 +54,7 @@
     function get_type_match_by_ID($id_poule)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM type_match WHERE id_type_match = :id_type_match");
             $stmt->bindParam("id_type_match", $id_type_match, PDO::PARAM_INT);
@@ -71,7 +71,7 @@
     function get_all_types_match()
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->query("SELECT * FROM type_match");
             $all_poules = $stmt->fetchAll();

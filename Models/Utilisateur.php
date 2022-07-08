@@ -3,7 +3,7 @@
     function get_pseudo($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT pseudo FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -20,7 +20,7 @@
     function get_mot_de_passe($id_race)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT mot_de_passe FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -37,7 +37,7 @@
     function get_premium($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT compte_premium FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -54,7 +54,7 @@
     function get_mail($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT adresse_mail FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -71,7 +71,7 @@
     function get_personnage_1($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT personnage_1_id FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -88,7 +88,7 @@
     function get_personnage_2($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT personnage_2_id FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -105,7 +105,7 @@
     function get_personnage_3($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT personnage_3_id FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -122,7 +122,7 @@
     function get_derniere_connexion($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT derniere_connexion FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -139,7 +139,7 @@
     function get_dernier_personnage($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT dernier_personnage_utilise FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -156,7 +156,7 @@
     function get_club_nom($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT nom_club FROM club WHERE proprietaire_id = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -173,7 +173,7 @@
     function get_utilisateur_by_ID($id_utilisateur)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
             $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
@@ -190,7 +190,7 @@
     function get_all_utilisateurs()
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->query("SELECT * FROM utilisateur");
             $all_utilisateurs = $stmt->fetchAll();
@@ -205,7 +205,7 @@
         function get_all_utilisateurs_non_proprietaires()
         {
             try{
-                require_once("../Core/ConnexionBDD.php");
+                require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
                 $pdo = connect_db();
                 $stmt = $pdo->query("SELECT utilisateur.* FROM utilisateur LEFT JOIN club ON utilisateur.id_utilisateur = club.proprietaire_id WHERE club.proprietaire_id IS NULL");
                 $all_utilisateurs_non_proprietaires = $stmt->fetchAll();

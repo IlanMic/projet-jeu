@@ -3,7 +3,7 @@
     function get_nom_capacite($id_capacite)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT nom_capacite FROM capacite WHERE id_capacite = :id_capacite");
             $stmt->bindParam("id_capacite", $id_capacite, PDO::PARAM_INT);
@@ -20,7 +20,7 @@
     function get_type($id_capacite)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT type FROM capacite WHERE id_capacite = :id_capacite");
             $stmt->bindParam("id_capacite", $id_capacite, PDO::PARAM_INT);
@@ -37,7 +37,7 @@
     function get_temps_chargement($id_capacite)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT temps_chargement_secondes FROM capacite WHERE id_capacite = :id_capacite");
             $stmt->bindParam("id_capacite", $id_capacite, PDO::PARAM_INT);
@@ -54,7 +54,7 @@
     function get_effet($id_capacite)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT nom_effet FROM capacite WHERE id_capacite = :id_capacite");
             $stmt->bindParam("id_capacite", $id_capacite, PDO::PARAM_INT);
@@ -71,7 +71,7 @@
     function get_duree_effet($id_capacite)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT duree_secondes_effet FROM capacite WHERE id_capacite = :id_capacite");
             $stmt->bindParam("id_capacite", $id_capacite, PDO::PARAM_INT);
@@ -88,7 +88,7 @@
     function get_capacite_by_ID($id_capacite)
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->prepare("SELECT * FROM capacite WHERE id_capacite = :id_capacite");
             $stmt->bindParam("id_capacite", $id_capacite, PDO::PARAM_INT);
@@ -105,7 +105,7 @@
     function get_all_capacites()
     {
         try{
-            require_once("../Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
             $stmt = $pdo->query("SELECT * FROM capacite");
             $all_capacite = $stmt->fetchAll();

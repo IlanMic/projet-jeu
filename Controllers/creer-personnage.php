@@ -18,9 +18,9 @@ session_start();
         $passe = $_POST['passe'];
         $tir = $_POST['tir'];
 
-        require_once("../Core/Core.php");
-        //Connexion à la base de données
-        require_once("../Core/ConnexionBDD.php");
+
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
         $pdo = connect_db();
 
         //On récupère le slot de personnage disponible (si l'utilisateur a déjà 2 personnages, ce sera le troisième)

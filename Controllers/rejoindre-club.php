@@ -4,7 +4,7 @@
     if(isset($_POST['personnageid'])) {
         $identifiant_club = $_POST['club_id'];
         $identififiant_personnage = $_POST['personnageid'];
-        require_once("../Core/ConnexionBDD.php");
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
         $pdo = connect_db();
         $stmt = $pdo->prepare("UPDATE personnage SET club_id = :club_id WHERE id_personnage = :id_personnage");
         $stmt->bindParam("club_id", $identifiant_club, PDO::PARAM_INT);
