@@ -104,7 +104,6 @@
     }
 
     //Getter retournant 1 si un match est terminé, 0 si ce n'est pas le cas
-
     function get_statut_match($id_match)
     {
         try{
@@ -118,6 +117,24 @@
             $pdo = null;
         } catch(PDOException $e) {
             echo "Impossible d'obtenir les informations du match: ". $e->getMessage();
+        }
+    }
+
+    //Permet de retourner l'identifiant du joueur X du club Y
+    function get_joueur_X_from_club_Y_from_match_z($joueur, $club, $id_match)
+    {
+        try{
+            $data_club ="club_".$club."_joueur_".$joueur;
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT $data_club FROM matchs WHERE id_match = :id_match");
+            $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
+            $stmt->execute();
+            $match = $stmt->fetch();
+            return $match[$data_club];
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir les informations du joueur ". $joueur ." du club ".$club .": ". $e->getMessage();
         }
     }
 
@@ -162,7 +179,7 @@
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT * FROM matchs WHERE club_1_id = :id_club OR club_2_id = :id_club2 AND est_fini = 0 ");
+            $stmt = $pdo->prepare("SELECT * FROM matchs WHERE club_1_id = :id_club OR club_2_id = :id_club2 AND est_fini = 0 AND a_commence = 0");
             $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
             $stmt->bindParam("id_club2", $id_club, PDO::PARAM_INT);
             $stmt->execute();
