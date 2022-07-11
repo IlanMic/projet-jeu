@@ -12,6 +12,11 @@
 ?>
 
 <body>
+<div class="alert-container">
+    <?php
+        require_once("../Views/layout/message.php");
+    ?>
+</div>
 <!-- Formulaire pour rechercher un club selon son nom -->
 <div class="container-rechercher">
     <form class="search-club-form" action="rechercher-club.php" method="POST">
