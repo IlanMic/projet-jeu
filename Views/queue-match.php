@@ -5,6 +5,69 @@
     include dirname(dirname(__FILE__)) .'/Views/layout/navbar.php';
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/personnage.php");
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/utilisateur.php");
+
+    //On récupère les paramètres de l'URL
+    if(isset($_GET['match'])) {
+        $id_match = $_GET['match'];
+    } else {
+        $_SESSION['etat'] = "Echec";
+        redirect_to_index();
+        $_SESSION['message'] = "Veuillez au moins sélectionner un mode de jeu";
+    }
+    if(isset($_GET['club_1_joueur_1'])) {
+        $club_1_joueur_1 = $_GET['club_1_joueur_1'];
+    }
+    if(isset($_GET['club_1_joueur_2'])) {
+        $club_1_joueur_2 = $_GET['club_1_joueur_2'];
+    }
+    if(isset($_GET['club_1_joueur_2'])) {
+        $club_1_joueur_2 = $_GET['club_1_joueur_2'];
+    }
+    if(isset($_GET['club_1_joueur_3'])) {
+        $club_1_joueur_3 = $_GET['club_1_joueur_3'];
+    }
+    if(isset($_GET['club_1_joueur_4'])) {
+        $club_1_joueur_4 = $_GET['club_1_joueur_4'];
+    }
+    if(isset($_GET['club_1_joueur_5'])) {
+        $club_1_joueur_5 = $_GET['club_1_joueur_5'];
+    }
+    if(isset($_GET['club_1_joueur_6'])) {
+        $club_1_joueur_6 = $_GET['club_1_joueur_6'];
+    }
+    if(isset($_GET['club_1_joueur_7'])) {
+        $club_1_joueur_7 = $_GET['club_1_joueur_7'];
+    }
+    if(isset($_GET['club_2_joueur_1'])) {
+        $club_2_joueur_1 = $_GET['club_2_joueur_1'];
+    }
+    if(isset($_GET['club_2_joueur_2'])) {
+        $club_2_joueur_2 = $_GET['club_2_joueur_2'];
+    }
+    if(isset($_GET['club_2_joueur_2'])) {
+        $club_2_joueur_2 = $_GET['club_2_joueur_2'];
+    }
+    if(isset($_GET['club_2_joueur_3'])) {
+        $club_2_joueur_3 = $_GET['club_2_joueur_3'];
+    }
+    if(isset($_GET['club_2_joueur_4'])) {
+        $club_2_joueur_4 = $_GET['club_2_joueur_4'];
+    }
+    if(isset($_GET['club_2_joueur_5'])) {
+        $club_2_joueur_5 = $_GET['club_2_joueur_5'];
+    }
+    if(isset($_GET['club_2_joueur_6'])) {
+        $club_2_joueur_6 = $_GET['club_2_joueur_6'];
+    }
+    if(isset($_GET['club_2_joueur_7'])) {
+        $club_2_joueur_7 = $_GET['club_2_joueur_7'];
+    }
+    
+    
+
+
+
+
 ?>
 
 <body>
