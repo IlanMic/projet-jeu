@@ -147,4 +147,21 @@
             echo "Impossible d'obtenir la liste des membres du club: ". $e->getMessage();
         }
     }
+
+    //Getter pour les membres du club et les bots
+    function get_all_personnages_club_and_bots($club_id)
+    {
+        try{
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT * FROM personnage WHERE club_id = :club_id OR nom_personnage LIKE '%[BOT]%'");
+            $stmt->bindParam("club_id", $club_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $all_personnages_club = $stmt->fetchAll();
+            return $all_personnages_club;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des membres du club: ". $e->getMessage();
+        }
+    }
 ?>

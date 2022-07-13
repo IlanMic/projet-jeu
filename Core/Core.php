@@ -233,6 +233,14 @@
             ?><script> location.replace("../Views/index.php"); </script><?php
         }
     }
+
+    /**
+     * Redirection vers admin 
+     */
+    function redirect_to_index()
+    {
+        ?><script> location.replace("../Views/index.php"); </script><?php
+    }
     
 
 ?>
