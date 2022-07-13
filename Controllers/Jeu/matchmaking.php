@@ -39,7 +39,7 @@
                                     $counter = $counter +1;
                                     $id_match = $match_en_cours['id_match'];
                                     $place_equipe = "";
-                                    $url = "";
+                                    $url = "?match=". $id_match;
 
                                     //On définit dans l'url les identifiants des joueurs
                                     if($match_en_cours['club_1_id'] == get_club_id($_SESSION['dernier_personnage_utilise'])) {
@@ -156,13 +156,13 @@
                             $pdo = null;
                         }
 
-                        //Si aucun match ne correspond à la recherche, on cherche un match non fini avec un seul club
+                        //Si aucun match ne correspond à la recherche, on cherche un match non commencé avec un seul club
                         else{
                             $url ="";
                             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
                             $pdo = connect_db();
                             $club = get_club_id($_SESSION['dernier_personnage_utilise']);
-                            $stmt = $pdo->prepare("SELECT id_match, COUNT(*) as total FROM matchs WHERE (club_1_id IS NULL AND club_2_id <> :club_2) OR (club_2_id IS NULL AND club_1_id <> :club_1) AND a_commence = 0");
+                            $stmt = $pdo->prepare("SELECT id_match, club_1_id, club_2_id, COUNT(*) as total FROM matchs WHERE (club_1_id IS NULL AND club_2_id <> :club_2) OR (club_2_id IS NULL AND club_1_id <> :club_1) AND a_commence = 0");
                             $stmt->bindParam("club_2", $club, PDO::PARAM_INT);
                             $stmt->bindParam("club_1", $club, PDO::PARAM_INT);
                             $stmt->execute();
@@ -187,12 +187,129 @@
                                         $_SESSION['message'] = "Erreur: Il est impossible de lancer un nouveau match pour le moment";
                                     }
                                 }
-
+                                
                                 //Si un match est disponible, alors le club rejoint ce match
                                 else {
-                                    echo "Matchs en attente: ". $matchs_en_attente['total'];
-                                    echo "<br>";
-                                    echo "Match à rejoindre: ". $resultat_stmt['id_match'];
+                                    $update = 0;
+                                    $match_a_rejoindre = $resultat_stmt['id_match'];
+                                    $club_vide_1 = $resultat_stmt['club_1_id'];
+                                    $club_vide_2 = $resultat_stmt['club_2_id'];
+                                    $club_a_modifier = null;
+                                    $url = "?match=". $match_a_rejoindre;
+                                    if($club_vide_1 == null) {
+                                        $club_a_modifier = "club_1_id";
+                                        $update = 1;
+                                        $equipe_1 = get_equipe_1($match_a_rejoindre);
+                                        if($equipe_1['club_1_joueur_1'] == null) {
+                                            $url = $url. "?club_1_joueur_1=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_1_joueur_1";
+                                        }else if($equipe_1['club_1_joueur_2'] == null) {
+                                            $url = $url. "?club_1_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_2=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_1_joueur_2";
+                                        }else if($equipe_1['club_1_joueur_3']== null)  {
+                                            $url = $url. "?club_1_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,1,$match_a_rejoindre); 
+                                            $url = $url. "?club_1_joueur_3=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_1_joueur_3";
+                                        }else if($equipe_1['club_1_joueur_4']== null){
+                                            $url = $url. "?club_1_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,1,$match_a_rejoindre); 
+                                            $url = $url. "?club_1_joueur_3=". get_joueur_X_from_club_Y_from_match_z(3,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_4=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_1_joueur_4";
+                                        }else if($equipe_1['club_1_joueur_5']== null){
+                                            $url = $url. "?club_1_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,1,$match_a_rejoindre); 
+                                            $url = $url. "?club_1_joueur_3=". get_joueur_X_from_club_Y_from_match_z(3,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_4=". get_joueur_X_from_club_Y_from_match_z(4,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_5=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_1_joueur_5";
+                                        }else if($equipe_1['club_1_joueur_6']== null){
+                                            $url = $url. "?club_1_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,1,$match_a_rejoindre); 
+                                            $url = $url. "?club_1_joueur_3=". get_joueur_X_from_club_Y_from_match_z(3,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_4=". get_joueur_X_from_club_Y_from_match_z(4,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_5=". get_joueur_X_from_club_Y_from_match_z(5,1,$match_a_rejoindre);
+                                            $url = $url."?club_1_joueur_6=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_1_joueur_6";
+                                        }else if($equipe_1['club_1_joueur_7']== null){
+                                            $url = $url. "?club_1_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,1,$match_a_rejoindre); 
+                                            $url = $url. "?club_1_joueur_3=". get_joueur_X_from_club_Y_from_match_z(3,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_4=". get_joueur_X_from_club_Y_from_match_z(4,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_5=". get_joueur_X_from_club_Y_from_match_z(5,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_63=". get_joueur_X_from_club_Y_from_match_z(6,1,$match_a_rejoindre);
+                                            $url = $url. "?club_1_joueur_7=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_1_joueur_7";
+                                        }
+                                    } else if($club_vide_2 == null) {
+                                        $update = 1;
+                                        $equipe_2 = get_equipe_2($match_a_rejoindre);
+                                        $club_a_modifier = "club_2_id";
+                                        if($equipe_2['club_2_joueur_1'] == null) {
+                                            $place_equipe = "club_2_joueur_1";
+                                            $url = $url. "?club_2_joueur_1=".$_SESSION['dernier_personnage_utilise'];
+                                        }else if($equipe_2['club_2_joueur_2']== null){
+                                            $url = $url. "?club_2_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,2,$id_match);
+                                            $url = $url. "?club_2_joueur_2=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_2_joueur_2";
+                                        }else if($equipe_2['club_2_joueur_3']== null){
+                                            $url = $url. "?club_2_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,2,$id_match);
+                                            $url = $url. "?club_2_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,2,$id_match);
+                                            $url = $url. "?club_2_joueur_3=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_2_joueur_3";
+                                        }else if($equipe_2['club_2_joueur_4']== null){
+                                            $url = $url. "?club_2_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,2,$id_match);
+                                            $url = $url. "?club_2_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,2,$id_match);
+                                            $url = $url. "?club_2_joueur_3=". get_joueur_X_from_club_Y_from_match_z(3,2,$id_match);
+                                            $url = $url. "?club_2_joueur_4=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_2_joueur_4";
+                                        }else if($equipe_2['club_2_joueur_5']== null){
+                                            $url = $url. "?club_2_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,2,$id_match);
+                                            $url = $url. "?club_2_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,2,$id_match);
+                                            $url = $url. "?club_2_joueur_3=". get_joueur_X_from_club_Y_from_match_z(3,2,$id_match);
+                                            $url = $url. "?club_2_joueur_4=". get_joueur_X_from_club_Y_from_match_z(4,2,$id_match);
+                                            $url = $url. "?club_2_joueur_5=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_2_joueur_5";
+                                        }else if($equipe_2['club_2_joueur_6']== null){
+                                            $url = $url. "?club_2_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,2,$id_match);
+                                            $url = $url. "?club_2_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,2,$id_match);
+                                            $url = $url. "?club_2_joueur_3=". get_joueur_X_from_club_Y_from_match_z(3,2,$id_match);
+                                            $url = $url. "?club_2_joueur_4=". get_joueur_X_from_club_Y_from_match_z(4,2,$id_match);
+                                            $url = $url. "?club_2_joueur_5=". get_joueur_X_from_club_Y_from_match_z(5,2,$id_match);
+                                            $url = $url. "?club_2_joueur_6=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_2_joueur_6";
+                                        }else if($equipe_2['club_2_joueur_7']== null){
+                                            $url = $url. "?club_2_joueur_1=". get_joueur_X_from_club_Y_from_match_z(1,2,$id_match);
+                                            $url = $url. "?club_2_joueur_2=". get_joueur_X_from_club_Y_from_match_z(2,2,$id_match);
+                                            $url = $url. "?club_2_joueur_3=". get_joueur_X_from_club_Y_from_match_z(3,2,$id_match);
+                                            $url = $url. "?club_2_joueur_4=". get_joueur_X_from_club_Y_from_match_z(4,2,$id_match);
+                                            $url = $url. "?club_2_joueur_5=". get_joueur_X_from_club_Y_from_match_z(5,2,$id_match);
+                                            $url = $url. "?club_2_joueur_6=". get_joueur_X_from_club_Y_from_match_z(6,2,$id_match);
+                                            $url = $url. "?club_2_joueur_7=".$_SESSION['dernier_personnage_utilise'];
+                                            $place_equipe = "club_2_joueur_7";
+                                        }
+                                    } else {
+                                        $update = 0;
+                                        $_SESSION['etat'] = "Echec";
+                                        header('Location: ../../Views/index.php'. $url);
+                                        $_SESSION['message'] = "Erreur: Aucun match n'est disponible pour le moment.";
+                                    }
+
+                                    if($update == 1 && $club_a_modifier != null) {
+                                        header('Location: ../../Views/queue-match.php'. $url);
+                                        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+                                        $pdo = connect_db();
+                                        $stmt = $pdo->prepare("UPDATE matchs SET ". $club_a_modifier ." = :club_id , ". $place_equipe ." = :id_personnage_utilise WHERE id_match = :id_match");
+                                        $stmt->bindParam("club_id", get_club_id($_SESSION['dernier_personnage_utilise']), PDO::PARAM_INT);
+                                        $stmt->bindParam("id_personnage_utilise", $_SESSION['dernier_personnage_utilise'], PDO::PARAM_INT);
+                                        $stmt->bindParam("id_match", $match_a_rejoindre, PDO::PARAM_INT);
+                                        $stmt->execute();
+                                    }
+                                    else {
+                                        echo "non";
+                                    }
                                 }
 
                             $pdo = null;
