@@ -66,4 +66,49 @@
         }
     }
 
+    //Getter pour les orientations de défense
+    function get_all_defense_orientations()
+    {
+        try{
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT * FROM orientation WHERE poste_id = 2");
+            $all_orientation = $stmt->fetchAll();
+            return $all_orientation;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des orientations de défense: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour les orientations de milieu de terrain
+    function get_all_milieu_orientations()
+    {
+        try{
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT * FROM orientation WHERE poste_id = 3");
+            $all_orientation = $stmt->fetchAll();
+            return $all_orientation;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des orientations de milieu de terrain: ". $e->getMessage();
+        }
+    }
+
+    //Getter pour les orientations d'attaque
+    function get_all_attaque_orientations()
+    {
+        try{
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->query("SELECT * FROM orientation WHERE poste_id = 4");
+            $all_orientation = $stmt->fetchAll();
+            return $all_orientation;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des orientations d'attaque: ". $e->getMessage();
+        }    
+    }
+
 ?>

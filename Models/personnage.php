@@ -425,6 +425,22 @@
         } catch(PDOException $e) {
             echo "Impossible d'obtenir la liste des personnages: ". $e->getMessage();
         }
-    }    
+    }  
+    
+    //Getter permettant de récupérer la liste des personnages [BOT]
+    function get_all_bots()
+    {
+        try{
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT * FROM personnage WHERE nom_personnage LIKE '%[BOT]%'");
+            $stmt->execute();
+            $all_bots = $stmt->fetchAll();
+            return $all_bots;
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir la liste des membres du club: ". $e->getMessage();
+        }
+    }
 
 ?>
