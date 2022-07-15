@@ -251,7 +251,7 @@ ALTER TABLE `projet_jeu`.`utilisateur` ADD `dernier_personnage_utilise` INT NULL
 INSERT INTO `projet_jeu`.`poule` (`nom_poule`, `club_id_1`, `club_id_2`, `point_club_1`, `point_club_2`) VALUES ('Argent', '1', '2', '0', '0');
 ALTER TABLE `projet_jeu`.`poule` ADD `division` TINYINT NULL AFTER `nom_poule`;
 ALTER TABLE `projet_jeu`.`poule` ADD `type_poule` TINYINT NULL AFTER `division`;
-INSERT INTO `projet_jeu`.`type_match` (`id_type_match`, `type_match`, `points_gagnant`, `points_perdant`) VALUES (NULL, 'Tournoi', '15', '0'), (NULL, 'Championnat', '3', '0'), (NULL, 'Coupe', '5', '0')
+INSERT INTO `projet_jeu`.`type_match` (`id_type_match`, `type_match`, `points_gagnant`, `points_perdant`) VALUES (NULL, 'Tournoi', '15', '0'), (NULL, 'Championnat', '3', '0'), (NULL, 'Coupe', '5', '0');
 
 
 ALTER TABLE `projet_jeu`.`matchs` ADD `club_1_joueur_1` INT NULL AFTER `score_club_2`, ADD `club_1_joueur_2` INT NULL AFTER `club_1_joueur_1`, ADD `club_1_joueur_3` INT NULL AFTER `club_1_joueur_2`, ADD `club_1_joueur_4` INT NULL AFTER `club_1_joueur_3`, ADD `club_1_joueur_5` INT NULL AFTER `club_1_joueur_4`, ADD `club_1_joueur_6` INT NULL AFTER `club_1_joueur_5`, ADD `club_1_joueur_7` INT NULL AFTER `club_1_joueur_6`, ADD `club_2_joueur_1` INT NULL AFTER `club_1_joueur_7`, ADD `club_2_joueur_2` INT NULL AFTER `club_2_joueur_1`, ADD `club_2_joueur_3` INT NULL AFTER `club_2_joueur_2`, ADD `club_2_joueur_4` INT NULL AFTER `club_2_joueur_3`, ADD `club_2_joueur_5` INT NULL AFTER `club_2_joueur_4`, ADD `club_2_joueur_6` INT NULL AFTER `club_2_joueur_5`, ADD `club_2_joueur_7` INT NULL AFTER `club_2_joueur_6`;
