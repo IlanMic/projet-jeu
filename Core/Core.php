@@ -241,6 +241,11 @@
     {
         ?><script> location.replace("../Views/index.php"); </script><?php
     }
+
+    function redirect_to_composition()
+    {
+        ?><script> location.replace("../Views/composition.php"); </script><?php
+    }
     
 
 ?>
