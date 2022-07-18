@@ -29,15 +29,15 @@
                 <div class="row center-text">
                     <div class="col-sm">         
                         <h5>Défense:</h5>
-                        <input type="number" name="nombre_defense"  value="0" min="0" max="6">
+                        <input type="number" name="nombre_defense" id="nombre_defense" value="0" min="0" max="4">
                     </div>
                     <div class="col-sm">
                         <h5>Milieu</h5>
-                        <input type="number" name="nombre_milieu"  value="0" min="0" max="6">
+                        <input type="number" name="nombre_milieu" id="nombre_milieu"  value="0" min="0" max="4">
                     </div>
                     <div class="col-sm"> 
                         <h5>Attaque</h5>
-                        <input type="number" name="nombre_attaque" value="0" min="0" max="6">
+                        <input type="number" name="nombre_attaque" id="nombre_attaque" value="0" min="0" max="3">
                     </div>
                     <input type="hidden" name="compo_finie" value="0">
                 </div>
@@ -155,8 +155,28 @@
                                 if(isset($_POST['attaquant_'. $i]) && $_POST['attaquant_'. $i] != null){
                                     $id_attaquant = $_POST['attaquant_'. $i];
                                     ?>
-                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>" value="<?php echo $id_attaquant?>">
+                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>_id" value="<?php echo $id_attaquant?>">
+                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>_poste" value="4">
                                     <?php
+                                    switch ($nombre_attaquants) {
+                                        case 1:
+                                        case 2:
+                                            ?>
+                                            <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="6">
+                                            <?php
+                                            break;
+                                        case 3:
+                                            if($i == 1 || $i == 3) {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="5">
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="6">
+                                                <?php
+                                            }
+                                            break;
+                                    }
                                     ++$index_joueur;
                                 }else{
                                     $_SESSION['etat'] = "Echec";
@@ -190,8 +210,44 @@
                                 if(isset($_POST['milieu_'. $i]) && $_POST['milieu_'. $i] != null){
                                     $id_milieu = $_POST['milieu_'. $i];
                                     ?>
-                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>" value="<?php echo $id_milieu?>">
+                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>_id" value="<?php echo $id_milieu?>">
+                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>_poste" value="3">
                                     <?php
+                                    switch ($nombre_milieux){
+                                        case 1:
+                                            ?>
+                                            <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="3">
+                                            <?php
+                                            break;
+                                        case 2:
+                                            ?>
+                                            <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="3">
+                                            <?php
+                                        case 3:
+                                            if($i == 1 ||$i == 3) {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="4">
+                                                <?php
+                                            }
+                                            else {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="3">
+                                                <?php
+                                            }
+                                            break;
+                                        case 4:
+                                            if($i == 1 || $i == 4) {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="4">
+                                                <?php
+                                            }
+                                            else {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="3">
+                                                <?php
+                                            }
+                                            break; 
+                                    }
                                     ++$index_joueur;
                                 }else{
                                     $_SESSION['etat'] = "Echec";
@@ -225,8 +281,37 @@
                                 if(isset($_POST['defenseur_'. $i]) && $_POST['defenseur_'. $i] != null){
                                     $id_defenseur = $_POST['defenseur_'. $i];
                                     ?>
-                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>" value="<?php echo $id_defenseur?>">
+                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>_id" value="<?php echo $id_defenseur?>">
+                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>_poste" value="2">
                                     <?php
+                                    switch($nombre_defenseurs) {
+                                        case 1:
+                                        case 2:
+                                            ?>
+                                            <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="2">
+                                            <?php
+                                        case 3:
+                                            if($i == 1 || $i == 3) {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="1">
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="2">
+                                                <?php
+                                            }
+                                        case 4:
+                                            if($i == 1 || $i == 4) {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="1">
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <input type="hidden" name="joueur_<?php echo $index_joueur ?>_orientation" value="2">
+                                                <?php
+                                            }
+                                            break;
+                                    }
                                     ++$index_joueur;
                                 }else{
                                     $_SESSION['etat'] = "Echec";
@@ -258,7 +343,7 @@
                                 if(isset($_POST['gardien']) && $_POST['gardien'] != null){
                                     $id_gardien = $_POST['gardien'];
                                     ?>
-                                    <input type="hidden" name="joueur_<?php echo $index_joueur ?>" value="<?php echo $id_gardien?>">
+                                    <input type="hidden" name="gardien" value="<?php echo $id_gardien?>">
                                     <?php
                                     ++$index_joueur;
                                     if(get_illustration($id_gardien) != null) {
@@ -280,11 +365,9 @@
             }
             ?>
         </div>
-            <input type="hidden" name="utilisateur" value="$_SESSION['utilisateur_id']">
-            <input type="hidden" name="club_personnage_utilise" value="$_SESSION['dernier_personnage_utilise']">
-            <input type="hidden" name="nombre_defenseurs" value="$_GET['nombre_defense']">
-            <input type="hidden" name="nombre_attaquants" value="$_GET['nombre_defense']">
-            <input type="hidden" name="nombre_milieux" value="$_GET['nombre_defense']">
+            <input type="hidden" name="nombre_defenseurs" value="<?php echo $_GET['nombre_defense'] ?>">
+            <input type="hidden" name="nombre_attaquants" value="<?php echo $_GET['nombre_defense'] ?>">
+            <input type="hidden" name="nombre_milieux" value="<?php echo $_GET['nombre_defense']?>">
             <div class="text-center mt-4 mb-3">
                <button type="submit" name="submit" class="form-btn">Sauvegarder et utiliser cette composition d'équipe</button>
             </div>
