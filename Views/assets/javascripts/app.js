@@ -194,26 +194,30 @@ $(document).ready(function () {
         });
     }
 
+    var total = 0;
     var max = 6;
-    var $inputs = $('input');
+    $('#total span').html(total);
     
-    function sumInputs($inputs) {
-      var sum = 0;
-      
-      $inputs.each(function() {
-        sum += parseInt($(this).val(), 0);
-      });
+    $('#nombre_defense').on('change', function() {
+      var nombre_defense = parseInt($(this).val());
+      let allowed = max - nombre_defense;
     
-      return sum;
-    }
+      $('#nombre_milieu').val(0).attr('max', allowed);
+      $('#nombre_attaque').val(0).attr('max', allowed);
     
-    $inputs.on('input', function(e) {
-      var $this = $(this);
-      var sum = sumInputs($inputs.not(function(i, el) {
-        return el === e.target;
-      }));
-      var value = parseInt($this.val(), 10) || 0;
-      if(sum + value > max) $this.val(max - sum);
+      total = nombre_defense;
+      $('#total span').html(total);
+    });
+    
+    $('#nombre_milieu').on('change', function() {
+      var nombre_defense = parseInt($('#nombre_defense').val());
+      var nombre_milieu = parseInt($(this).val());
+      let allowed = max - (nombre_defense + nombre_milieu)
+    
+      $('#nombre_attaque').val(0).attr('max', allowed);
+    
+      total = nombre_defense + nombre_milieu
+      $('#total span').html(total);
     });
 
 });
