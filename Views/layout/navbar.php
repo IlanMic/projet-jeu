@@ -74,6 +74,24 @@
                   </div>
                 </li>
                 <li class="nav-item">
+                  <div class="dropdown">
+                    <button class="btn dropdown-toggle btn-dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Composition
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <?php
+                        require_once("../Models/composition.php");
+                        if(composition_existe_deja($_SESSION['dernier_personnage_utilise']) == 0){
+                          echo '<a class="nav-link" href="composition.php">Création et enregistrement de composition</a>';
+                        }
+                        else {
+                          echo '<a class="nav-link" href="composition.php">Modification et enregistrement de composition</a>';
+                        }
+                      ?>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item">
                 <?php if($_SESSION['statut_connexion'] == true && $_SESSION['utilisateur_pseudo'] == "Administrateur") { ?>
                   <a class="nav-link" href="page-admin.php">Espace administrateur</a>
                 <?php } ?>
