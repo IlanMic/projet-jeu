@@ -143,43 +143,13 @@
         <div class="index-container">
             <img src="assets/images/_svg_competition.svg" class="index-container-svg" alt="Tournoi">
             <div class="index-content">
-                <input type="submit" class="index-btn" name="tournoi" value="Rejoindre un tournoi">
+                <input type="submit" class="index-btn" name="tournoi" value="Rejoindre la file d'attente pour votre prochain match">
                 <hr>
-                <p>Cette compétition s'engage autour d'un tournoi durant lequel différentes équipes s'affronteront avant d'avancer à l'étape suivante.</p>
+                <p>A compléter par la suite</p>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="index-container">
-            <img src="assets/images/_svg_coupe.svg" class="index-container-svg" alt="Coupe">
-            <div class="index-content">
-                <input type="submit" class="index-btn" name="coupe" value="Rejoindre une coupe">
-                <hr>
-                <p>A l'issue de cette coupe, seule la meilleure équipe restera !</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="index-container">
-            <img src="assets/images/_svg_football.svg" class="index-container-svg" alt="Championnat">
-            <div class="index-content">
-                <input type="submit" class="index-btn" name="championnat" value="Rejoindre un championnat">
-                <hr>
-                <p>Une compétition récompensant la régularité: il vous faudra affronter chaque équipe !</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="index-container">
-            <img src="assets/images/_svg_equipe_football.svg" class="index-container-svg" alt="Coupe">
-            <div class="index-content">
-                <input type="submit" class="index-btn" name="match_competitif" value="Rejoindre un match compétitif">
-                <hr>
-                <p>Un match occasionnel aux enjeus non négligeables</p>
-            </div>
-        </div>
-    </div>
-</form>
+    </form>
     <?php
     }?>
 
