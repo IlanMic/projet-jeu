@@ -3,7 +3,105 @@
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/match.php");
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/type_match.php");
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/personnage.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/composition.php");
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+
+    //Dans le cadre du stage, nous ne faisons que les matchs amicaux et championnats
+
+    //Si l'utilisateur n'a pas créé de personnages, il ne peut pas jouer au jeu
+    if(compter_personnages_utilisateur($_SESSION['utilisateur_id']) > 0) {
+        
+        //Si l'utilisateur n'a pas sélectionner de personnage, il ne peut pas jouer au jeu
+        if($_SESSION['dernier_personnage_utilise'] != null)  {
+
+            //Si le personnage sélectionné n'a pas de club, il ne peut jouer qu'amicalement, sinon il peut jouer en championnat
+            //Matchmaking championnat
+            if(get_club_id($_SESSION['dernier_personnage_utilise']) != null) {
+                $type_match = 2;
+                
+                
+                
+                //L'utilisateur doit avoir choisi une composition pour jouer
+                if(composition_existe_deja($_SESSION['dernier_personnage_utilise']) == 1) {
+
+                } else {
+                    $_SESSION['etat'] = "Echec";
+                    header('Location: ../Views/composition.php');
+                    $_SESSION['message'] = "Une composition est nécessaire pour jouer un match. 1";
+                }
+
+            //Matchmaking amical
+            } else {
+                $type_match = 1;
+
+                //L'utilisateur doit avoir choisi une composition pour jouer
+                if(composition_existe_deja($_SESSION['dernier_personnage_utilise']) == 1) {
+
+                    $id_composition = get_composition_selon_id_personnage($_SESSION['dernier_personnage_utilise']);
+
+                    //On cherche des matchs amicaux non commencés avec une place vacante
+                    $pdo = connect_db();
+                    $stmt = $pdo->prepare("SELECT id_match, utilisateur_1_id, utilisateur_2_id FROM matchs WHERE a_commence = 0 AND (utilisateur_1_id IS NULL OR utilisateur_2_id IS NULL) AND type_match_id = :type_match");
+                    $stmt->bindParam("type_match", $type_match, PDO::PARAM_INT);
+                    if($stmt->execute()) {
+                        $resultats = $stmt -> fetch();
+                        $id_match_a_rejoindre = $resultats['id_match'];
+                        $utilisateur_1_id = $resultats['utilisateur_1_id'];
+                        $utilisateur_2_id = $resultats['utilisateur_2_id'];
+
+                        /**
+                         *                  A CONTINUER
+                         * 
+                         * Récupérer les joueurs selon la composition
+                         * Faire les UPDATE / INSERT INTO
+                         * 
+                         * 
+                         * 
+                         * 
+                         * 
+                         * 
+                         */
+
+                        //Si l'id obtenu n'est pas null, un match correspond et on le rejoint, sinon on en créé un
+                        if($id_match_a_rejoindre != null) {
+                            if($utilisateur_1_id == null) {
+                                $utilisateur = 'utilisateur_1_id';
+                            } else if($utilisateur_2_id == null) {
+                                $utilisateur = 'utilisateur_2_id';
+                            }
+                            $rejoindre_match_amical = $pdo->prepare("UPDATE matchs SET ". $utilisateur ." =:id_utilisateur WHERE id_match =:id_match");
+                            $rejoindre_match_amical->bindParam("id_utilisateur", $type_match, PDO::PARAM_INT);
+                            $rejoindre_match_amical->bindParam("id_match", $id_match_a_rejoindre, PDO::PARAM_INT);
+                        } else {
+                            $zero = 0;
+                            $creation_match_amical = $pdo->prepare("INSERT INTO matchs (type_match_id, utilisateur_1_id, date_match, score_utilisateur_1, score_utilisateur_2, utilisateur_1_joueur_1, utilisateur_1_joueur_2, utilisateur_1_joueur_3, utilisateur_1_joueur_4, utilisateur_1_joueur_5, utilisateur_1_joueur_6, utilisateur_1_joueur_7, est_fini, a_commence) VALUES (:type_match_id, :utilisateur_1_id, NOW(), :zero, :zero_2, :utilisateur_1_joueur_1, :utilisateur_1_joueur_2, :utilisateur_1_joueur_3, :utilisateur_1_joueur_4, :utilisateur_1_joueur_5, :utilisateur_1_joueur_6, :utilisateur_1_joueur_7, :zero_3, :zero_4)");
+                        }
+                    } else {
+                        $_SESSION['etat'] = "Echec";
+                        header('Location: ../Views/index.php');
+                        $_SESSION['message'] = "Impossible de trouver un match pour le moment.";
+                    }
+                } else {
+                    $_SESSION['etat'] = "Echec";
+                    header('Location: ../../Views/composition.php');
+                    $_SESSION['message'] = "Une composition est nécessaire pour jouer un match. 2";
+                }
+            }
+        } else {
+            $_SESSION['etat'] = "Echec";
+            header('Location: ../Views/selection-personnage.php');
+            $_SESSION['message'] = "Veuillez sélectionner au moins un personnage pour jouer";
+        }
+    } else {
+        $_SESSION['etat'] = "Echec";
+        header('Location: ../Views/creation-personnage.php');
+        $_SESSION['message'] = "Veuillez créer au moins un personnage pour jouer.";
+    }
+
+
+
+    /* Ancien matchmaking
     $type_match = 0;
 
     //Matchmaking pour les joueurs connectés
@@ -341,5 +439,5 @@
         }
     } else {
         echo "EN CONSTRUCTION - A faire pour les joueurs invités...";
-    }
+    } */
 ?>
