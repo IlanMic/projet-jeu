@@ -156,7 +156,7 @@ input:checked + .slider:before {
 
 /* informations utilisateur */
 
-.container-informations{
+.container-informations, .queue-form-container{
     padding: 0.75em;
     background-color: #ffffff;
     box-shadow: 5px 10px 18px #888888;
