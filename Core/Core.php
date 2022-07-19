@@ -149,22 +149,22 @@
                 $resultats = $query_club->fetch();
                 $club_personnage = $resultats['club_id'];
                 try {
-                    $query_club_match = $pdo->prepare("SELECT club_1_id, club_2_id FROM matchs WHERE id_match =:id_match");
+                    $query_club_match = $pdo->prepare("SELECT utilisateur_1_id, utilisateur_2_id FROM matchs WHERE id_match =:id_match");
                     $query_club_match->bindParam("id_match", $id_match, PDO::PARAM_INT);
                     if($query_club_match->execute()) {
                         $resultats_club_match = $query_club_match->fetch();
-                        $club_1 = $resultats_club_match['club_1_id'];
-                        $club_2 = $resultats_club_match['club_2_id'];
+                        $club_1 = $resultats_club_match['utilisateur_1_id'];
+                        $club_2 = $resultats_club_match['utilisateur_2_id'];
                         if($club_1 == $club_personnage) {
-                            $query_full_1 = $pdo->prepare("SELECT club_1_joueur_1, club_1_joueur_2, club_1_joueur_3, club_1_joueur_4, club_1_joueur_5, club_1_joueur_6, club_1_joueur_7,
+                            $query_full_1 = $pdo->prepare("SELECT utilisateur_1_joueur_1, utilisateur_1_joueur_2, utilisateur_1_joueur_3, utilisateur_1_joueur_4, utilisateur_1_joueur_5, utilisateur_1_joueur_6, utilisateur_1_joueur_7,
                             (
-                            COALESCE((CASE WHEN club_1_joueur_1 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_1_joueur_2 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_1_joueur_3 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_1_joueur_4 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_1_joueur_5 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_1_joueur_6 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_1_joueur_7 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                            COALESCE((CASE WHEN utilisateur_1_joueur_1 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_1_joueur_2 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_1_joueur_3 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_1_joueur_4 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_1_joueur_5 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_1_joueur_6 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_1_joueur_7 IS NOT NULL THEN 1 ELSE 0 END), 0) 
                             ) AS SOMME
                             FROM matchs
                             WHERE id_match =:id_match");
@@ -176,15 +176,15 @@
                                 $count = NULL;
                             }
                         } else if($club_2 == $club_personnage) {
-                            $query_full_2 = $pdo->prepare("SELECT club_2_joueur_1, club_2_joueur_2, club_2_joueur_3, club_2_joueur_4, club_2_joueur_5, club_2_joueur_6, club_2_joueur_7,
+                            $query_full_2 = $pdo->prepare("SELECT utilisateur_2_joueur_1, utilisateur_2_joueur_2, utilisateur_2_joueur_3, utilisateur_2_joueur_4, utilisateur_2_joueur_5, utilisateur_2_joueur_6, utilisateur_2_joueur_7,
                             (
-                            COALESCE((CASE WHEN club_2_joueur_1 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_2_joueur_2 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_2_joueur_3 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_2_joueur_4 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_2_joueur_5 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_2_joueur_6 IS NOT NULL THEN 1 ELSE 0 END), 0) +
-                            COALESCE((CASE WHEN club_2_joueur_7 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                            COALESCE((CASE WHEN utilisateur_2_joueur_1 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_2_joueur_2 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_2_joueur_3 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_2_joueur_4 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_2_joueur_5 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_2_joueur_6 IS NOT NULL THEN 1 ELSE 0 END), 0) +
+                            COALESCE((CASE WHEN utilisateur_2_joueur_7 IS NOT NULL THEN 1 ELSE 0 END), 0) 
                             ) AS SOMME
                             FROM matchs
                             WHERE id_match =:id_match");
@@ -245,6 +245,11 @@
     function redirect_to_composition()
     {
         ?><script> location.replace("../Views/composition.php"); </script><?php
+    }
+
+    function redirect_to($path)
+    {
+        ?><script> location.replace($path); </script><?php
     }
     
 
