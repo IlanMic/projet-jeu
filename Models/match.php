@@ -126,7 +126,7 @@
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT club_1_joueur_1, club_1_joueur_2, club_1_joueur_3, club_1_joueur_4, club_1_joueur_5, club_1_joueur_6, club_1_joueur_7 FROM matchs WHERE id_match = :id_match");
+            $stmt = $pdo->prepare("SELECT utilisateur_1_joueur_1, utilisateur_1_joueur_2, utilisateur_1_joueur_3, utilisateur_1_joueur_4, utilisateur_1_joueur_5, utilisateur_1_joueur_6, utilisateur_1_joueur_7 FROM matchs WHERE id_match = :id_match");
             $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
             $stmt->execute();
             $equipe_1 = $stmt->fetch();
@@ -143,7 +143,7 @@
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT club_2_joueur_1, club_2_joueur_2, club_2_joueur_3, club_2_joueur_4, club_2_joueur_5, club_2_joueur_6, club_2_joueur_7 FROM matchs WHERE id_match = :id_match");
+            $stmt = $pdo->prepare("SELECT utilisateur_2_joueur_1, utilisateur_2_joueur_2, utilisateur_2_joueur_3, utilisateur_2_joueur_4, utilisateur_2_joueur_5, utilisateur_2_joueur_6, utilisateur_2_joueur_7 FROM matchs WHERE id_match = :id_match");
             $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
             $stmt->execute();
             $equipe_1 = $stmt->fetch();
