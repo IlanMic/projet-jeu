@@ -17,37 +17,37 @@
 
     }
 
-    //Getter pour l'identifiant du premier club participant au match
-    function get_club_1($id_match)
+    //Getter pour l'identifiant du premier utilisateur participant au match
+    function get_utilisateur_1($id_match)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT club_1_id FROM matchs WHERE id_match = :id_match");
+            $stmt = $pdo->prepare("SELECT utilisateur_1_id FROM matchs WHERE id_match = :id_match");
             $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
             $stmt->execute();
-            $club_1 = $stmt->fetch();
-            return $club_1['club_1_id'];
+            $utilisateur_1 = $stmt->fetch();
+            return $utilisateur_1['utilisateur_1_id'];
             $pdo = null;
         } catch(PDOException $e) {
-            echo "Impossible d'obtenir le premier club participant au match: ". $e->getMessage();
+            echo "Impossible d'obtenir le premier utilisateur participant au match: ". $e->getMessage();
         }
     }
 
-    //Getter pour l'identifiant du second club participant au match
-    function get_club_2($id_match)
+    //Getter pour l'identifiant du second utilisateur participant au match
+    function get_utilisateur_2($id_match)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT club_2_id FROM matchs WHERE id_match = :id_match");
+            $stmt = $pdo->prepare("SELECT utilisateur_2_id FROM matchs WHERE id_match = :id_match");
             $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
             $stmt->execute();
-            $club_2 = $stmt->fetch();
-            return $club_2['club_2_id'];
+            $utilisateur_2 = $stmt->fetch();
+            return $utilisateur_2['utilisateur_2_id'];
             $pdo = null;
         } catch(PDOException $e) {
-            echo "Impossible d'obtenir le second club participant au match: ". $e->getMessage();
+            echo "Impossible d'obtenir le second utilisateur participant au match: ". $e->getMessage();
         }
     }
 
@@ -68,38 +68,38 @@
         }
     }
 
-    //Getter pour le score du club 1
-    function get_score_club_1($id_match)
+    //Getter pour le score du utilisateur 1
+    function get_score_utilisateur_1($id_match)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT score_club_1 FROM matchs WHERE id_match = :id_match");
+            $stmt = $pdo->prepare("SELECT score_utilisateur_1 FROM matchs WHERE id_match = :id_match");
             $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
             $stmt->execute();
-            $score_club_1 = $stmt->fetch();
-            return $score_club_1['score_club_1'];
+            $score_utilisateur_1 = $stmt->fetch();
+            return $score_utilisateur_1['score_utilisateur_1'];
             $pdo = null;
         } catch(PDOException $e) {
-            echo "Impossible d'obtenir le score du club 1: ". $e->getMessage();
+            echo "Impossible d'obtenir le score du utilisateur 1: ". $e->getMessage();
         }
     }
 
     
-    //Getter pour le score du club 2
-    function get_score_club_2($id_match)
+    //Getter pour le score du utilisateur 2
+    function get_score_utilisateur_2($id_match)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT score_club_2 FROM matchs WHERE id_match = :id_match");
+            $stmt = $pdo->prepare("SELECT score_utilisateur_2 FROM matchs WHERE id_match = :id_match");
             $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
             $stmt->execute();
-            $get_score_club_2 = $stmt->fetch();
-            return $get_score_club_2['score_club_2'];
+            $get_score_utilisateur_2 = $stmt->fetch();
+            return $get_score_utilisateur_2['score_utilisateur_2'];
             $pdo = null;
         } catch(PDOException $e) {
-            echo "Impossible d'obtenir le score du club 2: ". $e->getMessage();
+            echo "Impossible d'obtenir le score du utilisateur 2: ". $e->getMessage();
         }
     }
 
@@ -154,21 +154,21 @@
         }
     }
 
-    //Permet de retourner l'identifiant du joueur X du club Y
-    function get_joueur_X_from_club_Y_from_match_z($joueur, $club, $id_match)
+    //Permet de retourner l'identifiant du joueur X du utilisateur Y
+    function get_joueur_X_from_utilisateur_Y_from_match_z($joueur, $utilisateur, $id_match)
     {
         try{
-            $data_club ="club_".$club."_joueur_".$joueur;
+            $data_utilisateur ="utilisateur_".$utilisateur."_joueur_".$joueur;
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT $data_club FROM matchs WHERE id_match = :id_match");
+            $stmt = $pdo->prepare("SELECT $data_utilisateur FROM matchs WHERE id_match = :id_match");
             $stmt->bindParam("id_match", $id_match, PDO::PARAM_INT);
             $stmt->execute();
             $match = $stmt->fetch();
-            return $match[$data_club];
+            return $match[$data_utilisateur];
             $pdo = null;
         } catch(PDOException $e) {
-            echo "Impossible d'obtenir les informations du joueur ". $joueur ." du club ".$club .": ". $e->getMessage();
+            echo "Impossible d'obtenir les informations du joueur ". $joueur ." du utilisateur ".$utilisateur .": ". $e->getMessage();
         }
     }
 
@@ -189,15 +189,15 @@
         }
     }
 
-    //Getter de match par club
-    function get_match_by_club($id_club)
+    //Getter de match par utilisateur
+    function get_match_by_utilisateur($id_utilisateur)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT * FROM matchs WHERE club_1_id = :id_club OR club_2_id = :id_club2");
-            $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
-            $stmt->bindParam("id_club2", $id_club, PDO::PARAM_INT);
+            $stmt = $pdo->prepare("SELECT * FROM matchs WHERE utilisateur_1_id = :id_utilisateur OR utilisateur_2_id = :id_utilisateur2");
+            $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+            $stmt->bindParam("id_utilisateur2", $id_utilisateur, PDO::PARAM_INT);
             $stmt->execute();
             $match = $stmt->fetch();
             return $match;
@@ -207,15 +207,15 @@
         }
     }
 
-    //Getter de match en cours par club
-    function get_match_en_cours_by_club($id_club)
+    //Getter de match en cours par utilisateur
+    function get_match_en_cours_by_utilisateur($id_utilisateur)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
             $pdo = connect_db();
-            $stmt = $pdo->prepare("SELECT * FROM matchs WHERE club_1_id = :id_club OR club_2_id = :id_club2 AND est_fini = 0 AND a_commence = 0");
-            $stmt->bindParam("id_club", $id_club, PDO::PARAM_INT);
-            $stmt->bindParam("id_club2", $id_club, PDO::PARAM_INT);
+            $stmt = $pdo->prepare("SELECT * FROM matchs WHERE utilisateur_1_id = :id_utilisateur OR utilisateur_2_id = :id_utilisateur2 AND est_fini = 0 AND a_commence = 0");
+            $stmt->bindParam("id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+            $stmt->bindParam("id_utilisateur2", $id_utilisateur, PDO::PARAM_INT);
             $stmt->execute();
             $match = $stmt->fetchAll();
             return $match;
