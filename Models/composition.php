@@ -52,7 +52,7 @@
     }
 
     //Retourne l'identifiant du personnage qui jouera le joueur 1
-    function get_personnage_1($id_composition)
+    function get_composition_personnage_1($id_composition)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
@@ -69,7 +69,7 @@
     }
 
     //Retourne l'identifiant du personnage qui jouera le joueur 2
-    function get_personnage_2($id_composition)
+    function get_composition_personnage_2($id_composition)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
@@ -86,7 +86,7 @@
     }
 
     //Retourne l'identifiant du personnage qui jouera le joueur 3
-    function get_personnage_3($id_composition)
+    function get_composition_personnage_3($id_composition)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
@@ -103,7 +103,7 @@
     }
 
     //Retourne l'identifiant du personnage qui jouera le joueur 4
-    function get_personnage_4($id_composition)
+    function get_composition_personnage_4($id_composition)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
@@ -120,7 +120,7 @@
     }
 
     //Retourne l'identifiant du personnage qui jouera le joueur 5
-    function get_personnage_5($id_composition)
+    function get_composition_personnage_5($id_composition)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
@@ -137,7 +137,7 @@
     }
 
     //Retourne l'identifiant du personnage qui jouera le joueur 6
-    function get_personnage_6($id_composition)
+    function get_composition_personnage_6($id_composition)
     {
         try{
             require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
