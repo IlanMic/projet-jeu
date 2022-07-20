@@ -27,7 +27,7 @@
 
                 } else {
                     $_SESSION['etat'] = "Echec";
-                    header('Location: ../Views/composition.php');
+                    header('Location: ../../Views/composition.php');
                     $_SESSION['message'] = "Une composition est nécessaire pour jouer un match. 1";
                 }
 
@@ -39,6 +39,19 @@
                 if(composition_existe_deja($_SESSION['dernier_personnage_utilise']) == 1) {
 
                     $id_composition = get_composition_selon_id_personnage($_SESSION['dernier_personnage_utilise']);
+
+                    //On récupère la composition de l'équipe du personnage utilisé
+                    $gardien = get_gardien($id_composition);
+                    $joueur_1 = get_composition_personnage_1($id_composition);
+                    $joueur_2 = get_composition_personnage_2($id_composition);
+                    $joueur_3 = get_composition_personnage_3($id_composition);
+                    $joueur_4 = get_composition_personnage_4($id_composition);
+                    $joueur_5 = get_composition_personnage_5($id_composition);
+                    $joueur_6 = get_composition_personnage_6($id_composition);
+
+                    //On récupère la date actuelle pour l'enregistrer comme date de début de match
+                    date_default_timezone_set('Europe/Paris');
+                    $date_match = date('Y-m-d H:i:s');
 
                     //On cherche des matchs amicaux non commencés avec une place vacante
                     $pdo = connect_db();
@@ -65,21 +78,76 @@
 
                         //Si l'id obtenu n'est pas null, un match correspond et on le rejoint, sinon on en créé un
                         if($id_match_a_rejoindre != null) {
+
+                            //On définit l'utilisateur qui va rejoindre le match
                             if($utilisateur_1_id == null) {
-                                $utilisateur = 'utilisateur_1_id';
+                                $opposant = get_equipe_2($id_match_a_rejoindre);
+                                $utilisateur = 'utilisateur_1';
                             } else if($utilisateur_2_id == null) {
-                                $utilisateur = 'utilisateur_2_id';
+                                $utilisateur = 'utilisateur_2';
+                                $opposant = get_equipe_1($id_match_a_rejoindre);
                             }
-                            $rejoindre_match_amical = $pdo->prepare("UPDATE matchs SET ". $utilisateur ." =:id_utilisateur WHERE id_match =:id_match");
-                            $rejoindre_match_amical->bindParam("id_utilisateur", $type_match, PDO::PARAM_INT);
+
+                            //On prépare la requête
+                            $rejoindre_match_amical = $pdo->prepare("UPDATE matchs SET ". $utilisateur ."_id =:id_utilisateur, ". $utilisateur ."_joueur_1 = :gardien, ". $utilisateur ."_joueur_2 = :joueur_1, ". $utilisateur ."_joueur_3 = :joueur_2, ". $utilisateur ."_joueur_4 = :joueur_3, ". $utilisateur ."_joueur_5 = :joueur_4, ". $utilisateur ."_joueur_6 = :joueur_5, ". $utilisateur ."_joueur_7 = :joueur_6 WHERE id_match =:id_match");
+                            $rejoindre_match_amical->bindParam("id_utilisateur", $_SESSION['dernier_personnage_utilise'], PDO::PARAM_INT);
                             $rejoindre_match_amical->bindParam("id_match", $id_match_a_rejoindre, PDO::PARAM_INT);
+                            $rejoindre_match_amical->bindParam("gardien", $gardien, PDO::PARAM_INT);
+                            $rejoindre_match_amical->bindParam("joueur_1", $joueur_1, PDO::PARAM_INT);
+                            $rejoindre_match_amical->bindParam("joueur_2", $joueur_2, PDO::PARAM_INT);
+                            $rejoindre_match_amical->bindParam("joueur_3", $joueur_3, PDO::PARAM_INT);
+                            $rejoindre_match_amical->bindParam("joueur_4", $joueur_4, PDO::PARAM_INT);
+                            $rejoindre_match_amical->bindParam("joueur_5", $joueur_5, PDO::PARAM_INT);
+                            $rejoindre_match_amical->bindParam("joueur_6", $joueur_6, PDO::PARAM_INT);
+
+                            //Gestion de la réussite et de l'échec de l'éxecution de la requête
+                            if($rejoindre_match_amical->execute()) {
+                                $_SESSION['match_en_cours'] = true;
+                                $_SESSION['opposant_match'] =$opposant;
+                                $_SESSION['etat'] = "Succès";
+                                header('Location: ../../Views/queue-match.php');
+                                $_SESSION['message'] = "Le match va commencer dans 1 minute. Préparez-vous et bonne chance !";
+                            } else {
+                                $_SESSION['etat'] = "Echec";
+                                header('Location: ../../Views/index.php');
+                                $_SESSION['message'] = "Impossible de rejoindre un match pour le moment.";
+                            }
+                            
                         } else {
                             $zero = 0;
-                            $creation_match_amical = $pdo->prepare("INSERT INTO matchs (type_match_id, utilisateur_1_id, date_match, score_utilisateur_1, score_utilisateur_2, utilisateur_1_joueur_1, utilisateur_1_joueur_2, utilisateur_1_joueur_3, utilisateur_1_joueur_4, utilisateur_1_joueur_5, utilisateur_1_joueur_6, utilisateur_1_joueur_7, est_fini, a_commence) VALUES (:type_match_id, :utilisateur_1_id, NOW(), :zero, :zero_2, :utilisateur_1_joueur_1, :utilisateur_1_joueur_2, :utilisateur_1_joueur_3, :utilisateur_1_joueur_4, :utilisateur_1_joueur_5, :utilisateur_1_joueur_6, :utilisateur_1_joueur_7, :zero_3, :zero_4)");
+                            
+                            //On prépare la requête
+                            $creation_match_amical = $pdo->prepare("INSERT INTO matchs (type_match_id, utilisateur_1_id, date_match, score_utilisateur_1, score_utilisateur_2, utilisateur_1_joueur_1, utilisateur_1_joueur_2, utilisateur_1_joueur_3, utilisateur_1_joueur_4, utilisateur_1_joueur_5, utilisateur_1_joueur_6, utilisateur_1_joueur_7, est_fini, a_commence) VALUES (:type_match_id, :utilisateur_1_id, :date_match, :zero, :zero_2, :gardien, :joueur_1, :joueur_2, :joueur_3, :joueur_4, :joueur_5, :joueur_6, :zero_3, :zero_4)");
+                            $creation_match_amical->bindParam("type_match_id", $type_match, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("date_match", $date_match, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("utilisateur_1_id", $_SESSION['dernier_personnage_utilise'], PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("gardien", $gardien, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("joueur_1", $joueur_1, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("joueur_2", $joueur_2, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("joueur_3", $joueur_3, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("joueur_4", $joueur_4, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("joueur_5", $joueur_5, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("joueur_6", $joueur_6, PDO::PARAM_INT);  
+                            $creation_match_amical->bindParam("zero", $zero, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("zero_2", $zero, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("zero_3", $zero, PDO::PARAM_INT);
+                            $creation_match_amical->bindParam("zero_4", $zero, PDO::PARAM_INT);
+                            
+                            if($creation_match_amical->execute()) {
+                                $_SESSION['match_en_attente'] = true;
+                                $_SESSION['match_en_attente_id'] = $pdo -> lastInsertId();
+                                $_SESSION['etat'] = "Succès";
+                                header('Location: ../../Views/queue-match.php');
+                                $_SESSION['message'] = "Le match commencera après qu'un adversaire aura rejoint.";
+                            } else {
+                                $_SESSION['etat'] = "Echec";
+                                header('Location: ../../Views/index.php');
+                                $_SESSION['message'] = "Impossible de créer un match pour le moment.";
+                            }
                         }
                     } else {
                         $_SESSION['etat'] = "Echec";
-                        header('Location: ../Views/index.php');
+                        header('Location: ../../Views/index.php');
                         $_SESSION['message'] = "Impossible de trouver un match pour le moment.";
                     }
                 } else {
@@ -90,12 +158,12 @@
             }
         } else {
             $_SESSION['etat'] = "Echec";
-            header('Location: ../Views/selection-personnage.php');
+            header('Location: ../../Views/selection-personnage.php');
             $_SESSION['message'] = "Veuillez sélectionner au moins un personnage pour jouer";
         }
     } else {
         $_SESSION['etat'] = "Echec";
-        header('Location: ../Views/creation-personnage.php');
+        header('Location: ../../Views/creation-personnage.php');
         $_SESSION['message'] = "Veuillez créer au moins un personnage pour jouer.";
     }
 
