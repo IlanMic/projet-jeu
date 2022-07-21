@@ -3,6 +3,7 @@
     
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/club.php");
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/utilisateur.php");
+    require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/personnage.php");
     //Vérification de la déclaration des variables
     if(isset($_POST['pseudo']) && isset($_POST['pass'])) {
 
@@ -65,6 +66,20 @@
                 $_SESSION['derniere_connexion'] = $date;
             }
             $_SESSION['dernier_personnage_utilise'] = $data['dernier_personnage_utilise'];
+
+            if(get_club_id($_SESSION['dernier_personnage_utilise']) != null) {
+                $get_next_match = $pdo->prepare("SELECT id_match FROM matchs WHERE utilisateur_1_id = :user OR utilisateur_2_id = :user_2");                
+                $get_next_match->bindParam("user", $_SESSION['dernier_personnage_utilise'], PDO::PARAM_INT);
+                $get_next_match->bindParam("user_2", $_SESSION['dernier_personnage_utilise'], PDO::PARAM_INT);
+                $get_next_match->execute();
+                $results = $get_next_match->fetch();
+                $id_match = $results['id_match'];
+                $_SESSION['prochain_match'] = $id_match;
+            } else {
+                $_SESSION['prochain_match'] = null;
+            }
+
+
 
             $_SESSION['etat'] = "Succès";
             header('Location: ../Views/index.php');
