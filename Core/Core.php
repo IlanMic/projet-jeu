@@ -235,6 +235,49 @@
     }
 
     /**
+     * Calcule la différence entre la date et l'heure actuelles et la date et l'heure du prochain match
+     * 
+     * Retourne 1 si le match est dans plus d'une heure
+     * Retourne 0 si aucun match ne correspond
+     * Retourne 2 si le match est dans moins d'une heure
+     * Retourne 3 si le personnage n'a pas de club
+     */
+    function is_match_in_less_than_1_hour($id_personnage)
+    {
+        try{
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/personnage.php");
+            $pdo = connect_db();
+            if(get_club_id($id_personnage) != null) {
+                $get_match_and_date = $pdo->prepare("SELECT id_match, date_match FROM matchs WHERE utilisateur_1_id = :user OR utilisateur_2_id =:user_2 AND a_commence =0 AND est_fini =0");
+                $get_match_and_date->bindParam("user", $id_personnage, PDO::PARAM_INT);
+                $get_match_and_date->bindParam("user_2", $id_personnage, PDO::PARAM_INT);
+                if($get_match_and_date->execute()) {
+                    $resultats = $get_match_and_date->fetch();
+                    $id_match = $resultats['id_match'];
+                    $date_match = new DateTime($resultats['date_match'], new DateTimeZone('Europe/Paris'));      
+                    $date_actuelle = new DateTime("now", new DateTimeZone('Europe/Paris'));
+                    $difference = $date_match->diff($date_actuelle);
+                    $hours = $difference->format('%h');
+                    $days = $difference->format('%d');
+                    if($days > 0 || ($days == 0 && $hours >0)) {
+                        return 1;
+                    } else {
+                        return 2;
+                    }
+                }
+                else {
+                    return 0;
+                }
+            } else {
+                return 3;
+            }
+        } catch(PDOException $e) {
+            return 0;
+        }
+    }
+
+    /**
      * Redirection vers admin 
      */
     function redirect_to_index()
