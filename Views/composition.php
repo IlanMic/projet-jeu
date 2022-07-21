@@ -7,6 +7,10 @@
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/utilisateur.php");
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/club.php");
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
+    if(isset($_SESSION['dernier_personnage_utilise']) && $_SESSION['dernier_personnage_utilise'] != null && is_match_in_less_than_1_hour($_SESSION['dernier_personnage_utilise']) != 1){
+
+    }
+
 ?>
 
 <body>
@@ -365,12 +369,18 @@
             }
             ?>
         </div>
+        <?php
+            if(isset($_GET['nombre_defense']) && isset($_GET['nombre_milieu']) && isset($_GET['nombre_attaque'])) {
+        ?>
             <input type="hidden" name="nombre_defenseurs" value="<?php echo $_GET['nombre_defense'] ?>">
-            <input type="hidden" name="nombre_attaquants" value="<?php echo $_GET['nombre_defense'] ?>">
-            <input type="hidden" name="nombre_milieux" value="<?php echo $_GET['nombre_defense']?>">
+            <input type="hidden" name="nombre_attaquants" value="<?php echo $_GET['nombre_milieu'] ?>">
+            <input type="hidden" name="nombre_milieux" value="<?php echo $_GET['nombre_attaque']?>">
             <div class="text-center mt-4 mb-3">
                <button type="submit" name="submit" class="form-btn">Sauvegarder et utiliser cette composition d'équipe</button>
             </div>
+        <?php
+            }
+        ?>
         </form>
     </div>
 </div>
