@@ -73,6 +73,9 @@
                     </div>
                   </div>
                 </li>
+                <?php
+                if(isset($_SESSION['dernier_personnage_utilise']) && $_SESSION['dernier_personnage_utilise'] != null && is_match_in_less_than_1_hour($_SESSION['dernier_personnage_utilise']) == 1){
+                ?>
                 <li class="nav-item">
                   <div class="dropdown">
                     <button class="btn dropdown-toggle btn-dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -91,6 +94,9 @@
                     </div>
                   </div>
                 </li>
+                <?php
+                }
+                ?>
                 <li class="nav-item">
                 <?php if($_SESSION['statut_connexion'] == true && $_SESSION['utilisateur_pseudo'] == "Administrateur") { ?>
                   <a class="nav-link" href="page-admin.php">Espace administrateur</a>
