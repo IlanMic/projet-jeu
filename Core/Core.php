@@ -19,6 +19,46 @@
         }
     }
 
+    //Vérifie qu'aucun autre utilisateur ne possède le même mail (vrai si unique, faux sinon)
+    function mail_est_unique($mail){
+        try{
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM utilisateur  WHERE adresse_mail = :mail");
+            $stmt->bindParam("mail", $mail, PDO::PARAM_STR);
+            $stmt->execute();
+            $unique = $stmt->fetchColumn();
+            if($unique ==0) {
+                return true;
+            } else {
+                return false;
+            }
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo 'Impossible de vérifier si le nom de club saisi est unique: '. $e->getMessage();
+        }
+    }
+
+    //Vérifie qu'aucun autre utilisateur ne possède le même pseudo (vrai si unique, faux sinon)
+    function pseudo_est_unique($pseudo){
+        try{
+            require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+            $pdo = connect_db();
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM utilisateur  WHERE pseudo = :pseudo");
+            $stmt->bindParam("pseudo", $pseudo, PDO::PARAM_STR);
+            $stmt->execute();
+            $unique = $stmt->fetchColumn();
+            if($unique ==0) {
+                return true;
+            } else {
+                return false;
+            }
+            $pdo = null;
+        } catch(PDOException $e) {
+            echo 'Impossible de vérifier si le nom de club saisi est unique: '. $e->getMessage();
+        }
+    }
+
     //Vérifie qu'aucun autre club ne possède le même nom (vrai si unique, faux sinon)
     function club_est_unique_depuis_Admin($nom_club){
         try{
