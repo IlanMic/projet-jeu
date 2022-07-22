@@ -225,6 +225,56 @@
         }
     }
 
+    
+    /**
+     * Getter du prochain match
+     * 
+     * Retourne l'id du prochain match si plannifé
+     * 
+     * Retourne 0 sinon
+     * 
+     */    
+    function get_next_match($id_personnage)
+    {
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/personnage.php");
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/poule.php");
+        require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/ConnexionBDD.php");
+        try { 
+            $club_personnage = get_club_id($id_personnage);
+            if($club_personnage != null) {
+                $poule_club_personnage = get_poule_from_club_id($club_personnage);
+                if($poule_club_personnage != null) {
+                    $type_match = 2;
+                    $pdo = connect_db();
+                    $get_next_match = $pdo->prepare("SELECT id_match FROM matchs WHERE a_commence = 0 AND est_fini = 0 AND type_match_id =:type_match AND (utilisateur_1_id = :user_1 OR utilisateur_2_id =:user_2) AND poule_id = :poule ORDER BY date_match ASC LIMIT 1");
+                    $get_next_match->bindParam("type_match", $type_match, PDO::PARAM_INT);
+                    $get_next_match->bindParam("user_1", $id_personnage, PDO::PARAM_INT);
+                    $get_next_match->bindParam("user_2", $id_personnage, PDO::PARAM_INT);
+                    $get_next_match->bindParam("poule", $poule_club_personnage, PDO::PARAM_INT);
+                    if($get_next_match->execute()) {
+                        $rs = $get_next_match->fetch();
+                        $next_match = $rs['id_match'];
+                        if($next_match != null) {
+                            return $next_match;
+                        } else {
+                            return 0;
+                        }
+                    } else {
+                        return 0;
+                    }
+                    $pdo = null;
+                } else {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+        } catch(PDOException $e) {
+            echo "Impossible d'obtenir les informations du prochain matchs: ". $e->getMessage();
+            return 0;
+        }
+    }
+
     //Getter pour obtenir tous les matchs
     function get_all_matchs()
     {
