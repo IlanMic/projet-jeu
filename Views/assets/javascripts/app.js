@@ -58,12 +58,14 @@ $(document).ready(function () {
         var poule_creation_form = document.getElementsByClassName("poule-admin-form")
         var personnage_creation_form = document.getElementsByClassName("personnage-admin-form")
         var utilisateur_creation_form = document.getElementsByClassName("utilisateur-admin-form")
+        var capacite_creation_form = document.getElementsByClassName("capacite-admin-form")
 
         $(".btn-poule").click(function() {
             $(poule_creation_form).removeClass("d-none")
             $(club_creation_form).addClass("d-none")
             $(personnage_creation_form).addClass("d-none")
             $(utilisateur_creation_form).addClass("d-none")
+            $(capacite_creation_form).addClass("d-none")
         });
         
         $(".btn-personnage").click(function() {
@@ -71,6 +73,7 @@ $(document).ready(function () {
             $(poule_creation_form).addClass("d-none")
             $(club_creation_form).addClass("d-none")
             $(utilisateur_creation_form).addClass("d-none")
+            $(capacite_creation_form).addClass("d-none")
         });
         
         $(".btn-club").click(function() {
@@ -78,6 +81,7 @@ $(document).ready(function () {
             $(poule_creation_form).addClass("d-none")
             $(personnage_creation_form).addClass("d-none")
             $(utilisateur_creation_form).addClass("d-none")
+            $(capacite_creation_form).addClass("d-none")
         });
 
         $(".btn-utilisateur").click(function() {
@@ -85,6 +89,15 @@ $(document).ready(function () {
             $(poule_creation_form).addClass("d-none")
             $(personnage_creation_form).addClass("d-none")
             $(club_creation_form).addClass("d-none")
+            $(capacite_creation_form).addClass("d-none")
+        });
+
+        $(".btn-capacite").click(function() {
+            $(capacite_creation_form).removeClass("d-none")
+            $(poule_creation_form).addClass("d-none")
+            $(personnage_creation_form).addClass("d-none")
+            $(club_creation_form).addClass("d-none")
+            $(utilisateur_creation_form).addClass("d-none")
         });
     }
 
