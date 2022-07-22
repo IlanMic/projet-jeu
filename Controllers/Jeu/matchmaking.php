@@ -40,11 +40,24 @@
                     date_default_timezone_set('Europe/Paris');
                     $date_match = date('Y-m-d H:i:s');
 
-                    //On récupère l'identifiant de la poule auquel le club appartient
-                    $id_poule = get_poule_from_club_id(get_club_id($_SESSION['dernier_personnage_utilise']));
-
-                    //On récupère la division de la poule
-                    $division = get_division($id_poule);     
+                    //On cherche des matchs non amicaux et non commencés avec une place vacante
+                    $match_plannifie = get_next_match($_SESSION['dernier_personnage_utilise']);
+                    if($match_plannifie != 0) {
+                        if(get_utilisateur_1($match_plannifie) == $_SESSION['dernier_personnage_utilise']) {
+                            $opposant = get_utilisateur_2($match_plannifie);
+                        } else if(get_utilisateur_2($match_plannifie) == $_SESSION['dernier_personnage_utilise']) {
+                            $opposant = get_utilisateur_1($match_plannifie);
+                        }
+                        $_SESSION['match_en_cours'] = true;
+                        $_SESSION['match_en_cours_id'] = $match_plannifie;
+                        $_SESSION['opposant_match'] =$opposant;
+                        $_SESSION['etat'] = "Succès";
+                        header('Location: ../../Views/queue-match.php');
+                    } else {
+                        $_SESSION['etat'] = "Echec";
+                        header('Location: ../../Views/index.php');
+                        $_SESSION['message'] = "Aucun match n'est planifié pour le moment.";
+                    }
                     
                     /**
                      *          REST A FAIRE
@@ -58,7 +71,7 @@
                 } else {
                     $_SESSION['etat'] = "Echec";
                     header('Location: ../../Views/composition.php');
-                    $_SESSION['message'] = "Une composition est nécessaire pour jouer un match. 1";
+                    $_SESSION['message'] = "Une composition est nécessaire pour jouer un match.";
                 }
 
             //Matchmaking amical
@@ -192,7 +205,7 @@
                 } else {
                     $_SESSION['etat'] = "Echec";
                     header('Location: ../../Views/composition.php');
-                    $_SESSION['message'] = "Une composition est nécessaire pour jouer un match. 2";
+                    $_SESSION['message'] = "Une composition est nécessaire pour jouer un match.";
                 }
             }
         } else {
