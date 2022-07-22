@@ -84,7 +84,7 @@
                         if(isset($_SESSION['match_en_cours']) && $_SESSION['match_en_cours'] == true && $illustration_capitaine_opposant == null) {
                             echo  '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Personnage utilisé par <?php echo $nom_opposant ?>">';
                         } else if(isset($_SESSION['match_en_cours'])  && $_SESSION['match_en_cours'] == true && $illustration_capitaine_opposant != null) {
-                            echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($illustration_capitaine_opposant).'" alt="Profil du capitaine de "/>';
+                            echo '<img class="card-img-top img-illustration" src="data:image/jpeg;base64,'.base64_encode($illustration_capitaine_opposant).'" alt="Profil du capitaine de l"adversaire"/>';
                         } else {
                             echo '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Image de profil">';
                         }

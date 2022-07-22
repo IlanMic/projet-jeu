@@ -131,8 +131,6 @@
                     </div>    
                 </form> -->
             </div>
-
-            <button class="play-as-guest-btn" onclick="location.href='../Views/queue-match.php'">Voulez vous jouer une partie en tant qu'invité ?</button>
         <?php
     }
     else {?>

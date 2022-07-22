@@ -8,7 +8,9 @@
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Models/club.php");
     require_once($_SERVER['DOCUMENT_ROOT']. "projet-jeu/Core/Core.php");
     if(isset($_SESSION['dernier_personnage_utilise']) && $_SESSION['dernier_personnage_utilise'] != null && is_match_in_less_than_1_hour($_SESSION['dernier_personnage_utilise']) != 1){
-
+        $_SESSION['etat'] = "Echec";
+        redirect_to_index();
+        $_SESSION['message'] = "Un match va commencer dans moins d'une heure: il est trop tard pour modifier la composition de l'équipe.";      
     }
 
 ?>

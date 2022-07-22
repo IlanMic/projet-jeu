@@ -178,6 +178,9 @@
             </div>
             <div class="inner">
                 <button class="btn-utilisateur mt-2 sub-btn" type="button">Créer un utilisateur</button>
+            </div>            
+            <div class="inner">
+                <button class="btn-capacite mt-2 sub-btn" type="button">Créer une capacité</button>
             </div>
         </div> 
     </form> 
@@ -305,6 +308,9 @@
             </div>
             <div class="inner">
                 <button class="btn-utilisateur mt-2 sub-btn" type="button">Créer un utilisateur</button>
+            </div>            
+            <div class="inner">
+                <button class="btn-capacite mt-2 sub-btn" type="button">Créer une capacité</button>
             </div>
         </div>
     </form> 
@@ -495,6 +501,9 @@
             </div>
             <div class="inner">
                 <button class="btn-utilisateur mt-2 sub-btn" type="button">Créer un utilisateur</button>
+            </div>            
+            <div class="inner">
+                <button class="btn-capacite mt-2 sub-btn" type="button">Créer une capacité</button>
             </div>
         </div>
     </form> 
@@ -582,9 +591,68 @@
             </div>
             <div class="inner">
                 <button class="btn-personnage mt-2 sub-btn" type="button">Créer un personnage</button>
+            </div>            
+            <div class="inner">
+                <button class="btn-capacite mt-2 sub-btn" type="button">Créer une capacité</button>
             </div>
         </div>
     </form> 
+
+    <!-- Formulaire de création de capacités -->
+    <form class="capacite-admin-form d-none" action="../Controllers/Admin/generer-admin-capacite.php" method="POST">
+        <div class="label-inscription-head">
+            <h1>Création d'une capacité</h1>
+            <hr>
+            <h3>Veuillez saisir les informations obligatoires (*) afin de créer une nouvelle capacité: <h2>
+            <br>
+        </div>
+        <div class="inscription-content">
+            <div class="row">
+                <div class="mb-4">
+                    <label for="nom_capacite" class="form-label">Nom de la capacité *:</label><br>
+                    <input type="text" id="nom_capacite" class="form-control" name="nom_capacite" placeholder="Entrez le nom de la capacité..." required>
+                </div>
+                <div class="mb-4">
+                    <label for="type_capacite" class="form-label">Type de capacité *:</label><br>
+                    <select class= "form-select" name="type_capacite" id="type_capacite" required>
+                            <option selected disabled value="null">Sélectionnez le type de capacité:</option>
+                            <option value="Magie">Magie</option>
+                            <option value="Fourberie">Fourberie</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="temps_chargement" class="form-label">Temps de chargement de la capacité *:</label><br>
+                    <input type="number" id="temps_chargement" class="form-control" name="temps_chargement" min="200" max="600" required>
+                </div>
+                <div class="mb-4">
+                    <label for="nom_effet" class="form-label">Nom de l'effet provoqué par la capacité *:</label><br>
+                    <input type="text" id="nom_effet" class="form-control" name="nom_effet" placeholder="Entrez le nom de l'effet..." required>
+                </div>
+                <div class="mb-4">
+                    <label for="duree_effet" class="form-label">Durée de l'effet' *:</label><br>
+                    <input type="number" id="duree_effet" class="form-control" name="duree_effet" placeholder="Entrez la durée en secondes de l'effet..." required>
+                </div>
+                <div class="text-center mt-4 mb-3">
+                    <button type="submit" name="submit" class="form-btn">Créer une capacité</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="outer">
+            <div class="inner">
+                <button class="btn-poule mt-2 sub-btn" class="form-btn"  type="button">Créer une poule</button>
+            </div>
+            <div class="inner">
+                <button class="btn-personnage mt-2 sub-btn" type="button">Créer un personnage</button>
+            </div>
+            <div class="inner">
+                <button class="btn-utilisateur mt-2 sub-btn" type="button">Créer un utilisateur</button>
+            </div>
+            <div class="inner">
+                <button class="btn-club mt-2 sub-btn" type="button">Créer un club</button>
+            </div>
+        </div>
+    </form>
 </div>
 <!-- Footer -->
 <?php

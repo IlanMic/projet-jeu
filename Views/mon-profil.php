@@ -27,7 +27,7 @@
                 if(get_illustration(get_dernier_personnage($_SESSION['utilisateur_id']))!=null) {
                 echo '<img class="card-img-top img-illustration-2" src="data:image/jpeg;base64,'.base64_encode(get_illustration(get_dernier_personnage($_SESSION['utilisateur_id']))).'" alt="Profil du dernier personnage utilisé par cet utilisateur"/>';
                 } else {
-                echo '<img class="card-img-top" src="assets/images/illustration-placeholder.png" alt="Profil du dernier personnage utilisé par cet utilisateur">';
+                echo '<img class="card-img-top img-illustration-2" src="assets/images/illustration-placeholder.png" alt="Profil du dernier personnage utilisé par cet utilisateur">';
                 }
                 ?>
                 <br>
